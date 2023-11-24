@@ -13,7 +13,7 @@ We introduce CrossWave, two attention-based neural network models for the identi
   flipped: true
 )
 #set align(center)
-#image("crosswave_small_diagram_expanded.png",  width: 88%)
+#image("crosswave_small_diagram_expanded.png",  width: 85%)
 #image("crosswave_large_diagram_expanded.png",  width: 96%)
 #set align(left)
 
