@@ -26,6 +26,7 @@ We introduce CrossWave, two attention-based neural network models for the identi
     caption: []
 ) <overlapnet_regression_scores>
 
+
 == CrossWave
 
 #set page(
@@ -39,3 +40,20 @@ We introduce CrossWave, two attention-based neural network models for the identi
 #set page(
   flipped: false
 )
+
+=== Arrival Time Parameter Estimation:
+
+#figure(
+    grid(
+        columns: 2,
+        rows:    1,
+        gutter: 1em,
+        [ #image("error_vs_arrival_time.png", width: 100%) ],
+        [ #image("binary_arrival_time_difference.png", width: 100%) ]
+    ),
+    caption: []
+) <crosswave_regression_scores>
+
+=== Other Parameter Results
+
+=== Physicallised Intuition

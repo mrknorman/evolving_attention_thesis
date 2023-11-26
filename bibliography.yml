@@ -2439,11 +2439,42 @@ semi-supervised:
   date: 2021-02-01
   url: https://doi.org/10.1093/mnras/staa3550
 
-# For later
+  parent:
+    type: periodical
+    title: Monthly Notices of the Royal Astronomical Society
+    volume: 500
+    issue: 4
+
+# GA
 
 #Genetic Algorithms:
  #Deighan et Al, Genetic-algorithm-optimized neural networks for gravitational wave classification
  #https://link.springer.com/content/pdf/10.1007/s00521-021-06024-4.pdf
+
+
+# Skywarp:
+
+attention_is_all_you_need:
+  type: article
+  title: Attention is All You Need
+  author: 
+    - Ashish Vaswani 
+    - Noam Shazeer 
+    - Niki Parmar 
+    - Jakob Uszkoreit 
+    - Llion Jones 
+    - Aidan N. Gomez 
+    - Lukasz Kaiser 
+    - Illia Polosukhin
+  date: 2017
+  url:  https://doi.org//10.5555/3295222.3295349
+
+  parent: 
+    type: proceedings
+    title: Advances in Neural Information Processing Systems
+    publisher: Curran Associates, Inc.
+    volume: 30
+
 
 #LSTM:
 #Chatterjee et al: extraction of Binary Black Hole Gravitational Wave Signals from Detector Data Using Deep Learning. Detection and denoising in appendix using LSTM network
@@ -2466,14 +2497,5 @@ semi-supervised:
  # doi = {10.1103/PhysRevD.104.064046},
 #  url = {https://link.aps.org/doi/10.1103/PhysRevD.104.064046}
 #}
-
-
-
-  parent:
-    type: periodical
-    title: Monthly Notices of the Royal Astronomical Society
-    volume: 500
-    issue: 4
-
 
 

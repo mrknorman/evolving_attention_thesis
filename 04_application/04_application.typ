@@ -813,7 +813,7 @@ In order to determine the score threshold of a model for a given FAR, we can run
 
 $ y = (d_op("total") - i times d_op("example")) / d_op("total") times 1.0 / d_op("example") "Hz" , $ <FAR_index_calc>
 
-where i is the x-axis index. The FAR is plotted against the required model threshold to achive that FAR in @perceptron_single_far. 
+where i is the x-axis index. The FAR is plotted against the required model threshold to achieve that FAR in @perceptron_single_far. 
 
 #figure(
   image("perceptron_single_far_curves.png", width: 100%), 
