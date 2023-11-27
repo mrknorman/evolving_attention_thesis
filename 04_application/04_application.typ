@@ -783,8 +783,8 @@ First, we can examine the results of applying dense-layer perceptrons to the CBC
         columns: 1,
         rows:    2,
         gutter: 1em,
-        [ #image("perceptron_single_training_accuracy.png",   width: 100%) ],
-        [ #image("perceptron_single_validation_accuracy.png", width: 100%) ],
+        [ #image("perceptron_single/perceptron_single_training_accuracy.png",   width: 100%) ],
+        [ #image("perceptron_single/perceptron_single_validation_accuracy.png", width: 100%) ],
     ),
     caption: [The loss history of perceptron models training to detect IMRPhenomD waveforms generated using cuPhenom that have been obfuscated by real interferometer noise sampled from the LIGO Livingston detector during the 3#super("rd") observing run. Visit #link("https://rawcdn.githack.com/mrknorman/data_ad_infinitum/c619a91b36513a2244ccd610c709bb1643a64b4c/models/chapter_04_perceptrons_single/training_history.html") for interactive plots, whilst they're still working. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 8 and 15. Input was from a single detector only. A rough search was performed over a relatively arbitrary selection of model architectures, which varied the number of layers and the number of perceptrons in each layer. The architectures of each model can be seen in the figure legends as a list of numbers where each digit is the number of artificial neurons in that layer. All were trained with the same training hyperparameters, details of which can be found in @perceptron-training-parameters. Each epoch consisted of $10^5$ training examples, and it should be noted that, unlike the regular training pipelines, each training epoch consisted of newly generated waveforms injected into unseen noise segments, though the validation examples were consistent. Training of each model was halted after ten consecutive epochs with no improvement to validation loss, the values of which are shown in @perceptron_single_loss. Validation noise was drawn from a separate pool of data segments inaccessible to the training data loader. We can see that the maximum accuracy achieved by any perceptron model only approaches 75%. Although these validations are performed with a pool containing mixed waveform SNRs and at an unrestrained False Alarm Rate (FAR) (this accuracy uses a score threshold of 0.5 regardless of FAR), it is clear that this is insufficient to be useful. _Upper:_ Plot of model accuracies when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when mesured with validation data ($10^4$ epoch-consistent examples).]
 ) <perceptron_single_accuracy>
@@ -794,8 +794,8 @@ First, we can examine the results of applying dense-layer perceptrons to the CBC
         columns: 1,
         rows:    2,
         gutter: 1em,
-        [ #image("perceptron_single_training_loss.png",   width: 100%) ],
-        [ #image("perceptron_single_validation_loss.png", width: 100%) ],
+        [ #image("perceptron_single/perceptron_single_training_loss.png",   width: 100%) ],
+        [ #image("perceptron_single/perceptron_single_validation_loss.png", width: 100%) ],
     ),
     caption: [Training loss history of perceptron models training to detect IMRPhenomD waveforms generated using cuPhenom, obfuscated by real interferometer noise from the LIGO Livingston detector from the 3#super("rd") observing run. The loss is computed using binary cross entropy loss function and is used by the gradient descent algorithm, in this case the Adam optimizer, as a minimization target. It also acts as the monitor by which the pipeline knows to stop the training process early. If the pipeline detects that the validation model loss has not decreased in more than 10 epochs, training is halted.
     Visit #link("https://rawcdn.githack.com/mrknorman/data_ad_infinitum/c619a91b36513a2244ccd610c709bb1643a64b4c/models/chapter_04_perceptrons_single/training_history.html") for interactive plots. See @perceptron_single_accuracy for a more detailed description of the training data. _Upper:_ Plot of model loss when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model loss when mesured with validation data ($10^4$ epoch-consistent examples).]
@@ -816,7 +816,7 @@ $ y = (d_op("total") - i times d_op("example")) / d_op("total") times 1.0 / d_op
 where i is the x-axis index. The FAR is plotted against the required model threshold to achieve that FAR in @perceptron_single_far. 
 
 #figure(
-  image("perceptron_single_far_curves.png", width: 100%), 
+  image("perceptron_single/perceptron_single_far_curves.png", width: 100%), 
   caption: [Perceptron False Alarm Rate (FAR) curves. This plot was created by running each of our 14 models over a pure noise validation dataset of $10^5$ noise examples. A relatively small number of noise examples were used due to the observed inaccuracy of the models during training which suggested that they would not be able to reach low FAR scores and thus would not necessitate a larger validation dataset. The output scores of the model from each inference over the pure noise validation dataset are sorted and plotted on this graph. The x-axis is the output score of the model inference on that example of noise. The y-axis is calculated by using @FAR_index_calc and provides the estimated number of false alarms that the model would output per second of pure noise data given the threshold score displayed on the x-axis. We can use this graph to calculate positive result thresholds for our classifier, at different false alarm rates. Once again, the models are listed with the number of artificial neurons in each hidden layer.]
 ) <perceptron_single_far>
 
@@ -828,9 +828,9 @@ where $|| "scores" > "score_threshold" ||$ is the number of scores above the sco
 
 #figure(
   grid(
-    image("perceptron_single_efficiency_curve_0_1.png", width: 100%),
-    image("perceptron_single_efficiency_curve_0_01.png", width: 100%),
-    image("perceptron_single_efficiency_curve_0_001.png", width: 100%),
+    image("perceptron_single/perceptron_single_efficiency_curve_0_1.png", width: 100%),
+    image("perceptron_single/perceptron_single_efficiency_curve_0_01.png", width: 100%),
+    image("perceptron_single/perceptron_single_efficiency_curve_0_001.png", width: 100%),
   ), 
   caption: [Perceptron efficiency curves. For each of the 14 perceptron models trained, 31 efficiency tests were performed at evenly spaced optimal SNR values between 0 and 15. For each test, 8192 examples with signals of the relevant SNR were examined by the model, and the percentage of those that scored above the threshold was plotted, see @specificity, for three different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz"), #box("0.01"+ h(1.5pt) + "Hz"), and #box("0.001"+ h(1.5pt) + "Hz"). The efficiency curve for each FAR threshold is presented on a unique plot. Some models have been excluded, they are shaded grey on the legends, because they are incapable of performing any classification at the chosen FAR thresholds. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Middle:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.001" + h(1.5pt) + "Hz").]
 ) <perceptron_efficiency_curves_single>
@@ -838,7 +838,7 @@ where $|| "scores" > "score_threshold" ||$ is the number of scores above the sco
 Finally, we can examine the model performance from a different perspective by freezing the SNR of the validation dataset and plotting the True Positive Rate (TPR), i.e. the sensitivity, against the False Alarm Rate (FAR). This will give us a Reciever Operator Curve (ROC), see @perceptron_roc_curve. We can compare the area under the curve for each model to make a comparison of its relative performance; although in this case, all the models perform very similarly at the chosen optimal SNR of eight. Eight was chosen as this is often considered a good detectability threshold.
 
 #figure(
-  image("perceptron_single_roc.png", width: 100%), 
+  image("perceptron_single/perceptron_single_roc.png", width: 100%), 
   caption: [Reciever Operator Curve (ROC) Curve at $rho_"opt" = 8$. To create this plot a validation dataset containing waveforms all of an SNR of eight was generated. The ability of the model to detect these waveforms was then measured at different FARs. All models show very similar, poor performance.]
 ) <perceptron_roc_curve> 
 
@@ -846,7 +846,44 @@ From these results, we can summarise that things are as anticipated from the res
 
 === Burst Detection Dense Results
 
+==== Training
 
+Although it may seem unlikely that we will have better results with what is arguably a more complex problem, we present the application of dense neural networks to multi-detector arbitrary waveform detection. Note that there were no incoherent or single detector counter-examples added to either the training or validation data, so in order to function a model would only have to identify the presence of excess power. The training and validation SNR ranges were also increased from 8 to 15 to 12 to 30 since initial testing at the SNR range used for CBC detection provided small accuracies across all FARs. From the training results it was clear that this was going to be a more complex problem than CBC detection; see @perceptron_multi_accuracy. Again there is the possibility that less constrained training or larger models could lead to better performance, but even if a solution was found outside the considered hyperparameter range, training time and computational requirements would soon become prohibitive. If other, less general networks can offer far superior results, they will be preferred.
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    2,
+        gutter: 1em,
+        [ #image("perceptron_multi/perceptron_multi_training_accuracy.png",   width: 100%) ],
+        [ #image("perceptron_multi/perceptron_multi_validation_accuracy.png", width: 100%) ],
+    ),
+    caption: [The loss history of perceptron models training to detect multi-detector WNBs generated using GWFlow and obfuscated by real interferometer noise sampled from the LIGO Livingston and LIGO Hanford detectors during the 3#super("rd") observing run. Visit ADD_LINK for interactive plots. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 12 and 30. The input was simulated LIGO Hanford and LIGO Livingston interferometer outputs. The training procedure was identical to the single detector case, except for the SNR range increase and the multiple detector data supply. We can see in these training plots, that despite the increased SNR range, training and validation accuracy barely creep above 50% (which can be achieved by random selection). This indicates that dense networks are even less suited for the more complex coherence detection problem. Further validation will be performed for completion. _Upper:_ Plot of model accuracies when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when mesured with validation data ($10^4$ epoch-consistent examples).]
+) <perceptron_multi_accuracy>
+
+==== Validation
+
+As with the CBC case, we first present the FAR curve that will be used to determine model FAR thresholds in @perceptron_multi_far. Then we show the efficiency curves at two FARs, #box("0.1" + h(1.5pt) + "Hz"), and #box("0.01" + h(1.5pt) + "Hz"); see @perceptron_efficiency_curves_multi. Only two FAR thresholds are presented here as lower FARs resulted in negligible accuracies. Finally, we show the ROC curves for these models, which are unsurprisingly also poor @perceptron_roc_curve_multi.
+
+#figure(
+  image("perceptron_multi/perceptron_multi_far_curves.png", width: 100%), 
+  caption: [Perceptron False Alarm Rate (FAR) curves. This plot was created by running each of our 14 models over a pure noise validation dataset of $10^5$ noise examples. Peformance is low across the board demonstrating that dense layer perceptrons are unsuitable for this kind of WNB detection, at least within the hyperparameter range tested.]
+) <perceptron_multi_far>
+
+#figure(
+  grid(
+    image("perceptron_multi/perceptron_multi_efficiency_curve_0_1.png", width: 100%),
+    image("perceptron_multi/perceptron_multi_efficiency_curve_0_01.png", width: 100%),
+  ), 
+  caption: [Perceptron efficiency curves for the multi-detector WNB detection model. For each of the 14 perceptron models trained, 31 efficiency tests were performed at evenly spaced optimal SNR values between 0 and 30. For each test, 8192 examples with signals of the relevant SNR were examined by the model, and the percentage of those that scored above the threshold was plotted, see @specificity, for two different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz") and #box("0.01"+ h(1.5pt) + "Hz"), lower FARs were excluded due to small accuracies. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz").]
+) <perceptron_efficiency_curves_multi>
+
+#figure(
+  image("perceptron_multi/perceptron_multi_roc.png", width: 100%), 
+  caption: [Reciever Operator Curve (ROC) Curve at $rho_"opt" = 8$. To create this plot a validation dataset containing waveforms all of an SNR of eight was generated. The ability of the model to detect these waveforms was then measured at different FARs. Again, all models show very similar, poor performance.]
+) <perceptron_roc_curve_multi> 
+
+From these validation results, we can determine that dense layer networks alone are unsuitable for the task of coherence detection. Once again these results are not surprising and presented as a reference. In the next section, we will describe another deep-learning architecture that has seen much more promising results in the literature.
 
 == Introducing Convolutional Neural Networks (CNNs) <cnn-sec>
 \

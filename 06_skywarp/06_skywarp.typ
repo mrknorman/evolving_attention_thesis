@@ -29,6 +29,18 @@ After tokenization, we must convert each token to a unique vector. This can also
 
 Gravitational-wave data is intrinsically vectorized so the embedding layer would not be much of a problem, however, it is not intrinsically discretised. Since transform are sequence-to-sequence models, they ingest a series of N vectors. It is unclear a priori, how best to split the gravitational wave data into smaller vectors. We could simply cut along equally separated lines, "chunking" our data into smaller timesteps, or we could embed the data using some learned weights, for example with one or more dense or convolutional layers, in the latter case, feeding the transformer with feature slices at different timesteps.
 
+#figure(
+    grid(
+        columns: 1,
+        rows:    2,
+        gutter: 1em,
+        [ #image("skywarp_chunking.png",  width: 100%)],
+        [ #image("skywarp_convolutional_embedding.png",  width: 100%)],
+        [ #image("skywarp_dense_embedding.png",  width: 100%)],
+    ),
+    caption: ["Different embedding possibilities to discretise and embed gravitational-wave time-series data."]
+) <gw_embedding>
+
 // Gravitational-wave embedding
 
 We have managed to transform our input text from a list of symbols into discrete tokens and finally into vectors that contain some aspect of the value represented by that token, and we have some ideas about how we might do the same with gravitational-wave data. However, unlike RNNs transformers treat each token equally, and intrinsically have no information about the location of the word in the sentence. We must use feature engineering to add to each vector, some information about the position of the token in the input sequence. 
