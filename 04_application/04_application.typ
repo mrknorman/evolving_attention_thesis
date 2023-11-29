@@ -754,7 +754,7 @@ During network training, the gradients were modified by batches consisting of 32
     [Maximum SNR], [15.0],
     [SNR Distribution], [Uniform],
     [Data Acquisition Batch Duration], [ #box("2048.0" + h(1.5pt) + "s") ],
-    [Sample Rate], [ #box("2048.0" + h(1.5pt) + "Hz")]
+    [Sample Rate], [ #box("2048.0" + h(1.5pt) + "Hz")],
     [On-source Duration], [ #box("1.0" + h(1.5pt) + "s")],
     [Off-source Duration], [ #box("16.0" + h(1.5pt) + "s")],
     [Scale Factor], [10#super("21") ],
