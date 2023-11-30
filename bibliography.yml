@@ -2453,6 +2453,34 @@ semi-supervised:
 
 
 # Skywarp:
+attention_1:
+  type: article
+  title: Neural machine translation by jointly learning to align and translate
+  author:
+    - Dzmitry Bahdanau
+    - Cho, Kyung Hyun
+    - Yoshua Bengio
+  date: 2015-01-01
+
+  parent :
+    type : proceedings
+    title : "3rd International Conference on Learning Representations, ICLR 2015" 
+    date :  2015-05-07
+
+attention_2:
+  type: article
+  title: Effective Approaches to Attention-based Neural Machine Translation
+  author: 
+    - Luong, Thang  
+    - Pham, Hieu
+    - Manning, Christopher D.
+  url: https://doi.org/10.18653/v1/D15-1166
+  date: 2015-09
+  page-range: 1412-1421
+  parent:
+    type : proceedings
+    title: Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing
+    publisher : Association for Computational Linguistics
 
 attention_is_all_you_need:
   type: article
@@ -2467,14 +2495,13 @@ attention_is_all_you_need:
     - Lukasz Kaiser 
     - Illia Polosukhin
   date: 2017
-  url:  https://doi.org//10.5555/3295222.3295349
+  url:  https://doi.org/10.5555/3295222.3295349
 
-  parent: 
-    type: proceedings
-    title: Advances in Neural Information Processing Systems
-    publisher: Curran Associates, Inc.
-    volume: 30
-
+#  parent: 
+#    type: proceedings
+ #   title: Advances in Neural Information Processing Systems
+#    publisher: Curran Associates, Inc.
+#    volume: 30
 
 #LSTM:
 #Chatterjee et al: extraction of Binary Black Hole Gravitational Wave Signals from Detector Data Using Deep Learning. Detection and denoising in appendix using LSTM network

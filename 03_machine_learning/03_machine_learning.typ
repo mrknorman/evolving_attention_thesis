@@ -89,7 +89,7 @@ where $N$ is the number of neurons in the layer, and $P$ is the number of weight
 
 #figure(
   image("mnist_examples.png", width: 80%),
-  caption: [Example MNIST data @mnist. A single example of each of the ten classes within the MNIST example dataset. As can be seen, the classes range from zero to nine inclusive. Each example consists of a grid of 28 by 28 pixels containing one float value between 0.0 and 1.0. In the above image, values near one are represented as nearly white, and values near 0.0 as black. When ingested by our single-layer perception, they will be flattened into a 1D vector; see @single_layer_perceptron.],
+  caption: [Example MNIST data @mnist. A single example of each of the ten classes within the MNIST example dataset. As can be seen, the classes range from zero to nine inclusive. Each example consists of a grid of 28 by 28 pixels containing one float value between 0.0 and 1.0. In the above image, values near one are represented as nearly white, and values near 0.0 as black. When ingested by our single-layer perception, they will be flattened into a 1D vector; see @flatten-sec.],
 ) <mnist_examples>
 
 #figure(
@@ -100,7 +100,7 @@ where $N$ is the number of neurons in the layer, and $P$ is the number of weight
         [ #image("single_layer_perceptron.png",   width: 100%) ],
         [ #align(center)[#image("single_layer_perceptron_abstract.png", width: 100%)] ],
   ),
-  caption: [Various representations of a Single-Layer Perceptron or Single-Layer Artificial Neural Network. _Upper:_ Diagram illustrating the structure and operation of a single-layer perceptron. In the example shown, a handwritten zero is fed into the single-layer perceptron. The 2D image is first flattened into a 1D vector; then, the entire vector is fed into each neuron. If the training process has worked correctly, each neuron will have learned to identify one of the possible classes, in this case, digits. As can be seen from the output values, $accent(accent(y, hat), arrow) = [accent(y, hat)_0, ... arrow accent(y, hat)_9]$, which are taken from a real trained model, this model can correctly identify this input as a zero with high confidence. _Middle:_ An abridged version of the upper diagram demonstrating the operation of feeding a handwritten one into the perceptron. This shows how future network diagrams will be abstracted for simplicity and that the perceptron outputs a different, correct value when it ingests a one rather than a zero.
+  caption: [Various representations of a Single-Layer Perceptron or Single-Layer Artificial Neural Network. _Upper:_ Diagram illustrating the structure and operation of a single-layer perceptron. In the example shown, a handwritten zero is fed into the single-layer perceptron. The 2D image is first flattened into a 1D vector, see @flatten-sec; then, the entire vector is fed into each neuron. If the training process has worked correctly, each neuron will have learned to identify one of the possible classes, in this case, digits. As can be seen from the output values, $accent(accent(y, hat), arrow) = [accent(y, hat)_0, ... arrow accent(y, hat)_9]$, which are taken from a real trained model, this model can correctly identify this input as a zero with high confidence. _Middle:_ An abridged version of the upper diagram demonstrating the operation of feeding a handwritten one into the perceptron. This shows how future network diagrams will be abstracted for simplicity and that the perceptron outputs a different, correct value when it ingests a one rather than a zero.
   _Lower:_ A further abstraction of the network. This type of abstraction will be used commonly throughout this thesis when dealing with networks consisting of multiple layers. A dense layer, wherein all neurons are attached to all previous neurons, will be shown as a filled black rectangle, and the icon next to it represents that the activation function applied is a softmax activation function; see @softmax-sec.]
 ) <single_layer_perceptron>
 
@@ -717,7 +717,7 @@ and
 
 $ (diff L)/ (diff accent(b, arrow)) = (diff L)/(diff accent(z, arrow)) (diff accent(z, arrow))/ (diff accent(b,arrow)) = y - accent(accent(y, hat), arrow). $ <bias_chain>
 
-Both of the gradients, @weights_chain and @bias_chain, are quite intuitively what you might expect from a single-layer network. There is no non-linear behaviour, and as we previously speculated, the network is just training to find pixels that are most often activated by certain classes.
+Both of the gradients, @weights_chain, and @bias_chain, are quite intuitively what you might expect from a single-layer network. There is no non-linear behaviour, and as we previously speculated, the network is just training to find pixels that are most often activated by certain classes.
 
 We can use a similar method for artificial neural networks of all complexities and depths. For a feed-forward dense network with $N$ layers, let us denote the weighted sums of the inputs plus the biases of a layer with index $i$, as $accent(z, arrow)_i$, the output of the activation function, $f$ of layer $i$ as $a_i = f(z_i)$, the weights matrix and biases vector of layer $i$ as $W_i$ and $ accent(b, arrow)_i$, and the loss function again as $L$.
 
@@ -729,6 +729,19 @@ First, we compute the forward propagation by running an input vector, $accent(x,
 + To propagate the error back to the previous layer, compute $(diff L)/ (diff a_(N-1)) = (diff z_N)/ (diff a_(N-1)) (diff L) / (diff z_N) = W_(N)^T (diff L) / (diff z_N)$.
 + Recursively repeat steps 1 to 4 until you reach the input layer and you have gradients for all parameters.
 
-This method is known as backpropagation because you work backwards from the output of the model toward the input vector.
+This method is known as backpropagation because you work backward from the output of the model toward the input vector.
 
-Missing overfitting, test, train validate datasets, regularisation, false-alarm rates, specificity ect.
+== Overfitting and Regularisation
+
+Missing overfitting, test, train validate datasets, regularisation
+
+== A note on Infrastructure Layers <flatten-sec>
+
+Most GPU vector libraries, including TensorFlow @tensorflow, have strict requirements about the shapes of vectors that flow through them. Within artificial neural network models, there is often a need to change the shape and/or dimensionality of the vectors as they flow through the network -- for example, if we are moving from a 2D image to a 1D vector, as we saw when feeding 2D MNIST images into the 1D perceptron architecture we must employ a *flattening layer* which takes whatever dimensionality the input vector has and reduces it to a 1D vector. We can also use reshape layers to perform more complex reshapings between vector shapes as long as the requested resultant vector contains the same number of elements as the input vector; see @flattening_diagram.
+
+#figure(
+  image("flattening.png", width: 80%),
+  caption: [A flattening layer. This layer takes a 2D input matrix $X = mat(x^1_1, x^1_2; x^2_1, x^2_1)$ and converts it into a 1D vector, $ accent(y, arrow) = [y_1, y_2, y_3, y_4]$, without using any learned parameters or altering the values of the data. It simply rearranges the indexes and removes all but one dimension. Reshaping layers are a more general version of a flattening layer, where an input vector or matrix can be transformed into any equivalently sized output vector or matrix.],
+) <flattening_diagram>
+
+These kinds of "infrastructure" layers will typically not be discussed nor included in network diagrams if their existence is implied by the network construction. They do not have any trainable parameters and perform no transformation on the passing data other than to change the data layout. They are only noted when newly introduced or of special interest.∂∂
