@@ -860,8 +860,19 @@ Although it may seem unlikely that we will have better results with what is argu
         [ #image("perceptron_multi/perceptron_multi_training_accuracy.png",   width: 100%) ],
         [ #image("perceptron_multi/perceptron_multi_validation_accuracy.png", width: 100%) ],
     ),
-    caption: [The loss history of perceptron models training to detect multi-detector WNBs generated using GWFlow and obfuscated by real interferometer noise sampled from the LIGO Livingston and LIGO Hanford detectors during the 3#super("rd") observing run. Visit ADD_LINK for interactive plots. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 12 and 30. The input was generated using real noise from LIGO Hanford and LIGO Livingston. The training procedure was identical to the single detector case, except for the SNR range increase and the multiple detector data supply. We can see in these training plots, that despite the increased SNR range, training and validation accuracy barely creep above 50% (which can be achieved by random selection). This indicates that dense networks are even less suited for the more complex coherence detection problem. Further validation will be performed for completion. _Upper:_ Plot of model accuracies when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when tested with validation data ($10^4$ epoch-consistent examples).]
+    caption: [The accuracy history of perceptron models training to detect multi-detector WNBs generated using GWFlow and obfuscated by real interferometer noise sampled from the LIGO Livingston and LIGO Hanford detectors during the 3#super("rd") observing run. Visit ADD_LINK for interactive plots. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 12 and 30. The input was generated using real noise from LIGO Hanford and LIGO Livingston. The training procedure was identical to the single detector case, except for the SNR range increase and the multiple detector data supply. We can see in these training plots, that despite the increased SNR range, training and validation accuracy barely creep above 50% (which can be achieved by random selection). This indicates that dense networks are even less suited for the more complex coherence detection problem. Further validation will be performed for completion. _Upper:_ Plot of model accuracies when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when tested with validation data ($10^4$ epoch-consistent examples).]
 ) <perceptron_multi_accuracy>
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    2,
+        gutter: 1em,
+        [ #image("perceptron_multi/perceptron_multi_training_loss.png",   width: 100%) ],
+        [ #image("perceptron_multi/perceptron_multi_validation_loss.png", width: 100%) ],
+    ),
+    caption: [The loss history of perceptron models training to detect multi-detector WNBs generated using GWFlow and obfuscated by real interferometer noise sampled from the LIGO Livingston and LIGO Hanford detectors during the 3#super("rd") observing run. Visit ADD_LINK for interactive plots. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 12 and 30. The input was generated using real noise from LIGO Hanford and LIGO Livingston. The losses show a similar picture to the accuracy plotsa, and although we see a gradual decline it is very shallow and triggering the patience early stopping before it has had any chance to gain significant perfomance, assuming that is even possible. Patience could be increased, but as we will see in later architectures, this is not competitive. _Upper:_ Plot of model losses when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model losses when tested with validation data ($10^4$ epoch-consistent examples).]
+) <perceptron_multi_loss>
 
 ==== Validation
 

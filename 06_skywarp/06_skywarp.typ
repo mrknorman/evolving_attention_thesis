@@ -118,9 +118,9 @@ $ alpha(q_i, K, V) = sum_(j=1)^N a(q_i, k_j)v_j $ <attention-eq>
   
 where $a(., .)$ is called the alignment function and measures the similarity between the queries and keys. In the case of dot-product attention
 
-$ a(q, k) = sigma(q^T k) $ <alignment-eq>
+$ a(q, k) = sigma((q^T k) / sqrt(d_k)) $ <alignment-eq>
   
-where $sigma$ is the Softmax function; see @softmax-sec.
+where $sigma$ is the Softmax function; see @softmax-sec, and $d_k$ is the num of elements in the key vector, used to scale the value so that differences remain large when $d_k$ is large. This scaling was not a part of the original dot-product attention aproach and was added by Vaswani _et al._ @attention_is_all_you_need, it has since become a common feature in attention layers.
 
 #figure(
     image("alignment_function_diagram.png",  width: 100%), 
@@ -134,11 +134,11 @@ where $sigma$ is the Softmax function; see @softmax-sec.
 
 This calculation is performed on each element of the sequence to produce a new sequence of equal length, hopefully with some contextual context embedded. Generalizing @attention-eq for the entire input matrix, $X$, we get
 
-$ alpha(Q, K, V) = sigma(Q K^T)V . $ <attention-eq-general>
+$ alpha(Q, K, V) = sigma((Q K^T)/sqrt(d_"model"))V . $ <attention-eq-general>
   
-Where again, $sigma$ is the Softmax function. Comining @attention-eq-general and with @weight-1-eq, @weight-2-eq and @weight-3-eq gives a mapping between the attention input matrix, $X$, and the attention output matrix, $Y$
+Where again, $sigma$ is the Softmax function. Comining @attention-eq-general and with @weight-1-eq, @weight-2-eq and @weight-3-eq gives a mapping between the attention input matrix, $X$, and the attention output matrix, $Y$.
 
-$ Y = sigma((X W_q) (X W_k)^T) (X W_v). $ 
+$ Y = sigma(((X W_q) (X W_k)^T) / sqrt(d_k)) (X W_v). $ 
 
 The convience that this complex proceedure can be perfomed with a few matrix multiplications is one of the reasons for its great successs. See @attention-diagram and @attention-network-diagram for illustrative diagrams.
 
@@ -170,17 +170,22 @@ It should be noted that in practice, the entire query key and value matricies fo
 Within transformers and other similar architectures, multi-head attention layers are often paired with a number of complementary layers within a residual block. The input and output matricies of this block are usually have identical shape so that the block can be repeated, $N$ times without having any intermediate reshaping layers. Attention blocks typically feature a number of dense layers with activation functions in order to perform non-linear computation, regularisation methods such as dropout and batch normalisation, and a residual skip connection wherein the block input is added to the block output, in order to reduce the vanishing gradient problem that can occour in very deep networks; see @attention-block-diagram.
 
 #figure(
-    image("attention_block.png",  width: 100%), 
-    caption: [Typical atention block comprising multiple layers. Residual attention blocks vary in design between architecures but usually maintain the consistent elements shown. The skip connection is here represented by the encirciling arrow, which shows that the input of the block is fed to the output before it is returned. There are also several regularisation methods present, batch normalisation, and dropout. Finally, the addition of dense layers and activation functions ensures that non linear computation can be performed. Sometimes, if a reduction in total model parameter count and inference time is required, convolutional layers can be used in place of dense layers. ]
+    image("attention_block.png",  width: 80%), 
+    caption: [Typical atention block comprising multiple layers. Residual attention blocks vary in design between architecures but usually maintain the consistent elements shown. The skip connection is here represented by the encirciling arrow, which shows that the input of the block is fed to the output before it is returned. There are also several regularisation methods present, batch normalisation, and dropout which help to reduce overfitting and ensure that values within the network remain bounded. Finally, the addition of dense layers and activation functions ensures that non linear computation can be performed. Sometimes, if a reduction in total model parameter count and inference time is required, convolutional layers can be used in place of dense layers. The question marks indicate user selectable hyperparameters. ]
 ) <attention-block-diagram>
 
 === Transformers
+\
+Since their introduction, attention mechanisms have been utilised in a number of different neural network architectures, including transformers and stable diffusion models. Transformers were first proposed by Vaswani _et al._ @attention_is_all_you_need to solve natural-language processing tasks, showing significant improvement over previous recurrent and convolutional architectures. For these reasons, we decided to investigate a fully attention-based model, inspired by a Transformer encoder.
 
-Since their introduction, attention mechanisms have been utilised in a number of different neural network architectures, including transformers and stable diffusion models. Transformers were first proposed by (Vaswani et al. 2017) to solve natural-language processing tasks, showing significant improvement over previous recurrent and convolutional architectures. For these reasons, we decided to investigate a fully attention-based model, inspired by a Transformer encoder.
+The transformer proposed by Vaswani _et al._ consists of two branches each comprised of stacks of transformer blocks - the encoder and the decoder. See @transformer-diagram. Since the model is designed for sentence generation, its architecture is a little differnt to what we will use in Skywarp. The encoder model takes the input sequence, your input prompt adds positional encoding, and then runs that sequence through six encoder blocks, each consisting of a multi-attention head and two dense layers, both the multi-attention head, and the two dense layers are surrounded by a residual skip connection and the outputs are normalised. The encoder converts an input sequence into an discrete latent space, which is then fed to the decoder, 
 
-The transformer model uses the attention mechanism described earlier in section @sec-attention within discrete blocks called multi-attention heads. Multi-attention heads have N multiples of the weights matrices used to generate query, key, and value matrices from input sequences. These multiple heads can be thought of analogously to different convolutional filters inside a CNN layer; each head can focus on extracting a different type of contextual information from the sequence. This is necessary as the useful contextual information embedded within a sequence can be more complex than it is possible to extract with a single attention head. The output sequences of all N heads are merged after the block to ensure that the output and input sizes are the same.
+#figure(
+    image("transformer.png",  width: 100%), 
+    caption: [The transformer model decribed by Vaswani _et al._ @attention_is_all_you_need.   ]
+) <transformer-diagram>
 
-Often, as is the case for our models, the multi-attention heads are followed by normalisation and one or more dense layers. These blocks of layers can then be stacked to form components of a transformer.
+
 
 == Literature <skywarp_review>
 
