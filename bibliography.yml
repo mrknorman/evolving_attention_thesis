@@ -1857,6 +1857,39 @@ O2_O3_DQ:
     pages: 135014
     publisher: IOP Publishing
 
+
+cnn_review:
+  type: article
+  title: A survey of the recent architectures of deep convolutional neural networks
+  auhtor:
+    - Khan, Asifullah
+    - Sohail, Anabia
+    - Zahoora, Umme
+    - Qureshi, Aqsa Saeed
+  date: 2020-12-01
+  url: https://doi.org/10.1007/s10462-020-09825-6
+
+  parent:
+    type: periodical
+    title: Artificial Intelligence Review
+    volume: 53
+    issue: 8
+
+cnn_interpretability:
+  type: article
+  title: "Visual interpretability for deep learning: a survey"
+  author:
+    - Zhang, Quan-shi
+    - Zhu, Song-chun
+  date: 2018-01-01
+  url: https://doi.org/10.1631/FITEE.1700808
+
+  parent:
+    type: periodical
+    title: "Frontiers of Information Technology & Electronic Engineering"
+    volume: 19
+    issue: 1
+
 # CNN literature:
 
 george_huerta_cnn: 

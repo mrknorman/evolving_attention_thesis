@@ -735,7 +735,7 @@ This method is known as backpropagation because you work backward from the outpu
 
 Missing overfitting, test, train validate datasets, regularisation
 
-== A note on Infrastructure Layers <flatten-sec>
+== Infrastructure Layers <flatten-sec>
 
 Most GPU vector libraries, including TensorFlow @tensorflow, have strict requirements about the shapes of vectors that flow through them. Within artificial neural network models, there is often a need to change the shape and/or dimensionality of the vectors as they flow through the network -- for example, if we are moving from a 2D image to a 1D vector, as we saw when feeding 2D MNIST images into the 1D perceptron architecture we must employ a *flattening layer* which takes whatever dimensionality the input vector has and reduces it to a 1D vector. We can also use reshape layers to perform more complex reshapings between vector shapes as long as the requested resultant vector contains the same number of elements as the input vector; see @flattening_diagram.
 
@@ -744,4 +744,4 @@ Most GPU vector libraries, including TensorFlow @tensorflow, have strict require
   caption: [A flattening layer. This layer takes a 2D input matrix $X = mat(x^1_1, x^1_2; x^2_1, x^2_1)$ and converts it into a 1D vector, $ accent(y, arrow) = [y_1, y_2, y_3, y_4]$, without using any learned parameters or altering the values of the data. It simply rearranges the indexes and removes all but one dimension. Reshaping layers are a more general version of a flattening layer, where an input vector or matrix can be transformed into any equivalently sized output vector or matrix.],
 ) <flattening_diagram>
 
-These kinds of "infrastructure" layers will typically not be discussed nor included in network diagrams if their existence is implied by the network construction. They do not have any trainable parameters and perform no transformation on the passing data other than to change the data layout. They are only noted when newly introduced or of special interest.∂∂
+These kinds of "infrastructure" layers will typically not be discussed nor included in network diagrams if their existence is implied by the network construction. They do not have any trainable parameters and perform no transformation on the passing data other than to change the data layout. They are only noted when newly introduced or of special interest.

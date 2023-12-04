@@ -11,8 +11,8 @@
   let sans-font = "Avenir"
 
   // Set body font family.
-  set text(font: body-font, lang: "en")
-  show heading: set text(font: sans-font)
+  //set text(font: body-font, lang: "en")
+  //show heading: set text(font: sans-font)
   set heading(numbering: "1.1.1")
 
   // Title page.
@@ -23,10 +23,10 @@
   }
   v(9.6fr)
 
-  text(font: sans-font, 2em, weight: 700, title)
+  text(2em, weight: 700, title)
 
   v(0.3fr)
-  text(font: sans-font, 1.5em, weight: 400, subtitle)
+  text(1.5em, weight: 400, subtitle)
   
   // Author information.
   pad(
