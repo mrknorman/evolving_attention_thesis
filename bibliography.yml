@@ -2530,32 +2530,237 @@ attention_is_all_you_need:
   date: 2017
   url:  https://doi.org/10.5555/3295222.3295349
 
-#  parent: 
-#    type: proceedings
- #   title: Advances in Neural Information Processing Systems
-#    publisher: Curran Associates, Inc.
-#    volume: 30
+  parent: 
+    type: proceedings
+    title: Advances in Neural Information Processing Systems
+    publisher: "Curran Associates, Inc."
+    volume: 30
 
-#LSTM:
-#Chatterjee et al: extraction of Binary Black Hole Gravitational Wave Signals from Detector Data Using Deep Learning. Detection and denoising in appendix using LSTM network
-#https://arxiv.org/pdf/2105.03073.pdf
+gw_machine_learning_review:
+  type: article
+  title: "AI in Gravitational Wave Analysis, an Overview"
+  author: 
+    - Benedetto, Vincenzo 
+    - Gissi, Francesco 
+    - Ciaparrone, Gioele 
+    - Troiano, Luigi
+  url: https://doi.org/10.3390/app13179886
+  
+  parent:
+    type: periodical
+    title: Applied Sciences
+    volume: 13
+    date: 2023
+    number: 17
 
-# Detection of gravitational waves using Bayesian neural networks (LSTM anc CNN) - high false awarness rate
-# https://journals.aps.org/prd/abstract/10.1103/PhysRevD.103.063034
- 
-#@article{PhysRevD.104.064046,
-#  title = {Extraction of binary black hole gravitational wave signals from detector data using deep learning},
- # author = {Chatterjee, Chayan and Wen, Linqing and Diakogiannis, Foivos and Vinsen, Kevin},
- # journal = {Phys. Rev. D},
- # volume = {104},
- # issue = {6},
-  #pages = {064046},
-  #numpages = {12},
- # year = {2021},
- # month = {Sep},
- # publisher = {American Physical Society},
- # doi = {10.1103/PhysRevD.104.064046},
-#  url = {https://link.aps.org/doi/10.1103/PhysRevD.104.064046}
-#}
+# == SKYWARP LITERATURE ==
 
+# bi-directional LSTM, feature engineered SNR:
+bidirectional_snr_lstm:
+  type: article
+  title: Detection of Binary Black Hole Mergers from the Signal-to-Noise Ratio Time Series Using Deep Learning
+  author: 
+    - Damon Beveridge 
+    - Linqing Wen 
+    - Andreas Wicenec
+  date: 2023
+  url: https://api.semanticscholar.org/CorpusID:260926510
+
+bidirectional_lstm:
+  type: article
+  title: Extraction of binary black hole gravitational wave signals from detector data using deep learning
+  author: 
+    - Chatterjee, Chayan 
+    - Wen, Linqing 
+    - Diakogiannis, Foivos 
+    - Vinsen, Kevin
+  date: 2023-09
+  url: https://doi.org/10.1103/PhysRevD.104.064046
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 104
+    issue: 6
+    publisher: American Physical Society
+
+bidirectional_lstm_comp:
+  type: article
+  title: Transient Classification in low SNR Gravitational Wave data using Deep Learning
+  author:
+    - Nigam, Rahul 
+    - Mishra, Amit 
+    - Reddy, Pranath
+  date: 2020-09
+  url: https://doi.org/10.48550/arXiv.2009.12168
+
+  parent:
+    type: web
+    title: ArXiv
+
+bidirectional_lstm_comp_2:
+  type: article
+  title: Investigating Deep Neural Networks for Gravitational Wave Detection in Advanced LIGO Data
+  date: 2019
+  author:
+    - Schmitt, Alexander
+    - Fu, Kaiyu 
+    - Fan, Siyu 
+    - Luo, Yuan
+  url: https://doi.org/10.1145/3339363.3339377
+
+  parent:
+    type: proceedings
+    title: Proceedings of the 2nd International Conference on Computer Science and Software Engineering
+    publisher: Association for Computing Machinery
+
+accelerating_rnns:
+  type: article
+  title: Accelerating Recurrent Neural Networks for Gravitational Wave Experiments
+  author:
+    - Que, Zhiqiang 
+    - Wang, Erwei 
+    - Marikar, Umar 
+    - Moreno, Eric 
+    - Ngadiuba, Jennifer 
+    - Javed, Hamza 
+    - Borzyszkowski, Bartłomiej 
+    - Aarrestad, Thea 
+    - Loncar, Vladimir 
+    - Summers, Sioni 
+    - Pierini, Maurizio 
+    - Cheung, Peter Y 
+    - Luk, Wayne
+  date: 2021
+  page-range: 117-124
+  url: https://doi.org/10.1109/ASAP52443.2021.00025
+
+  parent:
+    type: proceedings
+    title: "2021 IEEE 32nd International Conference on Application-specific Systems, Architectures and Processors (ASAP)"
+
+optimising_rnns_2:
+  type: article
+  title: Optimizing Large Gravitational-Wave Classifier Through a Custom Cross-System Mirrored Strategy Approach
+  author:
+    - Shaikh, Abdullah Abdul Sattar
+    - Ghosh, Abhra 
+    - Joshi, Atharva Chidambar 
+    - Akhilesh, Chaudhary Shivam 
+    - Savitha, S. K.
+  date: 2022
+  page-range: 1-7
+  url: https://doi.org/10.1109/ICDSIS55133.2022.9915926
+  parent:
+    type: proceedings
+    title: 2022 IEEE International Conference on Data Science and Information System (ICDSIS)
+
+bayesian_lstm:
+  type: article
+  title: Detection of gravitational waves using Bayesian neural networks
+  author: 
+    - Lin, Yu-Chiung 
+    - Wu, Jiun-Huei Proty
+  url: https://doi.org/10.1103/PhysRevD.103.063034
+  parent:
+    type: periodical
+    title: Physical Review D
+    issue: 6
+    volume: 103
+    date: 2021-03
+    publisher: American Physical Society
+
+source_agnostic_lstm:
+  type: article
+  title: Source-agnostic gravitational-wave detection with recurrent autoencoders
+  author:
+    - Eric A Moreno 
+    - Bartlomiej Borzyszkowski 
+    - Maurizio Pierini 
+    - Jean-Roch Vlimant 
+    - Maria Spiropulu
+  url: https://doi.org/10.1088/2632-2153/ac5435
+  date: 2022-04
+  
+  parent:
+    type: periodical
+    title: "Machine Learning: Science and Technology"
+    publisher: IOP Publishing
+    volume: 3
+    number: 2
+
+lstm_characterisation:
+  type: article
+  title: Characterization of Gravitational Waves Signals Using Neural Networks
+  author:
+    - A. Caramete 
+    - A. I. Constantinescu 
+    - L. I. Caramete 
+    - T. Popescu 
+    - R. A. Balasov 
+    - D. Felea 
+    - M. V. Rusu 
+    - P. Stefanescu 
+    - O. M. Tintareanu
+  date: 2020
+  url: https://doi.org/10.48550/arXiv.2009.06109
+
+bidirectional_gru:
+  type: article
+  title: Deep learning model based on a bidirectional gated recurrent unit for the detection of gravitational wave signals
+  author:
+    - Zhang, Yuewei 
+    - Xu, Haiguang 
+    - Liu, Meilin 
+    - Liu, Cheng 
+    - Zhao, Yuanyuan 
+    - Zhu, Jie
+  date: 2022-12
+  url: https://doi.org/10.1103/PhysRevD.106.122002
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 106
+    issue: 12
+    publisher: American Physical Society
+
+# coherent-snr attention search
+coherent_snr_attention:
+  type: article
+  title: "Gravitational Wave Detection Based on Squeeze-and-excitation Shrinkage Networks and Multiple Detector Coherent SNR"
+  author:
+    - Rui-Qing Yan 
+    - Wei Liu 
+    - Zong-Yao Yin 
+    - Rong Ma 
+    - Si-Ying Chen 
+    - Dan Hu 
+    - Dan Wu 
+    - Xian-Chuan Yu 
+  date: 2022-10
+  url: https://dx.doi.org/10.1088/1674-4527/ac846c
+  
+  parent:
+    type: periodical
+    title: Research in Astronomy and Astrophysics
+    number: 11
+    volume: 22
+
+#Burst:
+lstm_supernovae:
+  type: article
+  title: LSTM and CNN application for core-collapse supernova search in gravitational wave real data
+  author:
+    - Iess, Alberto
+    - Cuoco, Elena
+    - Morawski, Filip
+    - Nicolaou, Constantina
+    - Lahav, Ofer
+  url: https://doi.org/10.1051/0004-6361/202142525
+
+  parent:
+    type: periodical
+    title: "Astronomy & Astrophysics"
+    volume: 669
 

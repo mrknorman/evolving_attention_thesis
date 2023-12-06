@@ -1133,3 +1133,28 @@ As baseline models to compare with the results of our improvement attempts, in t
     image("gabbard_diagram.png",   width: 100%),
     caption: [CNN architecture from Gabbard _et al._ @gabbard_messenger_cnn.]
 ) <gabbard_diagram>
+
+
+== Results
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    2,
+        gutter: 1em,
+        [ #image("cnn_single/training_accuracy_cnn.png",   width: 100%) ],
+        [ #image("cnn_single/validation_accuracy_cnn.png", width: 100%) ],
+    ),
+    caption: [The accuracy history of attempts to retrain Convolutional Neural Network models from the literature using the GWFlow pipeline. A custom GWFlow whitening layer has been added to the start of each model in order to reproduce the whitening data conditioning step used in the original studies, but the structure of the models is otherwise identical. Differences in the training and validation procedure, however, may lead to slightly different results than in the original studies. Rather than exactly attempting to mimic the datasets and training process used in each of these studies, it has been kept consistent with the other results throughout the thesis, in order to facilitate comparison of results. The models presented are the two models from George _et al._ @george_huerta_cnn @george_huerta_followup, labeled "George Small", and "George Large", to differentiate them in terms of complexity, and the single model from Gabbard _et al._ @gabbard_messenger_cnn. The network structure of these models can be seen in @george_diagram and @gabbard_diagram, respectively. The training and validation datasets were maintained from the perceptron single-detector training experiment. The dataset contains IMRPhenomD waveforms generated using cuPhenom and real interferometer noise sampled from the LIGO Livingston detector during the 3#super("rd") observing run. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 8 and 15. Input was from a single detector only. Each epoch consisted of $10^5$ training examples, and it should be noted that, unlike the regular training pipelines, each training epoch consisted of newly generated waveforms injected into unseen noise segments, though the validation examples are consistent. Training of each model was halted after ten consecutive epochs with no improvement to validation loss, the values of which are shown in @cnn_single_loss. Validation noise was drawn from a separate pool of data segments inaccessible to the training data loader. It is immediately clear that this is a huge improvement over the perceptron models, and it makes it clear why we abandon the idea of perceptrons so quickly. Both the training and validation accuracies jump to above 90% accuracy almost immediately, and in the case of the Gabbard, and Large George models, they plateau at approximately 98% accuracy, with only marginal improvements from there, whereas the smaller George model plateaus closer to 96% accuracy. Considering approximants from both the training and validation datasets are generated with CBCs drawn uniformly between an optimal SNR of 8 and 15, this is a good performance. Because both the Gabbard and Large George models plateau at statistically similar accuracies with quite different architectures, it suggests that they are approaching the detectability limit in both cases. An interesting examination will be to compare their performance with a FAR-calibrated detection threshold. _Upper:_ Plot of model accuracies when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when measured with validation data ($10^4$ epoch-consistent examples).]
+) <cnn_single_accuracy>
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    2,
+        gutter: 1em,
+        [ #image("cnn_single/training_loss_cnn.png",   width: 100%) ],
+        [ #image("cnn_single/validation_loss_cnn.png", width: 100%) ],
+    ),
+    caption: [The accuracy history of attempts to retrain Convolutional Neural Network models from the literature using the GWFlow pipeline. These correspond to the accuracies displayed in @cnn_single_accuracy. The models presented are the two models from George _et al._ @george_huerta_cnn @george_huerta_followup, labeled "George Small", and "George Large", to differentiate them in terms of complexity, and the single model from Gabbard _et al._ @gabbard_messenger_cnn. The network structure of these models can be seen in @george_diagram and @gabbard_diagram, respectively. The training and validation datasets were maintained from the perceptron single-detector training experiment. The dataset contains IMRPhenomD waveforms generated using cuPhenom and real interferometer noise sampled from the LIGO Livingston detector during the 3#super("rd") observing run. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 8 and 15. Input was from a single detector only. Each epoch consisted of $10^5$ training examples, and it should be noted that, unlike the regular training pipelines, each training epoch consisted of newly generated waveforms injected into unseen noise segments, though the validation examples are consistent. The loss is the metric used to determine when training is halted --- after 10 epochs have passed with no improvement. Again we can see that this is a vast improvement over the perceptron case, at least in the time frame that is monitored. _Upper:_ Plot of model losses when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when measured with validation data ($10^4$ epoch-consistent examples).]
+) <cnn_single_loss>
