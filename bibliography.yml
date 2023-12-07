@@ -2739,13 +2739,44 @@ coherent_snr_attention:
     - Dan Wu 
     - Xian-Chuan Yu 
   date: 2022-10
-  url: https://dx.doi.org/10.1088/1674-4527/ac846c
+  url: https://doi.org/10.1088/1674-4527/ac846c
   
   parent:
     type: periodical
     title: Research in Astronomy and Astrophysics
     number: 11
     volume: 22
+
+space_based_transformer:
+  type: article
+  title: "Space-based gravitational wave signal detection and extraction with deep neural network"
+  author:
+    - Zhao, Tianyu
+    - Lyu, Ruoxi
+    - Wang, He
+    - Cao, Zhoujian
+    - Ren, Zhixiang
+  date: 2023-08-11
+  url: https://doi.org/10.1038/s42005-023-01334-6
+
+  parent:
+    type: periodical
+    title: Communications Physics
+    volume: 6
+    issue: 1
+
+detection_conv_transformer:
+  type: article
+  title: "Convolutional Transformer for Fast and Accurate Gravitational Wave Detection"
+  author:
+    - L. Jiang
+    - Y. Luo
+  url: https://doi.org/10.1109/ICPR56361.2022.9956104
+  date: 2022
+  
+  parent:
+    type: proceedings
+    title: "2022 26th International Conference on Pattern Recognition (ICPR)"
 
 #Burst:
 lstm_supernovae:
