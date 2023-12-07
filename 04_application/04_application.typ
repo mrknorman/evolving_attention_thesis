@@ -1089,7 +1089,7 @@ As can be seen, it is very difficult to compare the performance of many of the a
     [-], [-], [-], [-], [-], [-], [-], [-], [-], [#text(red)[*$5 times 10^(-5)$*]], [0.01], [0.001], [Not Given],
     [Yu _et al._ @spectrogram_cnn_2], [$2 times 1D "CNN"$  $->$  $2D "CNN"$], [-], [-], [Yes], [Single], [BBH], [#text(red)[*Spectrogram*]], [No], [$6 times 10^(-2)$], [0.89], [0.67], [0.20] 
   ),
-  caption: [Note: Some accuracy values are extracted from plots by eye, so substantive error will have been introduced.]
+  caption: [A comparison of results from the literature, red values indicate the significant feature of the study. Note: Some accuracy values are extracted from plots by eye, so substantive error will have been introduced. ]
 ) <literature-results>
 
 #set page(
@@ -1177,6 +1177,6 @@ image("cnn_single/far_plot.png", width: 100%),
 
 #figure(
     image("cnn_single/roc_8.png", width: 100%),
-  caption: [Perceptron efficiency curves for the multi-detector WNB detection model. For each of the 14 perceptron models trained, 31 efficiency tests are performed at evenly spaced optimal SNR values between 0 and 30. For each test, 8192 examples with signals of the relevant SNR are examined by the model. The percentage of those that scored above the threshold is plotted, see @specificity, for two different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz") and #box("0.01"+ h(1.5pt) + "Hz"), lower FARs are excluded due to small accuracies. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz").]
+    caption: [Perceptron efficiency curves for the multi-detector WNB detection model. For each of the 14 perceptron models trained, 31 efficiency tests are performed at evenly spaced optimal SNR values between 0 and 30. For each test, 8192 examples with signals of the relevant SNR are examined by the model. The percentage of those that scored above the threshold is plotted, see @specificity, for two different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz") and #box("0.01"+ h(1.5pt) + "Hz"), lower FARs are excluded due to small accuracies. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz").]
 ) <roc_curves_single>
 
