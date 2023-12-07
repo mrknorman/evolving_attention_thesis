@@ -1025,7 +1025,7 @@ Particular stride, dilation, and size combinations will sometimes produce kernel
 
 === Pooling <pool-sec>
 
-Pooling layers, or simply pooling, is a method used to restrict the number of data channels flowing through the network. They see widespread application across the literature and have multiple valuable properties. They can reduce the size of the network and thus the computation and memory overhead, and they can also make the network more robust to small translational, scale, and rotational differences in your input features. Convolutional layers record the position of the feature they recognise but can sometimes be overly sensitive to tiny shifts in the values of input pixels. Small changes in a feature's scale, rotation, or position within the input can lead to a very different output, which is evidently not often desirable behaviour.
+Pooling layers, or simply pooling, is a method used to restrict the number of data channels flowing through the network. They see widespread application across the literature and have multiple valuable properties. They can reduce the size of the network and thus the computation and memory overhead, and they can also make the network more robust to small translational, scale, and rotational differences in your input features. Convolutional layers record the position of the feature they recognise but can sometimes be overly sensitive to tiny shifts in the values of input pixels. Small changes in a feature's scale, rotation, or position within the input can lead to a very different output, which is evidently not often desirable behavior.
 
 Pooling layers do not have any trainable parameters, and their operation is dictated entirely by the user-selected hyperparameters chosen before the commencement of model training. Instead, they act to group pixels via subsampling throwing away excess information by combining their values into a single output. In this way, they are similar to convolutional kernels, however. instead of operating with trained parameters, they use simple operations. The two most common types of pooling layers are *max pooling* and *average pooling*; max pooling keeps only the maximum value within each of its input bins, discarding the other values; intuitively, we can think of this as finding the strongest evidence for the presence of the feature within the pooling bin and discarding the rest. Average pooling averages the value across the elements inside each pooling bin, which has the advantage that it uses some information from all the elements.
 
@@ -1116,7 +1116,7 @@ MLy achieves this goal by utilising two independent CNN models, one of which loo
 
 As baseline models to compare with the results of our improvement attempts, in the next section, we will train five model architectures using the GWFlow data acquisition and training pipeline. Since they are the basis of many of the subsequent attempts at CBC detection, we will train both the models presented in George _et al._ @george_huerta_cnn along with the model presented in @gabbard_messenger_cnn and for the coherence case, the two models of the MLy pipeline @MLy.
 
-=== CBC Detection recreation
+=== CBC Detection Recreation
 
 #figure(
   grid(
@@ -1134,8 +1134,7 @@ As baseline models to compare with the results of our improvement attempts, in t
     caption: [CNN architecture from Gabbard _et al._ @gabbard_messenger_cnn.]
 ) <gabbard_diagram>
 
-
-== Results
+==== Training
 
 #figure(
     grid(
@@ -1158,3 +1157,26 @@ As baseline models to compare with the results of our improvement attempts, in t
     ),
     caption: [The accuracy history of attempts to retrain Convolutional Neural Network models from the literature using the GWFlow pipeline. These correspond to the accuracies displayed in @cnn_single_accuracy. The models presented are the two models from George _et al._ @george_huerta_cnn @george_huerta_followup, labeled "George Small", and "George Large", to differentiate them in terms of complexity, and the single model from Gabbard _et al._ @gabbard_messenger_cnn. The network structure of these models can be seen in @george_diagram and @gabbard_diagram, respectively. The training and validation datasets were maintained from the perceptron single-detector training experiment. The dataset contains IMRPhenomD waveforms generated using cuPhenom and real interferometer noise sampled from the LIGO Livingston detector during the 3#super("rd") observing run. The optimal SNR of waveforms injected into the training and validation sets was uniformly distributed between 8 and 15. Input was from a single detector only. Each epoch consisted of $10^5$ training examples, and it should be noted that, unlike the regular training pipelines, each training epoch consisted of newly generated waveforms injected into unseen noise segments, though the validation examples are consistent. The loss is the metric used to determine when training is halted --- after 10 epochs have passed with no improvement. Again we can see that this is a vast improvement over the perceptron case, at least in the time frame that is monitored. _Upper:_ Plot of model losses when measured with training data ($10^5$ epoch-unique examples). _Lower:_ Plot of model accuracies when measured with validation data ($10^4$ epoch-consistent examples).]
 ) <cnn_single_loss>
+
+==== Validation
+
+#figure(
+image("cnn_single/far_plot.png", width: 100%),
+  caption: [Perceptron efficiency curves for the multi-detector WNB detection model. For each of the 14 perceptron models trained, 31 efficiency tests are performed at evenly spaced optimal SNR values between 0 and 30. For each test, 8192 examples with signals of the relevant SNR are examined by the model. The percentage of those that scored above the threshold is plotted, see @specificity, for two different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz") and #box("0.01"+ h(1.5pt) + "Hz"), lower FARs are excluded due to small accuracies. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz").]
+) <cnn_far_single>
+
+#figure(
+  grid(
+    image("cnn_single/efficiency_curve_0_1.png", width: 100%),
+    image("cnn_single/efficiency_curve_0_01.png", width: 100%),
+    image("cnn_single/efficiency_curve_0_001.png", width: 100%),
+    image("cnn_single/efficiency_curve_0_0001.png", width: 100%),
+  ), 
+  caption: [Perceptron efficiency curves for the multi-detector WNB detection model. For each of the 14 perceptron models trained, 31 efficiency tests are performed at evenly spaced optimal SNR values between 0 and 30. For each test, 8192 examples with signals of the relevant SNR are examined by the model. The percentage of those that scored above the threshold is plotted, see @specificity, for two different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz") and #box("0.01"+ h(1.5pt) + "Hz"), lower FARs are excluded due to small accuracies. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz").]
+) <cnn_efficiency_curves_single>
+
+#figure(
+    image("cnn_single/roc_8.png", width: 100%),
+  caption: [Perceptron efficiency curves for the multi-detector WNB detection model. For each of the 14 perceptron models trained, 31 efficiency tests are performed at evenly spaced optimal SNR values between 0 and 30. For each test, 8192 examples with signals of the relevant SNR are examined by the model. The percentage of those that scored above the threshold is plotted, see @specificity, for two different False Alarm Rate (FAR) thresholds: #box("0.1"+ h(1.5pt) + "Hz") and #box("0.01"+ h(1.5pt) + "Hz"), lower FARs are excluded due to small accuracies. _Upper:_ Efficiency curves at a FAR of #box("0.1" + h(1.5pt) + "Hz"). _Lower:_ Efficiency curves at a FAR of #box("0.01" + h(1.5pt) + "Hz").]
+) <roc_curves_single>
+
