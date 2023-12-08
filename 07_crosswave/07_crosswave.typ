@@ -1,4 +1,4 @@
-= CrossWave: Detection and Parameterisation of Overlapping Compact Binary Coalescence Signals
+= CrossWave: Detection and Parameterisation of Overlapping Compact Binary Coalescence Signals <crosswave-sec>
 
 We introduce CrossWave, a new attention-based neural network model for the identification and parameter estimation of overlapping CBC signals. CrossWave can with efficiencies matching that of more conventional matched filtering techniques, separate the case of overlapping mergers from lone mergers, but with considerably lower inference times and computational cost. We suggest CrossWave or a similar architecture may be used to augment existing CBC detection and parameter estimation infrastructure, either as a complementary confirmation of the presence of overlap or to extract the merger times of each signal in order to use other parameter estimation techniques on the separated parts of the signals.
 

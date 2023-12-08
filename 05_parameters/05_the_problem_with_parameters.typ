@@ -1,4 +1,4 @@
-= Demystifying Artificial Neural Networks for Gravitational-Wave Analysis: Exploring Hyperparameter Space with Genetic Algorithms
+= Demystifying Artificial Neural Networks for Gravitational-Wave Analysis: Exploring Hyperparameter Space with Genetic Algorithms <dragonn-sec>
 
 == The Problem with Parameters <hyperparameters-section>
 \
