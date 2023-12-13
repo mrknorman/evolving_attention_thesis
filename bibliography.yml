@@ -2795,3 +2795,419 @@ lstm_supernovae:
     title: "Astronomy & Astrophysics"
     volume: 669
 
+# Crosswave
+
+phil_thesis:
+  type: thesis
+  title: Accurate identification of the nature of signals in ground-based gravitational-wave interferometer data 
+  author: Relton, Philip
+  date: 2023-06-15
+  url: https://orca.cardiff.ac.uk/id/eprint/160395
+
+
+# Overlapping CBC PE:
+
+# Search
+overlapping_search:
+  type: article
+  title: Addressing the challenges of detecting time-overlapping compact binary coalescences
+  author:
+    - Relton, Philip 
+    - Virtuoso, Andrea 
+    - Bini, Sophie 
+    - Raymond, Vivien 
+    - Harry, Ian 
+    - Drago, Marco 
+    - Lazzaro, Claudia 
+    - Miani, Andrea 
+    - Tiwari, Shubhanshu
+  url: https://doi.org/10.1103/PhysRevD.106.104045
+  date: 2022-11
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    issue: 10
+    volume: 106
+    publisher: American Physical Society
+
+# PE
+
+# Global:
+
+global_fit:
+  type: article
+  title: "Noisy neighbours: inference biases from overlapping gravitational-wave signals"
+  author:
+    - Antonelli, Andrea
+    - Burke, Ollie
+    - Gair, Jonathan R
+  date: 2021
+  page-range: 5069-5086
+  url: https://doi.org/10.1093/mnras/stab2358
+  parent:
+    type: periodical
+    title: Monthly Notices of the Royal Astronomical Society
+    volume: 507
+    number: 1
+
+lisa_global_1:
+  type: article
+  title: "Impact of galactic foreground characterization on a global analysis for the LISA gravitational wave observatory"
+  url: https://doi.org/10.1088/1361-6382/aa9601
+  author:
+    - Robson, Travis
+    - Cornish, Neil
+  date: 2017-11-22
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    issue: 24
+    volume: 34
+    publisher: IOP Publishing
+
+lisa_global_2:
+  type: article
+  title: Global analysis of the gravitational wave signal from Galactic binaries
+  author:
+    - Littenberg, Tyson B. 
+    - Cornish, Neil J. 
+    - Lackeos, Kristen 
+    - Robson, Travis
+  url: https://doi.org/10.1103/PhysRevD.101.123021
+  date: 2020-06
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 101
+    issue: 12
+    publisher: American Physical Society
+
+lisa_global_3:
+  type: article
+  title: Characterization of the stochastic signal originating from compact binary populations as measured by LISA
+  author: 
+    - Karnesis, Nikolaos 
+    - Babak, Stanislav 
+    - Pieroni, Mauro 
+    - Cornish, Neil 
+    - Littenberg, Tyson
+  date: 2021-10
+  url: https://doi.org/10.1103/PhysRevD.104.043019
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    issue: 4
+    volume: 104
+    publisher: American Physical Society
+
+# Local
+
+# Hierachical:
+hiherachical_subtration_overlapping_pe:
+  type: article
+  title: Analyses of overlapping gravitational wave signals using hierarchical subtraction and joint parameter estimation
+  author:
+    - Janquart, Justin
+    - Baka, Tomasz
+    - Samajdar, Anuradha
+    - Dietrich, Tim
+    - Van Den Broeck, Chris
+  url: https://doi.org/10.1093/mnras/stad1542
+  date: 2023
+
+  parent:
+    type: periodical
+    title: Monthly Notices of the Royal Astronomical Society
+    volume: 523
+    issue: 2
+
+hieherachical_overlapping_pe_2:
+  type: article
+  title: Parameter estimation methods for analyzing overlapping gravitational wave signals in the third-generation detector era
+  author:
+    - Justin Janquart 
+    - Tomasz Baka 
+    - Anuradha Samajdar 
+    - Tim Dietrich 
+    - Chris Van Den Broeck
+  date: 2023
+  url: https://doi.org/10.48550/arXiv.2211.01304
+
+  parent:
+    type: web
+    title: arXiv
+
+# Mahcine learning
+machine_learning_overlapping_pe:
+  type: article
+  title: Normalizing Flows as an Avenue to Studying Overlapping Gravitational Wave Signals
+  author:
+    - Langendorff, Jurriaan 
+    - Kolmus, Alex 
+    - Janquart, Justin 
+    - Van Den Broeck, Chris
+  year: 2023-04
+  url: https://doi.org/10.1103/PhysRevLett.130.171402
+
+  parent:
+    type: periodical
+    title: Physcial Review Letters
+    volume: 130
+    issue: 17
+    publisher: American Physical Society
+
+# Detectors
+
+LIGO_Voyager:
+  type: article
+  title: "LIGO Voyager: A Cryogenic Silicon Interferometer for Gravitational-wave Detection"
+  author:
+    - Robie, Raymond 
+    - Brooks, Aidan 
+    - Wipf, Christopher 
+    - Arai, Koji 
+    - Adhikari, Rana
+  url: https://meetings.aps.org/Meeting/APR20/Session/D05.5
+  parent:
+    type: periodical
+    title: Bulletin of the American Physical Society
+    volume: 65
+    year: 2020
+    publisher: American Physical Society
+
+einstein_telescope:
+  type: article
+  title: "The Einstein Telescope: a third-generation gravitational wave observatory"
+  url: https://doi.org/10.1088/0264-9381/27/19/194002
+  author:
+    - Punturo, M
+    - Abernathy, M
+    - Acernese, F
+    - Allen, B
+    - Andersson, N
+    - Arun, K
+    - Barone, F
+    - Barr, B
+    - Barsuglia, M
+    - Beker, M
+    - Beveridge, N
+    - Birindelli, S
+    - Bose, S
+    - Bosi, L
+    - Braccini, S
+    - Bradaschia, C
+    - Bulik, T
+    - Calloni, E
+    - Cella, G
+    - Mottin, E Chassande
+    - Chelkowski, S
+    - Chincarini, A
+    - Clark, J
+    - Coccia, E
+    - Colacino, C
+    - Colas, J
+    - Cumming, A
+    - Cunningham, L
+    - Cuoco, E
+    - Danilishin, S
+    - Danzmann, K
+    - De Luca, G
+    - De Salvo, R
+    - Dent, T
+    - De Rosa, R
+    - Di Fiore, L
+    - Di Virgilio, A
+    - Doets, M
+    - Fafone, V
+    - Falferi, P
+    - Flaminio, R
+    - Franc, J
+    - Frasconi, F
+    - Freise, A
+    - Fulda, P
+    - Gair, J
+    - Gemme, G
+    - Gennai, A
+    - Giazotto, A
+    - Glampedakis, K
+    - Granata, M
+    - Grote, H
+    - Guidi, G
+    - Hammond, G
+    - Hannam, M
+    - Harms, J
+    - Heinert, D
+    - Hendry, M
+    - Heng, I
+    - Hennes, E
+    - Hild, S
+    - Hough, J
+    - Husa, S
+    - Huttner, S
+    - Jones, G
+    - Khalili, F
+    - Kokeyama, K
+    - Kokkotas, K
+    - Krishnan, B
+    - Lorenzini, M
+    - Lück, H
+    - Majorana, E
+    - Mandel, I
+    - Mandic, V
+    - Martin, I
+    - Michel, C
+    - Minenkov, Y
+    - Morgado, N
+    - Mosca, S
+    - Mours, B
+    - Müller–Ebhardt, H
+    - Murray, P
+    - Nawrodt, R
+    - Nelson, J
+    - Oshaughnessy, R
+    - Ott, C D
+    - Palomba, C
+    - Paoli, A
+    - Parguez, G
+    - Pasqualetti, A
+    - Passaquieti, R
+    - Passuello, D
+    - Pinard, L
+    - Poggiani, R
+    - Popolizio, P
+    - Prato, M
+    - Puppo, P
+    - Rabeling, D
+    - Rapagnani, P
+    - Read, J
+    - Regimbau, T
+    - Rehbein, H
+    - Reid, S
+    - Rezzolla, L
+    - Ricci, F
+    - Richard, F
+    - Rocchi, A
+    - Rowan, S
+    - Rüdiger, A
+    - Sassolas, B
+    - Sathyaprakash, B
+    - Schnabel, R
+    - Schwarz, C
+    - Seidel, P
+    - Sintes, A
+    - Somiya, K
+    - Speirits, F
+    - Strain, K
+    - Strigin, S
+    - Sutton, P
+    - Tarabrin, S
+    - Thüring, A
+    - van den Brand, J
+    - van Leewen, C
+    - van Veggel, M
+    - van den Broeck, C
+    - Vecchio, A
+    - Veitch, J
+    - Vetrano, F
+    - Vicere, A
+    - Vyatchanin, S
+    - Willke, B
+    - Woan, G
+    - Wolfango, P
+    - Yamamoto, K
+  date: 2010-09-21
+  parent:
+    type: periodical 
+    title: Classical and Quantum Gravity
+    issue: 19
+    volume: 27
+
+cosmic_explorer:
+
+  type: article
+  title: "Cosmic Explorer: The U.S. Contribution to Gravitational-Wave Astronomy beyond LIGO"
+  author: 
+    - David Reitze
+    - Rana X Adhikari 
+    - Stefan Ballmer 
+    - Barry Barish 
+    - Lisa Barsotti 
+    - GariLynn Billingsley 
+    - Duncan A. Brown 
+    - Yanbei Chen 
+    - Dennis Coyne 
+    - Robert Eisenstein 
+    - Matthew Evans 
+    - Peter Fritschel 
+    - Evan D. Hall 
+    - Albert Lazzarini 
+    - Geoffrey Lovelace 
+    - Jocelyn Read 
+    - B. S. Sathyaprakash 
+    - David Shoemaker 
+    - Joshua Smith 
+    - Calum Torrie 
+    - Salvatore Vitale 
+    - Rainer Weiss 
+    - Christopher Wipf 
+    - Michael Zucker
+  url: https://doi.org/10.48550/arXiv.1907.04833
+
+  parent:
+    type: web
+    title: arXiv
+
+LISA:
+  type: article
+  title: "LISA technology—concept, status, prospects"
+  url: https://doi.org/10.1088/0264-9381/20/10/301
+  author:
+    - Karsten Danzmann, 
+    - Albrecht Rüdiger, 
+  date: 2003-04-25
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    issue: 10
+    volume: 20
+
+#PE studies:
+
+bias_study_one:
+  type: article
+  title: Biases in parameter estimation from overlapping gravitational-wave signals in the third-generation detector era
+  author:
+    - Samajdar, Anuradha 
+    - Janquart, Justin 
+    - Van Den Broeck, Chris 
+    - Dietrich, Tim
+  date: 2021-08
+  url: https://doi.org/10.1103/PhysRevD.104.044003
+
+  parent:
+    type: periodical
+    titlle: Physical Review D
+    volume: 104
+    issue: 4
+    publisher: American Physical Society
+
+bias_study_two:
+  type: article
+  title: Parameter estimation bias from overlapping binary black hole events in second generation interferometers
+  author:
+    - Relton, Philip 
+    - Raymond, Vivien
+  date: 2021-10
+  url: https://10.1103/PhysRevD.104.084039
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 104
+    issue: 8
+    publisher: American Physical Society
+
+# Overlapping glitch PE
