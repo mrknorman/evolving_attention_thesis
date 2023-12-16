@@ -174,7 +174,7 @@ Within transformers and other similar architectures, multi-head attention layers
     caption: [Typical attention block comprising multiple layers. Residual attention blocks vary in design between architectures but usually maintain the consistent elements shown. The skip connection is here represented by the encircling arrow, which shows that the input of the block is fed to the output before it is returned. There are also several regularisation methods present, batch normalisation, and dropout which help to reduce overfitting and ensure that values within the network remain bounded. Finally, the addition of dense layers and activation functions ensures that non-linear computation can be performed. Sometimes, if a reduction in total model parameter count and inference time is required, convolutional layers can be used in place of dense layers. The question marks indicate user-selectable hyperparameters. ]
 ) <attention-block-diagram>
 
-=== Transformers
+=== Transformers <transformer-sec>
 \
 Since their introduction, attention mechanisms have been utilized in a number of different neural network architectures, including transformers and stable diffusion models. Transformers were first proposed by Vaswani _et al._ @attention_is_all_you_need to solve natural-language processing tasks, showing a significant improvement over previous recurrent and convolutional architectures. For these reasons, we decided to investigate a fully attention-based model, inspired by a Transformer encoder.
 

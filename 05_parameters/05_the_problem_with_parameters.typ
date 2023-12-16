@@ -1,4 +1,4 @@
-= DRAGONN: Exploring Hyperparameter Space with Genetic Algorithms <dragonn-sec>
+= Dragonn: Exploring Deep Gravitational-Wave Classifier Hyperparameter Space with Genetic Algorithms <dragonn-sec>
 
 == The Problem with Parameters <hyperparameters-section>
 \

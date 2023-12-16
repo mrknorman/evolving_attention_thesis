@@ -632,7 +632,7 @@ This is a similar method to AdaGrad, so it has many of the same strengths and we
 
 //Nesterov momentum
 
-=== Adam (Adaptive Moment Estimation),
+=== Adam (Adaptive Moment Estimation)
 
 Adam (Adaptive Moment Estimation) combines the advantages of AdaGrad and RMSProp. Instead of normalising by the L2 loss alone, like AdaGrad, or the moving squared average alone, like RMSProp, it uses an exponential of the moving average of both the gradient, $E_g (t)$ and the squared gradient, $E_(g^2) (t)$ and uses the parameters, $beta_1$ and $beta_2$ to control the decay rates of these averages respectively. The moving average of the gradient and the moving average of the squared gradient are
 
