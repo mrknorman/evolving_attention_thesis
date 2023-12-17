@@ -179,19 +179,25 @@ We conclude that Overlapnet is capable enough to differentiate between single an
 
 Following the relative success of Overlapnet in differentiating between examples with one CBC signal present and two overlapping CBC signals present, we attempted to use the same model, with an adjusted activation function on the last layer, (linear rather than softmax), to attempt a regression problem on pairs of overlapping signals, in an attempt to extract useful information that could be used in a parameter estimation pipeline. The most useful parameters that can be extracted from an overlapping signal, are the merger times of the two signals A and B. Using the same training dataset and procedure, we changed only the activation function applied to the model output to allow for regression rather than classification, the model loss function used, again to allow for regression, and the labels that the model was trained to output. Rather than output a score between zero and one, we trained the model to output a merger time for Signal A, and a merger time for Signal B. 
 
-Due to an error in the data labeling procedure, which was not spotted until later experiments. Regression test results were extremely poor. Initially, it was thought that this was down to an insufficient for the task, therefore a much more complex and experimental network was constructed, utilizing much of the insight gained from previous experiments, as well as denoising autoencoder heads, and cross-attention layers between detectors. These concepts are explained in @cross-attention-sec, and @autoencoder-sec. We name this more complex network structure CrossWave.
+Due to an error in the data labeling procedure, which was not spotted until later experiments. Regression test results were extremely poor. Initially, it was thought that this was down to an insufficient for the task, therefore a much more complex and experimental network was constructed, utilizing much of the insight gained from previous experiments, as well as denoising autoencoder heads, and cross-attention layers between detectors. These concepts are explained in @additional-elements. We name this more complex network structure CrossWave.
 
-== Cross-Attention <cross-attention-sec>
+== Aditional Structural Elements <additional-elements>
+=== Cross-Attention <cross-attention-sec>
 
-The multi-head attention layers we have explored thus far in @skywarp-sec have all consisted of self-attention heads, which is the most natural application of attention. However, attention layers can also be used to compare two different sequences; this is a principle component of the archetypical transformer design, wherein cross-attention layers compare the model-predicted vectors to the ground truth vectors of the training data. See @transformer-sec. Since we were not concerned with next-token prediction in @transformer-sec we opted not to use cross-attention layers and instead focus entirely on self-attention. 
+The multi-head attention layers we have explored thus far in @skywarp-sec have all consisted of self-attention heads, which is the most natural application of attention. However, attention layers can also be used to compare two different sequences; this is a principle component of the archetypical transformer design, wherein cross-attention layers compare the model-predicted vectors to the ground truth vectors of the training data. See @transformer-sec. Since we were not concerned with next-token prediction in @transformer-sec we opted not to use cross-attention layers and instead focus entirely on self-attention. See @cross-attention-digaram> for an illustration of the cross-attention mechanism.
 
 However, there is a scenario in gravitational-wave data science for which a natural application of cross attention can be applied --- between the detector outputs of multiple interferometers of a gravitational-wave detection network. There are two ways in which we could deal with this scenario, we could apply the appropriate temporal encoding, and add an encoding element informing the model which detector the vector originated from, or we could simply use cross attention between the multiple detectors.
 
 In cross-attention, query, key, and value vectors are still generated, but for two sequences instead of one. The query vectors from one sequence are then compared with the key vectors of the other sequence, and the value vectors of that sequence are summed together similarly to in self-attention. What this does is it allows the attention layer to accumulate information from the other sequence that is relevant to vectors in the first sequence, because the choice of which sequence will provide the query, and which key and value matters, cross-attention is not commutative. After calculating the cross-attention between detectors, you can then add this result back with the self-attention results, allowing you to accumulate relevant information both from other temporal locations in one detector and from information provided by other detectors. 
 
-Overlapnet used both detectors as input since there was no need to try and opitmise for low FAR. When attempting to improve on this network operation with attention layers, it is a natural choice to apply cross-attention.
+Overlapnet used both detectors as input since there was no need to try and optimise for low FAR. When attempting to improve on this network operation with attention layers, it is a natural choice to apply cross-attention.
 
-== Autoencoders and Denoising <autoencoder-sec>
+#figure(
+    image("cross_attention.png", width: 100%),
+    caption: [Illustration of the action of a single cross-attention head. In contrast to a self-attention head, a cross-attention head takes two sequences as input: a querier sequence, and a queried sequence. The queryier sequence is converted into query vectors with a learned weights matrix, and the queried sequence is converted into key and value vectors. The rest of the attention mechanism functions identically to self-attention, but using this query, key, and value vectors that originate from different sources. For more details on the self-attention mechanism see the description in @sec-attention.]
+) <cross-attention-digaram>
+
+=== Autoencoders and Denoising <autoencoder-sec>
 
 Autoencoders are a family of artificial neural network architectures, they can utalise many different layer types from pure dense layers, to convolutional layers, to attention-layers, but are defined fundamentally by their inputs and outputs and the shape of the data as it moves through the networks. The vanilla autoencoder can be described as a form of unsupervised learning since the model input is the same as the model output, and therefore, although it has in some sense a model label --- its input, the data does not need to be labeled, as it is its own label.
 
@@ -199,9 +205,26 @@ A vanilla autoencoder attempts to compress the information content of its input 
 
 Autoencoders can also be used for anomaly rejection which has application in gravitational-wave analysis in both glitch and burst detection. Because an autoendoer is trained to reconstruct data from a given distribution, if it is fed a result that lies outside that distribution this will likely result in a high reconstruction loss. The value of this loss then can be used to determine if the autoencoder has encountered something from outside its training distribution. In the case of gravitational-wave glitches, we can train a model on known glitch types or a single known glitch type, we can then reject glitches that the autoencoder can successfully reconstruct as specimines of known detector glitches. For anomaly detection, we can instead train the model to reconstruct a standard interferometer background, if the autoencoder fails to reconstruct a section of the background well, it could be an indication of the presence of an anomaly, which in some cases could be a gravitational wave burst, combined with anomalies from multiple detectors, this could lead to a confirmed burst detection once glitches have been ruled out.
 
-An autoencoder has three parts, an encoder, a decoder, and a latent vector. The encoder attempts to reduce the input vector into a smaller latent space vector. Performing a kind of dimensional reduction which hopefully preserves most of the information content of the input vector by representing it in a more efficient data format. In most distributions that are interesting, there is a significant structure that can be learned and used to compress the data. Similar to compression algorithms, if the input data is random and has no structure, there will not be a way to represent that data in a much more efficient way. The encoder commonly has an identical structure to the convolutional layers in a CNN, as a function to compress the input data down into smaller feature maps, which is an identical function to what we require from our encoder. Encoders can also be built with dense or attention layers, and share most of the benefits and drawbacks of these previously discussed.
+An autoencoder has three parts, an encoder, a decoder, and a latent vector. See @autoencoder-diagrams. The encoder attempts to reduce the input vector into a smaller latent space vector. Performing a kind of dimensional reduction which hopefully preserves most of the information content of the input vector by representing it in a more efficient data format. In most distributions that are interesting, there is a significant structure that can be learned and used to compress the data. Similar to compression algorithms, if the input data is random and has no structure, there will not be a way to represent that data in a much more efficient way. The encoder commonly has an identical structure to the convolutional layers in a CNN, as a function to compress the input data down into smaller feature maps, which is an identical function to what we require from our encoder. Encoders can also be built with dense or attention layers, and share most of the benefits and drawbacks of these previously discussed.
+
+As well as acting as unsupervised models, it is possible to use pseudo-autoencoders which have the same structure as autoencoders but are not autoencoders in the truest definition, to produce an output that is not the same as its input, but instead an altered version of the input. This can be used to transform the input in some way, for example adding a filter to an image or audio input, or it can be used to try and remove noise from the original image. This latter type is known as a *denoising autoencoder*, and it is what we will be using as part of our expanded crosswave architecture. Denoising autoencoders are no longer considered unsupervised models, as the labels must be denoised versions of the input vectors. During training, the autoencoder learns to extract important features from the input image but ignores the noise, as it is not present in the output label and would be unnecessary information to propagate through the model. There have been some attempts to apply denoising autoencoders to gravitational-wave data in order to remove interferometer noise and reveal hidden gravitational-wave signals.
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    1,
+        gutter: 1em,
+        [ #image("dense_autoencoder.png", width: 80%) ],
+        [ #image("convolutional_autoencoder.png", width: 100%) ]
+    ),
+    caption: [Illustration of two trivial autoencoder architectures, one using only dense layers, the other using convolutional layers. Both networks have very few neurons and would likely not see use in any real practical application but are presented for illustration only. Autoencoders consist of an encoder that performs dimensional reduction on an input vector to reduce its dimensionality to a smaller latent space and produce a latent vector, this latent vector is then processed by the decoder which attempts to perform the inverse operation and reconstruct the original input image, or a slightly altered version of the input, for example a denoised version of the original input. Often the decoder is simply an inversed version of the encoder, which introduces the concept of transposed convolutional layers which perform the inverted operation of convolutional layers. _Upper:_ Illustrative dense layer autoencoder with a two-layer encoder and a two-layer decoder. The latent space of this autoencoder has two dimensions meaning the dimensionality of the input vector has been reduced from five down to two _Lower:_ Illustrative convolutional autoencoder with a two-layer encoder consisting of convolutional layers and a two-layer decoder consisting of transposed convolutional layers. The latent vector of this autoencoder has four elements, which means there has only been a reduction of one element between the input vector and the latent space.]
+) <autoencoder-diagrams>
 
 == CrossWave Architecture
+
+The CrossWave architecture is the most ambitious model architecture presented in this document. It attempts to combine many intuitions gained throughout the research, with contemporary network features that are known to work well in similar domains. We utilize several new conceptual elements, denoising autoencoder head, and cross-attention layers, which are described in more detail in @additional-elements.
+
+
 
 #set page(
   flipped: true
@@ -218,7 +241,7 @@ An autoencoder has three parts, an encoder, a decoder, and a latent vector. The 
   flipped: false
 )
 
-=== Arrival Time Parameter Estimation (PE):
+=== Arrival Time Parameter Estimation
 
 #figure(
     grid(
@@ -231,6 +254,68 @@ An autoencoder has three parts, an encoder, a decoder, and a latent vector. The 
     caption: []
 ) <crosswave_regression_scores>
 
+#figure(
+    grid(
+        columns: 2,
+        rows:    2,
+        gutter: 1em,
+        [ #image("h1_signal_a_arrival_time.png", width: 100%) ],
+        [ #image("h1_signal_b_arrival_time.png", width: 100%) ],
+        [ #image("l1_signal_a_arrival_time.png", width: 100%) ],
+        [ #image("l1_signal_b_arrival_time.png", width: 100%) ],
+    ),
+    caption: []
+) <crosswave_arrival_time_prediction_error>
+
+
 === Other Parameter Estimation Results
+
+#figure(
+    grid(
+        columns: 2,
+        rows:    2,
+        gutter: 1em,
+        [ #image("signal_a_mass_1.png", width: 100%) ],
+        [ #image("signal_b_mass_1.png", width: 100%) ],
+        [ #image("signal_a_mass_2.png", width: 100%) ],
+        [ #image("signal_b_mass_2.png", width: 100%) ],
+    ),
+    caption: []
+) <crosswave_mass_prediction_error>
+
+#figure(
+    grid(
+        columns: 2,
+        rows:    1,
+        gutter: 1em,
+        [ #image("signal_a_luminosity_distance.png", width: 100%) ],
+        [ #image("signal_b_luminosity_distance.png", width: 100%) ],
+
+    ),
+    caption: []
+) <crosswave_luminosity_distance_error>
+
+#figure(
+    grid(
+        columns: 2,
+        rows:    6,
+        gutter: 1em,
+        [ #image("signal_a_spin_1_x.png", width: 100%) ],
+        [ #image("signal_b_spin_1_x.png", width: 100%) ],
+        [ #image("signal_a_spin_1_y.png", width: 100%) ],
+        [ #image("signal_b_spin_1_y.png", width: 100%) ],
+        [ #image("signal_a_spin_1_z.png", width: 100%) ],
+        [ #image("signal_b_spin_1_z.png", width: 100%) ],
+        [ #image("signal_a_spin_2_x.png", width: 100%) ],
+        [ #image("signal_b_spin_2_x.png", width: 100%) ],
+        [ #image("signal_a_spin_2_y.png", width: 100%) ],
+        [ #image("signal_b_spin_2_y.png", width: 100%) ],
+        [ #image("signal_a_spin_2_z.png", width: 100%) ],
+        [ #image("signal_b_spin_2_z.png", width: 100%) ],
+    ),
+    caption: []
+) <crosswave_spin_error>
+
+
 
 === Physicallised Intuition
