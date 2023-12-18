@@ -91,8 +91,7 @@ machine_learning_intersection:
     title: Machine Learning
     volume: 82
     date: 2011-02-18
-
-      
+  
 machine_learning: 
   type: article
   title: Some Studies in Machine Learning Using the Game of Checkers
@@ -583,7 +582,7 @@ alpha_fold:
     volume: 596
 
 biological_inspiration:
-  type: Chapter
+  type: chapter
   title: Representation of Events in Nerve Nets and Finite Automata
   author: S. C. Kleene
   page-range: 3-42
@@ -594,6 +593,110 @@ biological_inspiration:
     type: Book
     title: Automata Studies. (AM-34)
     volume: 34
+
+biological_differences:
+  type: article
+  title: Biological constraints on neural network models of cognitive function
+  author:
+    - Pulvermüller, Friedemann
+    - Tomasello, Rosario
+    - Henningsen-Schomers, Malte R.
+    - Wennekers, Thomas
+  date: 2021-08-01
+  url: https://doi.org/10.1038/s41583-021-00473-5
+
+  parent:
+    type: periodical
+    title: Nature Reviews Neuroscience
+    volume: 22
+    issue: 8
+
+future_improvements:
+  type: article
+  title: Catalyzing next-generation Artificial Intelligence through NeuroAI
+  author:
+    - Zador, Anthony
+    - Escola, Sean
+    - Richards, Blake
+    - Ölveczky, Bence
+    - Bengio, Yoshua
+    - Boahen, Kwabena
+    - Botvinick, Matthew
+    - Chklovskii, Dmitri
+    - Churchland, Anne
+    - Clopath, Claudia
+    - DiCarlo, James
+    - Ganguli, Surya
+    - Hawkins, Jeff
+    - Körding, Konrad
+    - Koulakov, Alexei
+    - LeCun, Yann
+    - Lillicrap, Timothy
+    - Marblestone, Adam
+    - Olshausen, Bruno
+    - Pouget, Alexandre
+    - Savin, Cristina
+    - Sejnowski, Terrence
+    - Simoncelli, Eero
+    - Solla, Sara
+    - Sussillo, David
+    - Tolias, Andreas S.
+    - Tsao, Doris
+  date: 2023-03-22
+  url: https://doi.org/10.1038/s41467-023-37180-x
+
+  parent:
+    type: periodical
+    title: Nature Communications
+    volume: 14
+    issue: 1
+
+deep_learning_2:
+  type: article
+  author:
+    - LeCun, Yann
+    - Bengio, Yoshua
+    - Hinton, Geoffrey
+  date: 2015-05-01
+  title: Deep learning
+  url: https://doi.org/10.1038/nature14539
+
+  parent:
+    type: periodical
+    title: Nature
+    volume: 521
+    issue: 7553
+
+deep_learning_3:
+  type: article
+  title: "Deep learning in neural networks: An overview"
+  author:
+    - Schmidhuber, Jürgen 
+  url: https://doi.org/10.1016/j.neunet.2014.09.003
+  date: 2015-01-01
+
+  parent:
+    type: periodical
+    title: Neural Networks
+    volume: 61
+
+universal_aproximators:
+  type: article
+  title: Multilayer Feedforward Networks are Universal Approximators
+  author:
+    - Kurt Hornik
+    - Maxwell Stinchcombe
+    - Halbert White
+  url: https://cognitivemedium.com/magic_paper/assets/Hornik.pdf
+  page-range: 359-366
+  date: 1989-02-09
+
+  parent:
+    type: periodical
+    title: Neural Networks
+    volume: 2
+
+  
 
 supernovae_waveforms:
   type: article
