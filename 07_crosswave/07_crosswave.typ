@@ -222,7 +222,7 @@ As well as acting as unsupervised models, it is possible to use pseudo-autoencod
 
 == CrossWave Architecture <crosswave-models>
 
-The CrossWave architecture is the most ambitious model architecture presented in this document. It attempts to combine many intuitions gained throughout the research, with contemporary network features that are known to work well in similar domains. We utilize several new conceptual elements, denoising autoencoder head, and cross-attention layers, which are described in more detail in @additional-elements.
+The CrossWave architecture is the most ambitious model architecture presented in this thesis. It attempts to combine many intuitions gained throughout the research, with contemporary network features that are known to work well in similar domains. We utilize several new conceptual elements, denoising autoencoder head, and cross-attention layers, which are described in more detail in @additional-elements.
 
 The Crosswave architecture has a dual branch structure, which, rather than immediately combining both detectors into one multi-dimensional input stream, deals with input streams from both detectors in separate network branches in the first stage of the model. Each detector input is first fed into independent denoising autoencoder heads, with the idea that each autoencoder can learn to deal with the specificities of that particular detector noise, extract only the important signal features, and filter out detector noise. These could first be trained independently to denoise signals before being used in the larger regression model, which was the original intention, however, due to time constraints, these were trained in unison with the greater model. The architecture of the autoencoder encoder is based on the model described in Gabbard _et al._ @gabbard_messenger_cnn, with the decoder consisting of the inverse of that architecture, using transpose convolutions in place of convolutions. This model was chosen as it is known to be able to effectively extract the features of a gravitational-wave signal.
 
@@ -263,22 +263,60 @@ Due to the failure of early experiments to perform parameter estimation with dat
 
 The second consideration is which parameters to attempt to extract. The inclusion of additional parameters did not appear to reduce the ability of the model to correctly extract other parameters, even if those additional parameters were difficult or impossible to extract, neither did the opposite appear to be the case; the addition of additional labels did not appear to improve the ability of the model to classify other parameters. The following 24 parameters that were selected for extraction by the models: ["*Signal A Geocentric Arrival Time (s)*", "*Signal B Geocentric Arrival Time (s)*", "*Signal A H1 Arrival Time (s)*", "*Signal B H1 Arrival Time (s)*", "*Signal A L1 Arrival Time (s)*", "*Signal B L1 Arrival Time (s)*", "*Signal A Companion Mass 1 ($M_dot.circle$)*", "*Signal B Companion Mass 1 ($M_dot.circle$)*", "*Signal A Companion Mass 2 ($M_dot.circle$)*", "*Signal B Companion Mass 2 ($M_dot.circle$)*", "*Signal A Luminosity Distance (MPc)*", "*Signal B Luminosity Distance (MPc)*", "*Signal A Dimensionless Spin Component Companion 1x*", "*Signal B Dimensionless Spin Component Companion 1x*", "*Signal A Dimensionless Spin Component Companion 1y*", "*Signal B Dimensionless Spin Component Companion 1y*", "*Signal A Dimensionless Spin Component Companion 1z*", "*Signal B Dimensionless Spin Component Companion 1z*", "*Signal A Dimensionless Spin Component Companion 2x*", "*Signal B Dimensionless Spin Component Companion 2x*", "*Signal A Dimensionless Spin Component Companion 2y*", "*Signal B Dimensionless Spin Component Companion 2y*", "*Signal A Dimensionless Spin Component Companion 2z*", "*Signal B Dimensionless Spin Component Companion 2z*"].
 
-Finally, we can consider if and how we want to normalize the values of the labels. Out of the selected parameters, many are in a different range, with the Spin Components between -1 and 1, the masses between 10 and 70, and the luminosity distance between 500 and 700. This is not necessarily a problem, and the model would still be able to produce these outputs assuming we use the right activation functions. However, this could cause the model to take a longer time to converge on correct solutions, as it would consider some parameters, with larger values, to be much more important the others. Ideally, we want the gradient descent mechanism to treat all parameters approximately equally, for that reason, all label values were normalized between zero and one. 
+Finally, we can consider if and how we want to normalize the values of the labels. Out of the selected parameters, many are in a different range, with the Spin Components between -1 and 1, the masses between 10 and 70, and the luminosity distance between 500 and 700. This is not necessarily a problem, and the model would still be able to produce these outputs assuming we use the right activation functions. However, this could cause the model to take a longer time to converge on correct solutions, as it would consider some parameters, with larger values, to be much more important the others. Ideally, we want the gradient descent mechanism to treat all parameters approximately equally, for that reason, all label values were normalized between zero and one. The only exception to this was the merger times for Signal B, as these were incorrectly normalized leading to some ground truth values of less than one, which the model was unable to predict due to ReLU activation functions, which limit neuron outputs to values of zero or greater.
 
-=== Arrival Time Parameter Estimation Results
+== CrossWave Results
 
-Though a single model was produced to produce all parameter estimation results, we shall focus on examining the signal arrival time results before we look at the other results. These are the more important outputs of the model, as they fulfill the initial goal of providing more information for use in further established parameter estimation methods.  
+=== Merger Time Parameter Estimation Results <crosswave-merger-time-sec>
+
+Though a single model to predict all aforementioned parameters was produced, we shall focus on examining the signal merger time predictions before we look at the other results. These are the more important outputs of the model, as they fulfill the initial goal of providing more information for use in more established parameter estimation methods. The model was trained to output signal merger arrival time predictions for the LIGO Hanford Detector, LIGO Livingston Detector, and the earth center's center. Results are consistent between detectors, so for the first set of comparisons we compare only the predictions for the Hanford arrival time to the ground truth Hanford arrival time.
+
+First, can examine the arrival time prediction error with respect to the individual signal SNRs --- unlike in the classification case where only a single result is output, (albeit in this case from two output neurons normalized by a SoftMax layer), the model is now tasked to output two regression values (along with other parameters), a merger time for signal A and merger time for signal B. Therefore, we have generated two plots, one for each signal; see @crosswave_regression_snr.
+
+Examining the results, we observe that there are a few outliers with high errors above 0.25 s, but the majority of merger times were predicted with errors under this margin. On average, errors were notably worse for signal B than signal A, but their magnitudes do not seem to be correlated to signal SNR so it is unclear whether the error lies in the method or is a result of systematic training degradation introduced by the normalisation error. The other possibility is that it arises from the asymmetry that arises because signal B always arrives in the detector first. These errors could originated from misidentification of signals A and B. However, if this were to be the case, we would expect to see this error correlated with SNR, but we do not, at least on first inspection.
+
+#figure(
+    grid(
+        columns: 2,
+        rows:    2,
+        gutter: 1em,
+        [ #image("regression_snr_A.png", width: 100%) ],
+        [ #image("regression_snr_B.png", width: 100%) ],
+        [ #image("regression_snr_A_less.png", width: 100%) ],
+        [ #image("regression_snr_B_less.png", width: 100%) ]
+    ),
+    caption: [CrossWave merger time prediction error of Signal A, _upper left_, and Signal B, _upper right_. Compared to the classification results, the merger time errors look more consistent. This is primarily because the model output is not restricted between one and zero like in classification, so a few outliers with very high errors saturate the color map. Given this, we have also plotted the same results with all examples that have errors greater than 0.25 s removed, for a more granular view of the bulk of the regression scores. These are the lower two plots. In these focused plots, we can see that a significant number of results have a regression error of less than 0.1 s, which could be helpful to aid a secondary parameter estimation method. On these lower plots, there is also a notable difference between the average error on signal A, and the average error on signal B, with a higher average error on signal B. It is unclear exactly why this is the case, but we speculate that this is because Signal B is the signal to arrive first meaning that the inspiral of signal A can interfere significantly with signal B, whereas the opposite is never the case. It is also possible that sometimes, signal A can be misclassified as signal B. We would expect this latter confusion to have some correlation to SNR, but this does not seem to be the case. It could also be due to the aforementioned normalisation error reducing model training efficacy. Interestingly, the relationship between signal SNR and regression error seems low. This suggests that the substantive cause of regression error lies elsewhere, we plot additional comparisons to further investigate.]
+) <crosswave_regression_snr>
+
+Next, we can plot the rolling average prediction error as it changes with SNR; see @crosswave_regression_efficiencies. The picture is mostly as anticipated, with the determining factor for high error at low SNRs ($<20$) being the SNR of the signal in question. This suggests that the expected SNR relationship is present in @crosswave_regression_snr, but is hidden under variance created by other factors.  At optimal Network SNRs between 20 and 60, the results are roughly consistent between Signal A prediction error and signal B prediction error. With a high SNR in the opposing signal leading to higher error, above an optimal network SNR of 60, the pictures change, with the signal A prediction error average roughly equal whether ranked by signal A SNR, signal B SNR, or maximum SNR. This suggests estimation of signal A merger time is independent of signal B. For signal B however, high signal A SNR increases error on signal B, suggesting that as theorized, the inspiral of signal A can interfere with the parameter estimation of signal B.
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    2,
+        gutter: 1em,
+        [ #image("regression_efficiency_A.png", width: 80%) ],
+        [ #image("regression_efficiency_B.png", width: 80%) ]
+    ),
+    caption: [Crosswave merger time prediction error in seconds with different SNR measurement combinations. Since the model now has two outputs, one for each merger time in the input example, a plot was generated for each merger time prediction. A plot showing signal A merger time prediction on the left, and a plot showing signal B merger time prediction on the right. At low SNR, the error is dominated by the SNR in the given signal, which is anticipated --- a low SNR in a given signal would, evidently, make it difficult for the model to detect, and hence, estimate the merger time, of that signal. We can also see the notable difference in average prediction error between the upper Signal A plot and the lower Signal B plot. Interestingly, we see that the error on the signal B merger time increases when the SNR of signal A is higher. This seems to be the case regardless of the SNR of signal B. Since signal B always arrives first in the detector, this could be because a loud signal A inspiral obfuscates the presence of signal B, rendering the signal B merger time hard to identify.]
+) <crosswave_regression_efficiencies>
+
+As was the case with classification, we might expect the difference in merger times to affect merger time estimation ability. Thus we have created similar plots to determine the effect of the difference in merger arrival time between the two signals on model prediction ability; see @crosswave_merger_times. In both cases, there is a sharp peak in the magnitude of the prediction error when the merger time separation nears zero. As would be expected, if it gets difficult to determine if there are one or two signals at a particular spot, with perhaps another smaller SNR signal hiding elsewhere, the model becomes confused when trying to predict the merger time. In the case of signal A, defined as the second to arrive in the detector, the model predicts the signal will arrive later than it does, and vice versa in the case of signal B. We also note in both cases, though more distinctly in the signal B case, a cluster of errors that fall along the line where error equals the time separations, we can label these events as misidentifications, where signal A, has been misidentified as signal B or vice versa. In both cases, there seems to be a very slight uptick in error at high separations, this could be due to a smaller number of examples present in these areas of parameter space, leading the model to think these are unlikely parameters. 
 
 #figure(
     grid(
         columns: 2,
         rows:    1,
         gutter: 1em,
-        [ #image("error_vs_arrival_time.png", width: 100%) ],
-        [ #image("binary_arrival_time_difference.png", width: 100%) ]
+        [ #image("error_time_difference_signal_a.png", width: 100%) ],
+        [ #image("error_time_difference_signal_b.png", width: 100%) ]
     ),
-    caption: []
-) <crosswave_regression_scores>
+    caption: [Crosswave merger arrival time prediction errors compared with the time separation between signal A and signal B merger arrival times in the LIGO Hanford detector. _Left:_ Error on signal A merger time prediction compared with the time separation between the two mergers. _Right:_ Error on signal A merger time prediction compared with the time separation between the two mergers. The colour of the plotted examples depicts the absolute error between the model prediction and the ground truth value, and the red line shows the rolling average absoloute prediction error. For both merger times, we can see a spike in erroneous merger time predictions when the time separation is near zero. This is similar behavior that is seen in the classification examples and is also expected here since if the mergers are hard to distinguish from each other it will be difficult to determine the specific merger times. An asymmetry arises in which way the model will incorrectly predict the merger, in signal A, defined as the second to arrive in the detector, the model predicts the signal will arrive later than it does, and for signal B, the model thinks it will arrive earlier than it does. Since b always arrives first, these are logical assumptions for the model to make in both cases. In both cases, we also see lines of erroneous predictions where the model error equals the time separation. These are believed to be cases where the model belives signal A to be signal B and vice versa. This line is more pronounced for signal B errors, suggesting that signal B's are more commonly mistaken for signal A's than the other way around.]
+) <crosswave_merger_times>
+
+We have decided not to plot the merger times against the mass parameters as we did in the classification case, as these did not seem to have much of an effect on classification ability so it is unclear why these would have a particular impact on model regression ability.
+
+Finally, we finish with a direct comparison of the model prediction to the ground truth value; see @crosswave_arrival_time_prediction_error. This is plotted to align with the further presentation of parameter estimation results in @crosswave-further-pe-sec. We have plotted the predicted arrival time in the LIGO Hanford detector compared to the ground truth, as well as the arrival time in the LIGO Livingston detector compared to the ground truth. Omitting the also predicted earth center merger arrival time predictions as these were not considered particularly relevant to this analysis. A full table of parameter estimation results is given by @crosswave-regression-results.
 
 #figure(
     grid(
@@ -293,8 +331,37 @@ Though a single model was produced to produce all parameter estimation results, 
     caption: [CrossWave signal merger time parameter estimation results. Each pair of plots shows the merger time estimate of Signal A (_left_) and Signal B (_right_). For each validation example, the ground truth value is represented on the x-axis, and the model prediction is on the y-axis. Each represents the signal merger time in seconds. The colour of each circle depicts the difference between the ground truth value and the prediction, which will be identical if the point falls on the line of $x = y$, which is also shown on the plot as a dashed grey line. Due to an error in label normalisation, some ground truth values for Signal B were less than zero. Unfortunately, due to the choice of loss function used for the regression (ReLU), the model could not output predictions below zero, this meant that it was unable to predict these values correctly. This error may have interfered slightly with the rest of the training process, however other than its inability to classify these examples, there does not seem to be a significant reduction in the performance of classification of signal B merger times. Validation examples with round truth values below zero, and their associated predictions have been omitted from Signal B plots for visual clarity. If training were to be repeated this error could be easily rectified, either by correcting the normalization or by altering the choice of activation function. _Upper Left:_ Predicted against actual signal A Merger time in the simulated LIGO Hanford output. _Upper Right:_ Predicted against actual signal b Merger time in the simulated LIGO Hanford output. _Lower Left:_ Predicted against actual Signal A Merger time in the simulated LIGO Livingston output. _Lower Right:_ Predicted against actual signal B Merger time in the simulated LIGO Livingston output. ]
 ) <crosswave_arrival_time_prediction_error>
 
+=== Other Parameter Estimation Results <crosswave-further-pe-sec>
 
-=== Other Parameter Estimation Results
+As well as attempting to predict the merger arrival times for both signal A and signal B, the model was also tasked to output several other parameters. This was initially done to attempt to increase the model's knowledge about the task at hand but was found to have no significant positive or negative effect on the estimation of the merger time parameters. Thus, it was kept in as an element of the final model as a potential feature of interest for future development into a more advanced fully machine learning-based parameter estimation model for overlapping signals.
+
+A full table of the results of the CrossWave parameter estimation model when run on the $10^5$ pair validation examples and compared to the ground truth labels can be seen in @crosswave-regression-results. For each parameter, an $R^2$ score is plotted as well as a Mean Absolute Error. The $R^2$ score or the "coefficient of determination" is a measure of the goodness of fit of a model. It provides an indication of how well the independent variables in a regression model explain the variability of the dependent variable. An $R^2$ score of one indicates a perfect predictor, whereas a $R^2$ score of zero indicates the model is doing no better than outputting the mean value, and a negative value indicates that the model is performing worse than outputting the mean and so possibly indicates an error in training. The mean absolute error (MAE), simply indicates the average magnitude of the difference between the model prediction and the ground truth value.
+
+#figure(
+  table(
+    columns: (auto, auto, auto, auto, auto),
+    inset: 10pt,
+    align: horizon,
+    [*Parameter*], [*$R^2$ score A*], [*Mean Absolute Error A*], [*$R^2$ score B*], [*Mean Absolute Error B*],  
+    [H1 Time], [0.968], [0.100 s], [0.963], [0.0967 s],
+    [L1 Time], [0.963], [0.0915 s], [0.963], [0.0965 s],
+    [Geocent Time], [0.963], [0.0923 s], [0.963], [0.0974 s],
+    [Luminosity Distance], [-0.834], [23.2 MPc], [-0.791], [22.7 MPc],
+    [Mass 1], [0.613], [#box("7.95"  + h(1.5pt) + $M_dot.circle$)], [0.623], [ #box("7.79" + h(1.5pt) + $M_dot.circle$)],
+    [Mass 2], [0.718 ], [#box("5.59" + h(1.5pt) + $M_dot.circle$)], [0.715], [#box("5.47" + h(1.5pt) + $M_dot.circle$)],
+    [Spin 1x], [-0.00897], [0.162], [-0.0119], [0.165],
+    [Spin 1y], [-0.0780], [0.174], [-0.0749], [0.178],
+    [Spin 1z], [0.268], [0.273], [0.234], [0.280],
+    [Spin 2x], [-0.0117], [0.161], [-0.0114], [0.163],
+    [Spin 2y], [-0.0709], [0.179], [-0.0705], [0.179],
+    [Spin 2z], [0.0699], [0.311], [0.0620], [0.316],
+  ),
+  caption: [Results of the CrossWave parameter estimation model. For each of the model's outputted parameters, a Mean Absolute Error (MAE) along with an $R^2$ score are plotted. The MAE indicates the average magnitude of the errors between the model's predictions on the validation dataset and the corresponding ground truth values. It's a measure of average prediction accuracy, though it doesn't distinguish between overestimation and underestimation. The $R^2$ score quantifies how well the model's predictions explain the variance of the ground truth values in the validation dataset. An $R^2$ score of one signifies perfect prediction accuracy in the validation examples used. In contrast, a score of zero suggests the model's predictive capability is no better than simply using the mean value of the validation examples. Negative $R^2$ values indicate that the model performs worse than a model that would always predict the mean, possibly signaling errors in the training process or model selection. ]
+) <crosswave-regression-results>
+
+Out of the parameters that the model was trained to predict, the most accurate are the merger times, with $R^2$ scores between 0.96 and 0.97, and MAEs between 0.1 s and 0.09 s. As we have seen from previous analyses of these results, this average is probably driven up by outliers. There does not seem to be a particular detector that performs worse than any other, however, the Hanford Signal A MAE is notably higher than the other predictions, whether this is driven up by statistical variance or some other factor is unknown. These results are discussed in more detail previously in @crosswave-merger-time-sec.
+
+The parameters that the model was next most proficient at extracting, were the mass parameters of each of the two-component masses in each of the two binaries, generating four mass values in total: signal A mass 1, signal B mass 1, signal a mass 2, and signal B mass 2. The $R^2$ scores are lower and the MAE values are higher for mass 1 than mass 2. This is probably because during parameter generation mass 1 is always forced, by convention, to be the higher mass, meaning in general mass 1 has a larger range of possible values than mass 2, because the model can use its prediction of mass 1 to constrain mass 2, it can reduce its error, as well as having a better guess at the average mass for mass 2, since its values have a smaller distribution than mass 2 values. These results can be seen in @crosswave_mass_prediction_error. The error margins may be low enough for these results to have some limited usefulness, however, since they lack any form of uncertainty it is unclear exactly what that would be. Perhaps they could be used to inform the priors of another parameter estimation search.
 
 #figure(
     grid(
@@ -309,17 +376,7 @@ Though a single model was produced to produce all parameter estimation results, 
     caption: [CrossWave companion parameter estimation results. Each pair of plots shows the merger time estimate of Signal A (_left_) and Signal B (_right_). For each validation example, the ground truth value is represented on the x-axis, and the model prediction is on the y-axis. Each represents the companion mass in solar masses. The colour of each circle depicts the difference between the ground truth value and the prediction, which will be identical if the point falls on the line of $x = y$, which is also shown on the plot as a dashed grey line. _Upper Left:_ Predicted against actual signal A companion 1 mass. _Upper Right:_ Predicted against actual signal B companion 1 mass. _Lower Left:_ Predicted against actual signal A companion 2 mass. _Lower Right:_ Predicted against actual signal B companion 2 mass.]
 ) <crosswave_mass_prediction_error>
 
-#figure(
-    grid(
-        columns: 2,
-        rows:    1,
-        gutter: 1em,
-        [ #image("signal_a_luminosity_distance.png", width: 100%) ],
-        [ #image("signal_b_luminosity_distance.png", width: 100%) ],
-
-    ),
-    caption: []
-) <crosswave_luminosity_distance_error>
+Beyond the mass parameter extraction results, the other parameters extracted by CrossWave are probably very limited and are explored here for interest alone, rather than as a suggestion of usefulness. Of the attempted extraction of the companion spins, only the Z components show any signs of successful extraction. in particular, the Z component of the larger companion shows partial predictive power, although the usefulness of this extraction is questionable. These results are shown in @crosswave_spin_error.
 
 #figure(
     grid(
@@ -339,9 +396,39 @@ Though a single model was produced to produce all parameter estimation results, 
         [ #image("signal_a_spin_2_z.png", width: 100%) ],
         [ #image("signal_b_spin_2_z.png", width: 100%) ],
     ),
-    caption: []
+    caption: [CrossWave regression results for the dimensionless spin components of the two companions in each binary merger, A and B. The left plots show the parameter extracted from merger A, whereas the right results show the same parameter extracted by CrossWave from merger B. The plot shows the ground truth value of the dimensionless spin component and the predicted value of the dimensionless spin component. The colour of each validation example indicates the difference between the ground truth and the predicted value, in this case, equivalent to the distance the point is from the line of x = y.  The results are in the following order from top to bottom: 
+
+    + Mass 1 Spin Component X [_Left:_ Signal A, _Right:_ Signal B]
+    + Mass 1 Spin Component Y [_Left:_ Signal A, _Right:_ Signal B]
+    + Mass 1 Spin Component Z [_Left:_ Signal A, _Right:_ Signal B]
+    + Mass 2 Spin Component X [_Left:_ Signal A, _Right:_ Signal B]
+    + Mass 2 Spin Component Y [_Left:_ Signal A, _Right:_ Signal B]
+    + Mass 2 Spin Component Z [_Left:_ Signal A, _Right:_ Signal B]
+    
+    The appears to be little difference in classification ability between signal A and signal B. The X and Y components show no classification ability, with the model finding an approximate output value to omit for all validation examples. It was known that extracting the spin from the waveforms would be a challenging task, so this is anticipated. The model appears to show limited classification ability for the Z components, with the Z component for the more massive companion extracted with a stronger correlation than the lower mass companion, for which crosswave shows only very slight predictive ability.
+    ]
 ) <crosswave_spin_error>
 
+Finally, CrossWave attempted to extract the luminosity distance of the source. This extraction has failed unusually, not only did the model fail to correctly predict the luminosity distance to any degree, but also the results produced a $R^2$ score, which indicates the model did not even find a good mean value. Why this is the case is unknown. The luminosity distance could be difficult to extract due to its degeneracy with the source inclination angle, a parameter for which prediction was not attempted. The negative $R^2$ score could be due to another normalisation error which further investigation may reveal. These results can be seen in @crosswave_luminosity_distance_error.
 
+#figure(
+    grid(
+        columns: 2,
+        rows:    1,
+        gutter: 1em,
+        [ #image("signal_a_luminosity_distance.png", width: 100%) ],
+        [ #image("signal_b_luminosity_distance.png", width: 100%) ],
 
-=== Physicallised Intuition
+    ),
+    caption: [CrossWave model predicted luminosity distance vs ground truth luminosity distance of simulated BBH waveforms. _Left:_ Predicted signal A luminosity distance. _Right:_ Predicted signal B luminosity distance. The colour of each example point indicates the difference between the predicted and the ground truth value for that example. These plots indicate that there is almost no correlation between the predicted luminosity distance and the ground truth value. The model outputs a very similar value independent of luminosity distance, it is unclear whether this inability arises from a problem with model training and/or data processing, or whether luminosity distance is too difficult for the model to determine because of degeneracy with other parameters such as inclination. ]
+) <crosswave_luminosity_distance_error>
+
+== Discussion and Limitations
+
+Overlapnet showed us that a machine learning model can be trained to distinguish between a single signal and a pair of signals separated by distances less than 2 seconds distant and greater than 0.1 s distance if the minimum SNR of the signal was sufficient for differentiation. With greater hyperparameter tuning and adjustments to the training dataset design improvements in differentiation ability could be made. This suggests that a machine learning method such as this one may be a good addition to a future CBC pipeline which has to seriously contend with the possibility of overlapping signals. It could act alone or as one of a suite of methods to switch between alternate parameter estimation methods designed to deal specifically with overlapping signals.
+
+CrossWave has shown that machine learning methods can be used to extract the merger times of two overlapping signals with moderate success. Again, CrossWave or an improved model could be used as part of a larger parameter estimation pipeline, to provide priors to a more established parameter estimation method, once a pair of signals had been identified in the data.
+
+CrossWave has also demonstrated limited parameter estimation ability of its own, across a few other parameters, most successfully extracting predictions for the masses of the companions of signals A and B with some accuracy. It also showed limited potential to extract predictions of the Z dimensionless spin component. This method of directly extracting parameters using CrossWave however has limited application, as it has no method of dealing with uncertainty or multi-modal parameter spaces, which are needed for a robust and modern parameter search. It is possible that a machine learning method could be created to generate these features, through the use of Bayesian Neural Networks (notably distinct from Bayesian networks), or a multimodal latent space perhaps within an autoencoder framework, similar to the function of the VITAMIN parameter estimation method.
+
+The large model developed for CrossWave has performed well, and warrants further investigation, and comparison against other detection methods in the single signal detection problem are recommended and were desired but abandoned because of time constraints.
