@@ -3314,3 +3314,21 @@ bias_study_two:
     publisher: American Physical Society
 
 # Overlapping glitch PE
+
+vitamin:
+  type: article
+  title: Bayesian parameter estimation using conditional variational autoencoders for gravitational-wave astronomy
+  author:
+    - Gabbard, Hunter
+    - Messenger, Chris
+    - Heng, Ik Siong
+    - Tonolini, Francesco
+    - Murray-Smith, Roderick
+  date: 2022-01-01
+
+  parent:
+    type: periodical
+    title: Nature Physics
+    url: https://doi.org/10.1038/s41567-021-01425-7
+    volume: 18
+    issue: 1
