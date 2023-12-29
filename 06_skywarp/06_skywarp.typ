@@ -1,6 +1,7 @@
 = Skywarp: An Attention-Based model for the Detection of Gravitational-Wave Compact Binary Coalescences <skywarp-sec>
 
-#set math.equation(numbering: "6.1")
+#set math.equation(numbering: "(1)")
+
 \
 Convolutional Neural Networks (CNNs), though effective, have not been the stars of the machine-learning world for a few years now. Just as AlexNet @image_classification paved the way for the era of CNNs, and the surge to prominence of artificial neural networks as problem-solving solutions in the image domain, a similar step change occurred when the confluence of several different technologies led to the development of Large Language Models (LLMs), most notably of which in recent years has been the Generative Pretrained Transformer (GPT) of ChatGPT fame, though it should be noted that this was far from the first LLM. 
 

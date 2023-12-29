@@ -680,6 +680,76 @@ deep_learning_3:
     title: Neural Networks
     volume: 61
 
+# ~~~ General ANN Section ~~~:
+
+# Artificial Neurons and Basics:
+artifical_neurons:
+  type: article
+  title: Neuromorphic artificial intelligence systems
+  author:
+    - Dmitry Ivanov
+    - Aleksandr Chezhegov
+    - Mikhail Kiselev
+    - Andrey Grunin
+    - Denis Larionov
+  url: https://doi.org/10.3389/fnins.2022.959626
+
+  parent:
+    type: periodical
+    title: Frontiers in  Neuroscince 
+    number: 16
+
+# Full deep learning reviews:
+deep_learning_review:
+  type: article
+  title: "Review of deep learning: concepts, CNN architectures, challenges, applications, future directions"
+  author: 
+    - Alzubaidi, Laith
+    - Zhang, Jinglan
+    - Humaidi, Amjad J.
+    - Al-Dujaili, Ayad
+    - Duan, Ye
+    - Al-Shamma, Omran
+    - Santamaría, J.
+    - Fadhel, Mohammed A.
+    - Al-Amidie, Muthana
+    - Farhan, Laith
+  date: 2021-03-31
+  url: https://doi.org/10.1186/s40537-021-00444-8
+
+  parent:
+    type: periodical
+    title: Journal of Big Data
+    volume: 8
+    issue: 1
+    url: https://doi.org/10.1186/s40537-021-00444-8
+
+perceptron_and_neural_network_chapter:
+  type: chapter
+  title: Perceptron and Neural Networks
+  author:
+    - Joshi, Ameet V.
+  date: 2023
+  url: https://doi.org/10.1007/978-3-031-12282-8_6
+
+  parent:
+    type: book
+    title: Machine Learning and Artificial Intelligence
+    publisher: Springer International Publishing
+
+# Matrix operations:
+gradient_descent_matrix:
+  type: article
+  title: The Matrix Calculus You Need For Deep Learning
+  author:
+    - Terence Parr 
+    - Jeremy Howard
+  url: https://doi.org/10.48550/arXiv.1802.01528
+
+  parent:
+    type: web
+    title: ArXiv
+
 universal_aproximators:
   type: article
   title: Multilayer Feedforward Networks are Universal Approximators
@@ -696,7 +766,575 @@ universal_aproximators:
     title: Neural Networks
     volume: 2
 
+perceptron:
+  type: article
+  title: "The perceptron: A probabilistic model for information storage and organization in the brain"
+  author:
+    - Frank Rosenblatt
+  date: 1958
+  url: https://doi.org/10.1037/h0042519
+  page-range: 386–408
+
+  parent:
+    type: periodical
+    title: Psychological Review
+    issue: 65
+    number: 6  
+
+activation_functions_ref:
+  type: article
+  title: The Role of Neural Network Activation Functions
+  author:
+    - R. Parhi
+    - R. D. Nowak
+  url: https://doi.org/10.1109/LSP.2020.3027517
+  date: 2020
   
+  parent:
+    type: periodical
+    title: IEEE Signal Processing Letters
+    volume: 27
+
+relu_intro:
+  type: article
+  author:
+    - Fukushima, Kunihiko
+  title: "Cognitron: A self-organizing multilayered neural network"
+  date: 1975-09-01
+  url: https://doi.org/10.1007/BF00342633
+
+  parent:
+    type: periodical
+    title: Biological Cybernetics
+    volume: 20
+    issue: 3
+
+skip_connections:
+  type: article
+  title: Theoretical analysis of skip connections and batch normalization from generalization and optimization perspectives
+  author:
+    - Furusho, Yasutaka
+    - Ikeda, Kazushi
+  url:  https://doi.org/10.1017/ATSIP.2020.7
+  date: 2020-02-27
+
+  parent:
+    type: book
+    title: APSIPA Transactions on Signal and Information Processing
+    volume: 9
+    publisher: Cambridge University Press
+
+res_net_intro:
+  type: article
+  title: Deep Residual Learning for Image Recognition
+  author:
+    - K. He
+    - X. Zhang
+    - S. Ren
+    - J. Sun
+  url:  https://doi.org/10.1109/CVPR.2016.90
+  date: 2016-06-27
+
+  parent:
+    type: proceedings
+    title: 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)
+
+boltzman_machine:
+  type: article
+  title: A learning algorithm for boltzmann machines
+  author:
+    - Ackley, David H.
+    - Hinton, Geoffrey E.
+    - Sejnowski, Terrence J.
+  date: 1985-01-01
+  url: https://doi.org/10.1016/S0364-0213(85)80012-4
+
+  parent:
+    type: periodical
+    title: Cognitive Science
+    volume: 9
+    issue: 1
+
+vanishing_gradients:
+  type: article
+  title: The Vanishing Gradient Problem During Learning Recurrent Neural Nets and Problem Solutions
+  author:
+    - Sepp Hochreiter
+  url: https://doi.org/10.1142/S0218488598000094
+  date: 1997-10-20
+  page-range: 107-116
+
+  parent:
+    type: periodical
+    title: World Scientific
+    number: 2
+    volume: 6
+
+reccurant_neural_networks:
+  type: article
+  title: Recurrent neural networks
+  author:
+    - Medsker, Larry R 
+    - Jain, LC
+  pages: 2
+  date: 2001
+
+  parent:
+    type: periodical
+    title: Design and Applications
+    volume: 5
+    number: 64-67
+
+ridge_functions:
+  type: article
+  title: Ridges, neural networks, and the Radon transform
+  author: 
+    - Unser, Michael
+  date: 2023
+  page-range: 1-33
+  
+  parent:
+    type: periodical
+    title: Journal of Machine Learning Research
+    volume: 34
+    number: 37
+
+radial_basis_function:
+  type: article
+  title: Median radial basis function neural network
+  author:
+    - A. G. Bors
+    - I. Pitas
+  date: 1996-11
+  url: https://doi.org/10.1109/72.548164
+  
+  parent:
+    type: periodical
+    title: IEEE Transactions on Neural Networks
+    issue: 6
+    volume: 7
+
+softmax_ref:
+  type: article
+  author:
+    - John S. Bridle 
+  date: 1990
+  title: "Probabilistic Interpretation of Feedforward Classification Network Outputs, with Relationships to Statistical Pattern Recognition."
+  page-range: 227–236
+  parent:
+    type: book
+    author:
+      - F.Fogleman Soulie 
+      - J.Herault
+    title: "Neurocomputing: Algorithms, Architectures and Applications"
+    publisher: Springer–Verlag
+
+sigmoid_ref:
+  type: article
+  title: Deep Sparse Rectifier Neural Networks
+  author:
+    - Xavier Glorot
+    - Antoine Bordes
+    - Yoshua Bengio
+  date: 2011-06-14
+  url: https://proceedings.mlr.press/v15/glorot11a.html
+
+  parent:
+    type: proceedings
+    title: Proceedings of Machine Learning Research
+    volume: 15
+
+dying_neurons:
+  type: article
+  title: "Delve Into Neural Activations: Toward Understanding Dying Neurons"
+  author:
+    - Jiang, Ziping 
+    - Wang, Yunpeng 
+    - Li, Chang-Tsun 
+    - Angelov, Plamen 
+    - Jiang, Richard
+  page-range: 959-971
+  url: https://doi.org/10.1109/TAI.2022.3180272
+  date: 2023
+  
+  parent:
+    type: periodical
+    title: IEEE Transactions on Artificial Intelligence
+    volume: 4
+    number: 4
+
+leaky_relu:
+  type: article
+  title: "Rectifier nonlinearities improve neural network acoustic models"
+  author:
+    - Maas, Andrew L 
+    - Hannun, Awni Y 
+    - Ng, Andrew Y
+  date: 2013
+  
+  parent: 
+    type: periodical
+    title: Proc. imcl
+    volume: 30
+    number: 1
+
+randomised_leaky_relu:
+  type: article
+  author: 
+    - S. Fujii
+    - H. Hayashi
+  title: Comparison of Performance by Activation Functions on Deep Image Prior
+  url: https://doi.org/10.1109/ICAIIC.2019.8669063
+  date: 2019-02-11
+
+  parent:
+    type: proceedings
+    title: 2019 International Conference on Artificial Intelligence in Information and Communication (ICAIIC)
+
+parameteric_relu:
+  type: article
+  title: "An Evaluation of Parametric Activation Functions for Deep Learning"
+  author:
+    - L. B. Godfrey
+  url: https://doi.org/10.1109/SMC.2019.8913972
+  date: 2019-10-06
+
+  parent:
+    type: proceedings
+    title:  2019 IEEE International Conference on Systems, Man and Cybernetics (SMC)
+
+binary_cross_entropy:
+  type: article
+  title: Binary cross entropy with deep learning technique for image classification
+  author:
+    - Ruby, Usha 
+    - Yendapalli, Vamsidhar
+  date: 2020
+  
+  parent:
+    type: periodical
+    title: Int. J. Adv. Trends Comput. Sci. Eng
+    volume: 9
+    number: 10
+
+mae_and_mae:
+  type: article
+  title: Root mean square error or mean absolute error? Use their ratio as well
+  author:
+    - Karunasingha, Dulakshi Santhusitha Kumari
+  date: 2022-03-01
+  url: https://doi.org/10.1016/j.ins.2021.11.036
+
+  parent:
+    type: periodical
+    title: Information Sciences
+    volume: 585
+
+huber_loss:
+  type: article
+  title: Robust pairwise learning with Huber loss
+  author:
+    - Huang, Shouyou
+    - Wu, Qiang
+  url: https://doi.org/10.1016/j.jco.2021.101570
+  date: 2021-10-01
+
+  parent:
+    type: periodical
+    title: Journal of Complexity
+    volume: 66
+
+backpropogation_ref:
+  type: article 
+  title: Learning representations by back-propagating errors
+  author:
+    - Rumelhart, David E.
+    - Hinton, Geoffrey E.
+    - Williams, Ronald J.
+  date: 1986-10-01
+  url: https://doi.org/10.1038/323533a0
+
+  parent:
+    type: periodical
+    title: Nature
+    volume: 323
+    issue: 6088
+
+stocastic_gradient_descent_ref:
+  type: article
+  title: Large-Scale Machine Learning with Stochastic Gradient Descent
+  author:
+    - Leon Bottou
+  date: 2010-01-01
+  url: https://doi.org/10.1007/978-3-7908-2604-3_16
+  page-range: 177–186
+
+  parent:
+    type: proceedings
+    title: Proceedings of COMPSTAT'2010 
+
+mini_batch_descent:
+  type: article
+  title: "Mini-batch gradient descent: Faster convergence under data sparsity"
+  author:
+    - S. Khirirat
+    - H. R. Feyzmahdavian
+    - M. Johansson
+  date: 2017-12-12
+  url: https://doi.org/10.1109/CDC.2017.8264077
+  
+  parent:
+    type: periodical
+    title: 2017 IEEE 56th Annual Conference on Decision and Control (CDC)
+
+batch_descent:
+  type: article
+  title: The general inefficiency of batch training for gradient descent learning
+  author:
+    - Wilson, D.Randall
+    - Martinez, Tony R.
+  date: 2003-12-01
+  url: https://doi.org/10.1016/S0893-6080(03)00138-2
+  
+  parent:
+    type: periodical
+    title: Neural Networks
+    volume: 16
+    issue: 10
+
+momentum_ref:
+  type: article
+  title: On the momentum term in gradient descent learning algorithms
+  author:
+    - Ning Qian
+  url: https://doi.org/10.1016/S0893-6080(98)00116-6
+  page-range: 145-151
+  date: 1999
+
+  parent:
+    type: periodical
+    title: Neural Networks
+    volume: 12
+    number: 1
+
+gradient_descent_algorithms:
+  type: article
+  title: Comparison of the stochastic gradient descent based optimization techniques
+  author:
+    - E. YAZAN
+    - M. F. Talu
+  url: https://doi.org/10.1109/IDAP.2017.8090299
+  date: 2017-09-16
+
+  parent:
+    type: proceedings
+    title: 2017 International Artificial Intelligence and Data Processing Symposium (IDAP)
+
+gradient_descent_algorithms_2:
+  type: article
+  title: A Comparative Analysis of Gradient Descent-Based Optimization Algorithms on Convolutional Neural Networks
+  author:
+    - E. M. Dogo
+    - O. J. Afolabi
+    - N. I. Nwulu
+    - B. Twala
+    - C. O. Aigbavboa
+  url: https://doi.org/10.1109/CTEMS.2018.8769211
+  date: 2018-12-21
+  
+  parent:
+    type: proceedings
+    title: 2018 International Conference on Computational Techniques, Electronics and Mechanical Systems (CTEMS)
+
+adagrad:
+  type: article
+  title: "AdaGrad Stepsizes: Sharp Convergence over Nonconvex Landscapes"
+  author:
+    - Ward, Rachel 
+    - Wu, Xiaoxia 
+    - Bottou, Lon
+  url: https://doi.org/10.5555/3455716.3455935
+  date: 2020-01-01
+
+  parent:
+    publisher: JMLR.org
+    volume: 21
+    number: 1
+
+rmsprop:
+  type: article
+  title: Convergence of the RMSProp deep learning method with penalty for nonconvex optimization
+  author:
+    - Xu, Dongpo
+    - Zhang, Shengdong
+    - Zhang, Huisheng
+    - Mandic, Danilo P.
+  date: 2021-07-01
+  url: https://doi.org/10.1016/j.neunet.2021.02.011
+
+  parent:
+    type: periodical
+    title: Neural Networks
+    volume: 139
+
+adam_optimiser:
+  type: article
+  title: "Adam: A Method for Stochastic Optimization"
+  author:
+    - Diederik P. Kingma 
+    - Jimmy Ba
+  date: 2014-12-22
+  url: https://doi.org/10.48550/arXiv.1412.6980
+
+  parent:
+    type: web
+    title: arXiv
+
+improved_adam:
+  type: article
+  title: Improved Adam Optimizer for Deep Neural Networks
+  author:
+    - Zijun Zhang
+  date: 2018
+  page-range: 1-2
+  url: https://api.semanticscholar.org/CorpusID:52062957
+  
+  parent:
+    type: periodical
+    title: "2018 IEEE/ACM 26th International Symposium on Quality of Service (IWQoS)"
+
+overfitting:
+  type: article
+  title: An Overview of Overfitting and its Solutions
+  url: https://doi.org/10.1088/1742-6596/1168/2/022022
+  date: 2019-02-01
+  author: 
+    - Ying, Xue
+
+  parent:
+    type: periodical
+    title: "Journal of Physics: Conference Series"
+    publisher: IOP Publishing
+
+
+dropout_ref:
+  type: article
+  title: "Dropout: a simple way to prevent neural networks from overfitting"
+  author:
+    - Nitish Srivastava
+    - Geoffrey Hinton
+    - Alex Krizhevsky
+    - Ilya Sutskever
+    - Ruslan Salakhutdinov
+  url: https://doi.org/10.5555/2627435.2670313
+  date: 2014-01
+  page-range: 1929–1958
+
+  parent:
+    type: periodical
+    title: Journal of Machine Learning Research
+    volume: 15
+    number: 1
+
+dropout_regularisation:
+  type: article
+  title: "A Review on Dropout Regularization Approaches for Deep Neural Networks within the Scholarly Domain"
+  author:
+    - Salehin, Imrus 
+    - Kang, Dae-Ki 
+  date: 2023
+  url: https://doi.org/10.3390/electronics12143106
+
+  parent:
+    type: periodical
+    title: Electronics
+    volume: 23
+    issue: 14
+
+batch_normalisation_ref:
+  type: article
+  title: "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift"
+  author:
+    - Sergey Ioffe 
+    - Christian Szegedy
+  date: 2015
+  url: https://doi.org/10.48550/arXiv.1502.03167
+
+  parent:
+    type: web
+    title: arXiv
+
+early_stopping:
+  type: article
+  title: Regularization learning, early stopping and biased estimator
+  author:
+    - Katsuyuki Hagiwara
+  url: https://doi.org/10.1016/S0925-2312(01)00681-6
+  page-range: 937-955
+  date: 2002
+  
+  parent:
+    type: periodical
+    title: Neurocomputing
+    volume: 48
+    number: 1
+
+training_dataset_importance:
+  type: article
+  title: Analyses on Influence of Training Data Set to Neural Network Supervised Learning Performance
+  author:
+    - Zhou, Yu
+    - Wu, Yali
+  date: 2011
+  url: https://doi.org/10.1007/978-3-642-23753-9_4
+
+  parent:
+    type: periodical
+    title: Advances in Computer Science, Intelligent System and Environment
+
+one_hot_encoding:
+  type: article 
+  title: Survey on categorical data for neural networks
+  author:
+    - Hancock, John T.
+    - Khoshgoftaar, Taghi M.
+  date: 2020-04-10
+  url: https://doi.org/10.1186/s40537-020-00305-w
+
+  parent:
+    type: periodical
+    title: Journal of Big Data
+    volume: 7
+    issue: 1
+
+weight_initlisation:
+  type: article
+  title: A review on weight initialization strategies for neural networks
+  author:
+    - Narkhede, Meenal V.
+    - Bartakke, Prashant P.
+    - Sutaone, Mukul S.
+  date: 2022-01-01
+  url: https://doi.org/10.1007/s10462-021-10033-z
+
+  parent:
+    type: periodical
+    title: Artificial Intelligence Review
+    volume: 55
+    issue: 1
+
+interpetability:
+  type: article
+  title: Breaking into the black box of artificial intelligence
+  author:
+    - Neil Savage
+  date: 2022-03-01
+  url: https://doi.org/10.1038/d41586-022-00858-1
+
+  parent:
+    type: periodical
+    title: Nature Outlooks
+
 
 supernovae_waveforms:
   type: article
@@ -1050,6 +1688,55 @@ MLy:
   parent:
     type: web
     title: Arxiv
+
+neutron_star_equation_of_state_1:
+  type: article
+  title: Constraints on the neutron star equation of state from GW170817
+  author:
+    - Raithel, Carolyn A.
+  date: 2019-05
+  url: http://doi.org/10.1140/epja/i2019-12759-5
+
+  parent:
+    type: periodical
+    title: The European Physical Journal A
+    number: 5
+    volume: 55
+    publisher: Springer Science and Business Media LLC
+
+neutron_star_equation_of_state_2:
+  type: article
+  title: Using Gravitational-wave Observations and Quasi-universal Relations to Constrain the Maximum Mass of Neutron Stars
+  author: 
+    - Rezzolla, Luciano
+    - Most, Elias R.
+    - Weih, Lukas R.
+  date: 2018-01-09
+  url: https://doi.org/10.3847/2041-8213/aaa401
+
+  parent:
+    type: periodical
+    title: The Astrophysical Journal Letters
+    issue: 2
+    volume: 852
+
+neutron_star_equation_of_state_3:
+  type: article
+  title: "GW170817: Joint Constraint on the Neutron Star Equation of State from Multimessenger Observations"
+  author:
+    - Radice, David 
+    - Perego, Albino 
+    - Zappa, Francesco 
+    - Bernuzzi, Sebastiano
+  url: http://doi.org/10.3847/2041-8213/aaa402
+  date: 2018-01
+
+  parent:
+    type: periodical
+    title: The Astrophysical Journal
+    publosher: American Astronomical Society
+    number: 2
+    volume: 852
 
 GWTC-1:
   type: article
@@ -1624,6 +2311,27 @@ imrphenom_d:
   date: 2023-06
   url: https://ui.adsabs.harvard.edu/abs/2023ascl.soft07019P/abstract
 
+imrphenom_future:
+  type: article
+  title: "Towards the routine use of subdominant harmonics in gravitational-wave inference: Reanalysis of GW190412 with generation X waveform models"
+  author:
+    - Colleoni, Marta 
+    - Mateu-Lucena, Maite 
+    - Estelles, Hector 
+    - Garcia-Quiros, Cecilio 
+    - Keitel, David 
+    - Pratten, Geraint 
+    - Ramos-Buades, Antoni 
+    - Husa, Sascha
+  url: https://10.1103/PhysRevD.103.024029
+
+  parnet:
+    type: periodical
+    title: Physical Review D
+    volume: 103
+    issue: 2
+    publisher: American Physical Society
+
 supernovae-review:
   type: article
   title: The gravitational-wave signature of core-collapse supernovae
@@ -1832,6 +2540,36 @@ gravity_spy:
     type: periodical
     title: Information Sciences
     volume: 444
+
+glitch_detection_1:
+  type: article
+  title: Application of machine learning algorithms to the study of noise artifacts in gravitational-wave data
+  author:
+    - Biswas, Rahul 
+    - Blackburn, Lindy 
+    - Cao, Junwei 
+    - Essick, Reed 
+    - Hodge, Kari Alison 
+    - Katsavounidis, Erotokritos 
+    - Kim, Kyungmin 
+    - Kim, Young-Min 
+    - Le Bigot, Eric-Olivier 
+    - Lee, Chang-Hwan 
+    - Oh, John J. 
+    - Oh, Sang Hoon 
+    - Son, Edwin J. 
+    - Tao, Ye 
+    - Vaulin, Ruslan 
+    - Wang, Xiaoge
+  url: https://doi.org/10.1103/PhysRevD.88.062003
+  
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 88
+    issue: 6
+    date: 2013-09
+    publisher: American Physical Society
 
 idq:
   type: article
@@ -2907,6 +3645,21 @@ phil_thesis:
   date: 2023-06-15
   url: https://orca.cardiff.ac.uk/id/eprint/160395
 
+multimessnger_review:
+  type: article
+  title: " Multi-messenger astronomy: gravitational waves, neutrinos, photons, and cosmic rays"
+  url: https://doi.org/10.1088/1742-6596/718/2/022004
+  date: 2016-05-01
+  author:
+    - Branchesi, Marica
+
+
+  parent: 
+    type: periodical
+    title: "Journal of Physics: Conference Series"
+    issue: 2
+    volume: 718
+    publisher: IOP Publishing
 
 # Overlapping CBC PE:
 
@@ -3313,7 +4066,30 @@ bias_study_two:
     issue: 8
     publisher: American Physical Society
 
-# Overlapping glitch PE
+
+
+# PE
+
+bbh_pe_1:
+  type: article
+  title:  Exploring gravitational-wave detection and parameter inference using deep learning methods
+  url: https://doi.org/10.1088/1361-6382/ac0455
+  author:
+    - Álvares, João D
+    - Font, José A
+    - Freitas, Felipe F
+    - Freitas, Osvaldo G
+    - Morais, António P
+    - Nunes, Solange
+    - Onofre, Antonio
+    - Torres-Forné, Alejandro
+  date: 2021-07-08
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    publisher: IOP Publishing
+    volume: 38
+    issue: 15
 
 vitamin:
   type: article
@@ -3332,3 +4108,907 @@ vitamin:
     url: https://doi.org/10.1038/s41567-021-01425-7
     volume: 18
     issue: 1
+
+# Dragon
+
+no_free_lunch:
+  type: article
+  title: No free lunch theorems for optimization
+  author:
+    - Wolpert, D.H. 
+    - Macready, W.G.
+  page-range: 67-82
+  date: 1997
+  url: https://doi.org/10.1109/4235.585893
+
+  parent:
+    type: periodical
+    title: IEEE Transactions on Evolutionary Computation
+    volume: 1
+    issue: 1
+
+
+# Continious Waveforms:
+
+continious_1:
+  type: article
+  title: Deep-learning continuous gravitational waves
+  author:
+    - Dreissigacker, Christoph 
+    - Sharma, Rahul 
+    - Messenger, Chris 
+    - Zhao, Ruining 
+    - Prix, Reinhard
+  date: 2019-08
+  url: https://doi.org/10.1103/PhysRevD.100.044009}
+  
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 100
+    issue: 4
+    publisher: American Physical Society
+
+continious_2:
+  type: article
+  title: "Deep-learning continuous gravitational waves: Multiple detectors and realistic noise"
+  author:
+    - Dreissigacker, Christoph 
+    - Prix, Reinhard
+  date: 2020-07
+  url: https://doi.org/10.1103/PhysRevD.102.022005
+  
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 102
+    issue: 2
+    publisher: American Physical Society
+
+continious_3:
+  type: article
+  title: Robust machine learning algorithm to search for continuous gravitational waves
+  author:
+    - Bayley, Joe 
+    - Messenger, Chris 
+    - Woan, Graham
+  date: 2020-10
+  url: https://doi.org/10.1103/PhysRevD.102.083024
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 102
+    issue: 8
+    publisher: American Physical Society
+
+continious_clustering:
+  type: article
+  title: Deep learning for clustering of continuous gravitational wave candidates
+  author:
+    - Beheshtipour, B. 
+    - Papa, M. A.
+  date: 2020-03
+  url: https://doi.org/10.1103/PhysRevD.101.064009}
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 101
+    issue: 6
+    publisher: American Physical Society
+
+# Stocastic background:
+
+stocastic_1:
+  type: article
+  title: Deep learning searches for gravitational wave stochastic backgrounds
+  author: 
+    - A. Utina
+    - F. Marangio
+    - F. Morawski
+    - A. Iess
+    - T. Regimbau
+    - G. Fiameni
+    - E. Cuoco
+  url:  https://doi.org/10.1109/CBMI50038.2021.9461904
+  date: 2021-06-28
+  
+  parent:
+    type: proceedings
+    title: 2021 International Conference on Content-Based Multimedia Indexing (CBMI)
+
+noise_characterisation:
+  type: article
+  title: Machine-learning nonstationary noise out of gravitational-wave detectors
+  author:
+    - Vajente, G. 
+    - Huang, Y. 
+    - Isi, M. 
+    - Driggers, J. C. 
+    - Kissel, J. S. 
+    - Szczepanficzyk, M. J. 
+    - Vitale, S.
+  date: 2020-02
+  url: https://doi.org/10.1103/PhysRevD.101.042003
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 101
+    issue: 4
+    publisher: American Physical Society
+
+deepclean:
+  type: article
+  title: Noise reduction in gravitational-wave data via deep learning
+  author: 
+    - Ormiston, Rich 
+    - Nguyen, Tri 
+    - Coughlin, Michael 
+    - Adhikari, Rana X. 
+    - Katsavounidis, Erik
+  date: 2020-07
+  url: https://doi.org/10.1103/PhysRevResearch.2.033066
+  
+  parent:
+    type: periodical
+    title: Physical Review Research
+    volume: 2
+    issue: 3
+    publisher: American Physical Society
+
+# Detector control and calibration:
+
+detector_control_1:
+  type: article
+  title: "Neural sensing and control in a kilometer-scale gravitational-wave observatory"
+  author:
+    - Mukund, N. 
+    - Lough, J. 
+    - Bisht, A. 
+    - Wittel, H. 
+    - Nadji, S. 
+    - Affeldt, C. 
+    - Bergamin, F. 
+    - Brinkmann, M. 
+    - Kringel, V. 
+    - Luck, H. 
+    - Weinert, M. 
+    - Danzmann, K.
+  date: 2023-12
+  url: https://doi.org/10.1103/PhysRevApplied.20.064041
+
+  patent:
+    type: periodical
+    title: Physical Review Applied
+    volume: 20
+    issue: 6
+    publisher: American Physical Society
+
+detector_control_2: 
+  type: article
+  title: "Machine learning for gravitational-wave detection: surrogate Wiener filtering for the prediction and optimized cancellation of Newtonian noise at Virgo"
+  author:
+    - Badaracco, F
+    - Harms, J
+    - Bertolini, A
+    - Bulik, T
+    - Fiori, I
+    - Idzkowski, B
+    - Kutynia, A
+    - Nikliborc, K
+    - Paoletti, F
+    - Paoli, A
+    - Rei, L
+    - Suchinski, M
+  url: https://doi.org/10.1088/1361-6382/abab64
+  date: 2020-09-10
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    publisher: IOP Publishing
+    issue: 19
+    volume: 37
+
+aproximant_generation_1: 
+  type: article
+  title: Gravitational-wave surrogate models powered by artificial neural networks
+  author: 
+    - Khan, Sebastian 
+    - Green, Rhys
+  date: 2021-03
+  url: https://doi.org/10.1103/PhysRevD.103.064015
+  
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 103
+    issue: 6
+    publisher: American Physical Society
+
+autoencoder_unsupervised:
+  type: article
+  title: Unsupervised Pre-training of a Deep LSTM-based Stacked Autoencoder for Multivariate Time Series Forecasting Problems
+  author:
+    - Sagheer, Alaa
+    - Kotb, Mostafa
+  url: https://doi.org/10.1038/s41598-019-55320-6
+  date: 2019-12-13
+
+  parent:
+    type: periodical
+    title: Scientific Reports
+    volume: 9
+    issue: 1
+
+unsupervised_clustering:
+  type: article
+  title:  Unsupervised and self-supervised deep learning approaches for biomedical text mining
+  author:
+    - Nadif, Mohamed
+    - Role, François
+  date: 2021-03-01
+  url: https://doi.org/10.1093/bib/bbab016
+
+  parent:
+    type: periodical
+    title: Briefings in Bioinformatics
+    volume: 22
+    issue: 2
+
+psd_ref:
+  type: article
+  title: An overview of power spectral density (PSD) calculations
+  author:
+    - Richard N. Youngworth
+    - Benjamin B. Gallagher
+    - Brian L. Stamper
+  url: https://doi.org/10.1117/12.618478
+  date: 2005-08-18
+  
+  parent:
+    type: periodical
+    title: Proc.SPIE
+    volume: 5869
+
+welchs_method:
+  type: article
+  title: PSD computations using Welch's method. [Power Spectral Density (PSD)]
+  author:
+    - Solomon, Jr, O M
+  url: https://doi.org/10.2172/5688766
+  date: 1991-12
+
+gwflow_ref:
+  type: repository
+  author:
+    - Michael R. K. Norman
+  title: GWFlow
+  date: 2023
+  url: https://github.com/mrknorman/gravyflow
+
+  parent:
+    type: web
+    title: GitHub
+
+cuphenom_ref:
+  type: repository
+  author:
+    - Michael R. K. Norman
+  title: cuPhenom
+  date: 2023
+  url: https://github.com/mrknorman/cuphenom    
+
+  parent:
+    type: web
+    title: GitHub
+
+dataset_mismatch_problems:
+  type: article
+  title: Domain-adaptive neural networks improve supervised machine learning based on simulated population genetic data
+  url: https://doi.org/10.1371/journal.pgen.1011032
+  author:
+    - Mo Z
+    - Siepel A 
+  date: 2023
+  
+  parent:
+    type: periodical
+    title: PLoS Genetics 
+    issue: 19
+    number: 11
+
+dataset_mismatch_problems_2:
+  type: article
+  author:
+    - Roady R
+    - Hayes TL
+    - Kemker R
+    - Gonzales A
+    - Kanan C 
+  date: 2020
+  title: Are open set classification methods effective on large-scale datasets?
+  url: https://doi.org/10.1371/journal.pone.0238302
+
+  parent:
+    title: PLoS ONE 
+    volume: 15
+    number: 9
+
+dataset_mismatch_problems_3:
+  type: article
+  author:
+    - Schat E
+    - van de Schoot R
+    - Kouw WM, Veen D
+    - Mendrik AM 
+  date: 2020
+  url: https://doi.org/10.1371/journal.pone.0237009
+  title: "The data representativeness criterion: Predicting the performance of supervised classification based on data set similarity."
+  parent:
+    type: periodical
+    title: "PLoS ONE"
+    issue: 15
+    number: 8
+
+ml_in_gw_review:
+  type: article
+  title:  AI in Gravitational Wave Analysis, an Overview
+  author:
+    - Benedetto, Vincenzo 
+    - Gissi, Francesco 
+    - Ciaparrone, Gioele 
+    - Troiano, Luigi 
+  date: 2023
+  url: https://doi.org/10.3390/app13179886
+
+  parent:
+    type: periodical
+    title: Applied Sciences
+    volume: 13
+    issue: 17
+
+computational_cost:
+  type: article
+  title: Hierarchical search for compact binary coalescences in the Advanced LIGO's first two observing runs
+  author:
+    - Soni, Kanchan 
+    - Gadre, Bhooshan Uday 
+    - Mitra, Sanjit 
+    - Dhurandhar, Sanjeev
+  date: 2022-03
+  url: https://doi.org/10.1103/PhysRevD.105.064005
+  
+  parent:
+    type: periodical
+    title: Physical Review D
+    publisher: American Physical Society
+    volume: 105
+    issue: 6
+  
+dataset_size:
+  type: article
+  title:  Comparative analysis of image classification algorithms based on traditional machine learning and deep learning
+  author:
+  - Wang, Pin
+  - Fan, En
+  - Wang, Peng
+  url: https://doi.org/10.1016/j.patrec.2020.07.042
+  date: 2021-01-01
+
+  parent:
+    type: periodical
+    title: Pattern Recognition Letters
+    volume: 141
+
+cufft:
+  type: web
+  title: cuFFT
+  url: https://docs.nvidia.com/cuda/cufft/index.html#notices
+
+gravitational_waves_ref:
+  type: article
+  title: Gravitational Waves
+  author:
+    - Kip S. Thorne
+  date: 1995
+  url: https://doi.org/10.48550/arXiv.gr-qc/9506086
+
+
+  parent:
+    type: web
+    title: ArXiv
+
+gravitation:
+  type: book
+  title: Gravitation
+  author:
+    - Thorne, Kip S 
+    - Wheeler, John Archibald 
+    - Misner, Charles W
+  date: 2000
+  publisher : Freeman San Francisco, CA
+
+gravitational_wave_interfereometers:
+  type: book
+  title: Gravitational‐Wave Physics and Astronomy
+  author: 
+    - Dr. Jolien D. E. Creighton
+    - Dr. Warren G. Anderson
+  date: 2011-09-07
+  url: https://doi.org/10.1002/9783527636037
+
+gravitational_wave_population:
+  type: article
+  title: On the importance of source population models for gravitational-wave cosmology
+  author:
+    - Mastrogiovanni, S. 
+    - Leyde, K. and Karathanasis, C. 
+    - Chassande-Mottin, E. 
+    - Steer, D. A. and Gair, J. 
+    - Ghosh, A. 
+    - Gray, R. 
+    - Mukherjee, S.  
+    - Rinaldi, S.
+  date: 2021-09
+  url: https://doi.org/10.1103/PhysRevD.104.062009
+
+  parent:
+    title: Physical Review D
+    volume: 104
+    issue: 6
+    publisher: American Physical Society
+
+feature_noise:
+  type: article
+  title: A taxonomy on impact of label noise and feature noise using machine learning techniques
+  author: 
+    - Shanthini, A.
+    - Vinodhini, G.
+    - Chandrasekaran, R. M.
+    - Supraja, P.
+  date: 2019-09-01
+  page-range: 8597-8607
+  url: https://doi.org/10.1007/s00500-019-03968-7
+
+  parent:
+    type: periodical
+    title:  Soft Computing
+    volume: 23
+    issue: 18
+
+snr_ref:
+  type: article
+  title: "FINDCHIRP: An algorithm for detection of gravitational waves from inspiraling compact binaries"
+  author:
+    - Allen, Bruce 
+    - Anderson, Warren G. 
+    - Brady, Patrick R. 
+    - Brown, Duncan A. 
+    - Creighton, Jolien D. E.
+  date: 2012-06
+  url: https://doi.org/10.1103/PhysRevD.85.122006
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 85
+    issue: 12
+    publisher: American Physical Society
+
+hrss_ref:
+  type: article
+  title: Gravitational wave burst source direction estimation using time and amplitude information
+  author: 
+    - Markowitz, J. 
+    - Zanolin, M. 
+    - Cadonati, L. 
+    - Katsavounidis, E.
+  url: https://doi.org/10.1103/PhysRevD.78.122003
+  date: 2008-12
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 78
+    issue: 12
+    publisher: American Physical Society
+
+detector_sensitivity:
+  type: article
+  title: Sensitivity and performance of the Advanced LIGO detectors in the third observing run
+  author:
+    - Buikema, A. 
+    - Cahillane, C. 
+    - Mansell, G. L. 
+    - Blair, C. D. 
+    - Abbott, R. 
+    - Adams, C. 
+    - Adhikari, R. X. 
+    - Ananyeva, A. 
+    - Appert, S. 
+    - Arai, K. 
+    - Areeda, J. S. 
+    - Asali, Y. 
+    - Aston, S. M. 
+    - Austin, C. 
+    - Baer, A. M. 
+    - Ball, M. 
+    - Ballmer, S. W. 
+    - Banagiri, S. 
+    - Barker, D. 
+    - et al.
+  date: 2020-09
+  url: https://doi.org/10.1103/PhysRevD.102.062003
+
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 102
+    issue: 6
+    publisher: American Physical Society
+
+network_snr:
+  type: article
+  title: Networks of gravitational wave detectors and three figures of merit
+  author:
+    - Schutz, Bernard F
+  url: https://doi.org/10.1088/0264-9381/28/12/125023
+  date: 2011-05-27
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    issue: 12
+    volume: 28
+
+human_hearing:
+  type: article
+  title: "Hearing the heavens: the cosmos is thought to be awash with gravitational waves to which humanity is, as yet, deaf."
+  author: Bell, Trudy E.
+  date: 2008
+  page-range: 18-22
+  
+  parent: 
+    type: periodical
+    title: Nature
+    issue: 453
+    number: 7183
+
+open_data:
+  type: article
+  title: Open data from the third observing run of LIGO, Virgo, KAGRA and GEO
+  author: 
+    - Abbott, R 
+    - Abe, H 
+    - Acernese, F 
+    - Ackley, K 
+    - Adhicary, S 
+    - Adhikari, N
+    - Adhikari, RX 
+    - Adkins, VK 
+    - Adya, VB 
+    - Affeldt, C 
+    - others
+  date: 2023-07-28
+  url:  https://doi.org/10.3847/1538-4365/acdc9f
+
+  parent:
+    type: periodical
+    title: The Astrophysical Journal Supplement Series
+    publisher: The American Astronomical Society
+    issue: 2
+    volume: 267
+
+geo_sensitivity:
+  type: article
+  title: The advanced LIGO detectors in the era of first discoveries
+  author: Sigg, Daniel
+  page-range: 72-80
+  date: 2016
+
+  parent:
+    type: periodical
+    title: Interferometry XVIII
+    volume: 9960
+
+current_status:
+  type: web
+  title: gwistat
+  url: https://online.igwn.org/grafana/public-dashboards/1a0efabe65384a7287abfcc1996e4c4d?orgId=1&refresh=5s&from=now-2d&to=now
+
+false_alarm_rate_ref:
+  type: article
+  title: A fixed false alarm probability figure of merit for gravitational wave detectors
+  author:
+    - Wąs, M
+    - Kalmus, P
+    - Leong, J R
+    - Adams, T
+    - Leroy, N
+    - Macleod, D M
+    - Pankow, C
+    - Robinet, F
+  url: https://doi.org/10.1088/0264-9381/31/8/085004
+  date: 2014-03-21
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    publisher: IOP Publishing
+    issue: 8
+    volume: 32
+  
+feature_engineering_ref:
+  type: book
+  title: Feature engineering for machine learning and data analytics
+  author:
+    - Dong, Guozhu 
+    - Liu, Huan
+  date: 2018
+  publisher: CRC press
+
+feature_engineering_performance:
+  type: article
+  title: A survey of feature selection and feature extraction techniques in machine learning
+  author:
+    - S. Khalid
+    - T. Khalil
+    - S. Nasreen
+  page-range: 372-378
+  date: 2014-08-27
+  url: https://doi.org/10.1109/SAI.2014.6918213
+  
+
+  parent:
+    type: proceedings
+    title:  2014 Science and Information Conference
+
+whitening_ref:
+  type: article
+  title: Whitening of non-stationary noise from gravitational wave detectors
+  url: https://doi.org/10.1088/0264-9381/21/5/061
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    author:
+      - Elena Cuoco, 
+      - Giancarlo Cella, 
+      - Gianluca M Guidi, 
+    date: 2004-02-10
+    issue: 5
+    volume: 21
+
+pearson_ref: 
+  type: article
+  title: "Quantifying colocalization by correlation: the Pearson correlation coefficient is superior to the Mander's overlap coefficient"
+  author:
+    - Adler, Jeremy 
+    - Parmryd, Ingela
+  page-range: 733-742
+  date: 2010
+
+  parent:
+    type: periodical
+    title: Cytometry Part A
+    volume: 77
+    number: 8
+    publisher: Wiley Online Library
+
+fourier_transform_ref:
+  type: book
+  title: The fast Fourier transform
+  author:
+    - Nussbaumer, Henri J
+  date: 1982
+  publisher: springer
+
+spectrograms_ref:
+  type: article
+  title: Multi-channel spectrograms for speech processing applications using deep learning methods
+  author: 
+    - Arias-Vergara, T.
+    - Klumpp, P.
+    - Vasquez-Correa, J. C.
+    - Nöth, E.
+    - Orozco-Arroyave, J. R.
+    - Schuster, M.
+  date: 2021-05-01
+  page_range: 423-43§
+  url: https://doi.org/10.1007/s10044-020-00921-5
+  
+  parent:
+    type: periodical
+    title: Pattern Analysis and Applications
+    volume: 24
+    issue: 2
+
+autoencoder_ref:
+  title: Autoencoders
+  type: chapter
+  author:
+    - Bank, Dor
+    - Koenigstein, Noam
+    - Giryes, Raja
+    - Rokach, Lior
+    - Maimon, Oded
+    - Shmueli, Erez
+  date: 2023
+  page-range: 343-374
+  url: https://doi.org/10.1007/978-3-031-24628-9_16
+
+  parent:
+    type: book
+    title: "Machine Learning for Data Science Handbook: Data Mining and Knowledge Discovery Handbook"
+    publisher: Springer International Publishing
+
+gan_ref:
+  title: Generative Adversarial Networks
+  type: chapter
+  author:
+    - Bank, Dor
+    - Koenigstein, Noam
+    - Giryes, Raja
+    - Rokach, Lior
+    - Maimon, Oded
+    - Shmueli, Erez
+  date: 2023
+  page-range: 375-400
+  url: https://doi.org/10.1007/978-3-031-24628-9_17
+
+  parent:
+    type: book
+    title: "Machine Learning for Data Science Handbook: Data Mining and Knowledge Discovery Handbook"
+    publisher: Springer International Publishing
+  
+conv_rnn:
+  type: article
+  title: Convolutional recurrent neural networks for music classification
+  author:
+    - K. Choi
+    - G. Fazekas
+    - M. Sandler
+    - K. Cho
+  page-range: 2392-2396
+  date: 2017-03-05
+  url: https://doi.org/10.1109/ICASSP.2017.7952585
+  parent:
+    type: proceedings
+    title: 2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)
+
+conv_transformer:
+  type: article
+  title: Transformer in convolutional neural networks
+  author:
+    - Liu, Yun 
+    - Sun, Guolei 
+    - Qiu, Yu 
+    - Zhang, Le 
+    - Chhatkuli, Ajad 
+    - Van Gool, Luc
+  date: 2021
+
+conv_diffusion:
+  type: article
+  title: "Attend-and-excite: Attention-based semantic guidance for text-to-image diffusion models"
+  author:
+    - Chefer, Hila 
+    - Alaluf, Yuval 
+    - Vinker, Yael 
+    - Wolf, Lior 
+    - Cohen-Or, Daniel
+  page-range: 1-10
+  date: 2023
+  
+  parent:
+    type: periodical
+    title: ACM Transactions on Graphics (TOG)
+    volume: 42
+    number: 4
+    publisher: ACM New York, NY, USA
+
+bio_inspired_conv:
+  type: article
+  title: " onvolutional Neural Networks as a Model of the Visual System: Past, Present, and Future"
+  author:
+    - Lindsay, Grace W.
+  date: 2021-09-01
+  url: https://doi.org/10.1162/jocn_a_01544
+  page-range: 2017-2031
+
+  parnet:
+    type: periodical
+    title: Journal of Cognitive Neuroscience
+    volume: 33
+    issue: 10
+
+receptive_field_bio:
+  type: article
+  title: Receptive fields, binocular interaction and functional architecture in the cat's visual cortex
+  author:
+    - Hubel, D. H.
+    - Wiesel, T. N.
+    - 1962-01-01
+  url: https://doi.org/10.1113/jphysiol.1962.sp006837
+  page-range: 106-154
+  date: 1962-01-01
+
+  parent:
+    type: article
+    title: The Journal of Physiology
+    volume: 160
+    issue: 1
+    publisher: John Wiley & Sons, Ltd
+
+lack_of_invariance:
+  type: article
+  title: Stride and Translation Invariance in CNNs
+  author:
+    - Mouton, Coenraad
+    - Myburgh, Johannes C.
+    - Davel, Marelie H.
+    - Gerber, Aurona
+  date: 2020
+  page-range: 267-281
+  url: https://doi.org/10.1113/10.1007/978-3-030-66151-9_17
+
+  parent:
+    type: periodical
+    title: Artificial Intelligence Research
+
+conv_review:
+  type: article
+  title: "A Survey of Convolutional Neural Networks: Analysis, Applications, and Prospects"
+  author:
+    - Z. Li
+    - F. Liu
+    - W. Yang
+    - S. Peng
+    - J. Zhou
+  page-range: 6999-7019
+  url: https://doi.org/10.1109/TNNLS.2021.3084827
+  date: 2022-12
+
+  parent:
+    type: periodical
+    title: IEEE Transactions on Neural Networks and Learning Systems
+    volume: 33
+    issue: 23
+
+cnn_hyperparameters:
+  type: chapter
+  title: Convolutional Neural Networks Hyperparameters Tuning
+  author:
+    - Tuba, Eva
+    - Bačanin, Nebojša
+    - Strumberger, Ivana
+    - Tuba, Milan
+    - Pap, Endre
+  date: 2021
+  page-range: 65-84
+  url: https://doi.org/10.1007/978-3-030-72711-6_4
+
+  parent:
+    title: "Artificial Intelligence: Theory and Applications"
+    publisher: Springer International Publishing
+
+burst_detection_gans:
+  type: article
+  url: https://doi.org/10.1088/1361-6382/ac09cc
+  title: Generalised gravitational wave burst generation with generative adversarial networks
+  author:
+    - McGinn, J
+    - Messenger, C
+    - Williams, M J
+    - Heng, I S
+  date: 2021-06-30
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    publisher: IOP Publishing
+    issue: 15
+    volume: 38
