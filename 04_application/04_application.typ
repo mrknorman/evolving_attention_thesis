@@ -1089,7 +1089,7 @@ As can be seen, it is very difficult to compare the performance of many of the a
     [-], [-], [-], [-], [-], [-], [-], [$1 times 10^(-3)$], [0.08], [0.00], [0.00],
     [Huerta _et al._ @huerta_fusion_cnn], [#text(red)[*Novel Ensemble*]], [Yes], [Two], [BBH], [No], [No], [#text(red)[*$5 times 10^(-4)$*]],  [0.20], [0.15], [Not Given],
     [-], [-], [-], [-], [-], [-], [-], [#text(red)[*$5 times 10^(-5)$*]], [0.01], [0.001], [Not Given],
-    [Yu _et al._ @spectrogram_cnn_2], [#text(red)[*Novel Multi-Branched CNN*]], [-], [-], [Yes], [Single], [BBH], [#text(red)[*Spectrogram*]], [No], [$6 times 10^(-2)$], [0.89], [0.67], [0.20] 
+    [Yu _et al._ @spectrogram_cnn_2], [#text(red)[*Novel Multi-Branched CNN*]], [Yes], [Single], [BBH], [#text(red)[*Spectrogram*]], [No], [$6 times 10^(-2)$], [0.89], [0.67], [0.20] 
   ),
   caption: [A comparison of results from the literature, red values indicate the significant feature of the study. Note: Some accuracy values are extracted from plots by eye, so substantive error will have been introduced. Some results were not included as they did not state comparable performance metrics. ]
 ) <literature-results>

@@ -244,6 +244,24 @@ text_classification:
     date: 2014
     publisher: Association for Computational Linguistics
 
+lstm_text_generation:
+  type: article
+  title: Adversarial feature matching for text generation
+  author:
+    - Zhang, Yizhe 
+    - Gan, Zhe 
+    - Fan, Kai 
+    - Chen, Zhi 
+    - Henao, Ricardo 
+    - Shen, Dinghan 
+    - Carin, Lawrence
+  page-range: 4006-4015
+  date: 2017
+  
+  parent:
+    type: proceedings
+    title: International conference on machine learning
+
 image_captioning:
   type: article
   title: "Show and Tell: A Neural Image Caption Generator"
@@ -5012,3 +5030,537 @@ burst_detection_gans:
     publisher: IOP Publishing
     issue: 15
     volume: 38
+
+architecture_review:
+  type: article
+  author:
+    - Shrestha, Ajay 
+    - Mahmood, Ausif
+  title: Review of Deep Learning Algorithms and Architectures
+  date: 2019
+  page-range: 53040-53065
+  url: https://doi.org/10.1109/ACCESS.2019.2912200
+
+  parent:
+    type: periodical
+    title: IEEE Access
+    volume: 7
+
+exponential_growth:
+  type: book
+  author:
+    - Krenn, Mario 
+    - Buffoni, Lorenzo 
+    - Coutinho, Bruno 
+    - Eppel, Sagi 
+    - Foster, Jacob 
+    - Gritsevskiy, Andrew 
+    - Lee, Harlin 
+    - Lu, Yichao 
+    - Moutinho, Joao 
+    - Sanjabi, Nima 
+    - Sonthalia, Rishi 
+    - Tran, Ngoc 
+    - Valente, Francisco 
+    - Xie, Yangxinyu 
+    - Yu, Rose 
+    - Kopp, Michael
+  date: 2022-09
+  title : "Predicting the Future of AI with AI: High-quality link prediction in an exponentially growing knowledge network"
+
+hyperparameter_optimisation_review:
+  type: article
+  title: "Hyperparameter optimization: Foundations, algorithms, best practices, and open challenges"
+  authors:
+    - Bischl, Bernd
+    - Binder, Martin
+    - Lang, Michel
+    - Pielok, Tobias
+    - Richter, Jakob
+    - Coors, Stefan
+    - Thomas, Janek
+    - Ullmann, Theresa
+    - Becker, Marc
+    - Boulesteix, Anne-Laure
+    - Deng, Difan
+    - Lindauer, Marius
+  date: 2023-03-01
+  url: https://doi.org/10.1002/widm.1484
+
+  parent:
+    type: periodical
+    title: WIREs Data Mining and Knowledge Discovery
+    volume: 13
+    issue: 2
+    publisher: John Wiley & Sons, Ltd
+
+hyperparameter_optimisation_review_2:
+  type: article
+  title: A survey on multi-objective hyperparameter optimization algorithms for machine learning
+  author:
+    - Morales-Hernández, Alejandro
+    - Van Nieuwenhuyse, Inneke
+    - Rojas Gonzalez, Sebastian
+  date: 2023-08-01
+  page-range: 8043-8093
+  url: https://doi.org/10.1007/s10462-022-10359-2
+
+  parent:
+    type: periodical
+    title: Artificial Intelligence Review
+    volume: 56
+    issue: 8
+
+hyperparameters_model_performance:
+  type: article
+  title: An Empirical Study of the Impact of Hyperparameter Tuning and Model Optimization on the Performance Properties of Deep Neural Networks
+  author:
+    - Liao, Lizhi 
+    - Li, Heng 
+    - Shang, Weiyi 
+    - Ma, Lei
+  date: 2022-07
+
+  parent:
+    type: article
+    publisher: Association for Computing Machinery
+    volume: 31
+    number: 3
+    url: https://doi.org/10.1145/3506695
+    name: ACM Trans. Softw. Eng. Methodol.
+
+genetic_algotrithm_review:
+  type: chapter
+  title: Genetic Algorithms and Their Applications
+  author:
+    - Gen, Mitsuo
+    - Lin, Lin
+  date: 2023
+  page-range: 635-674
+  url: https://doi.org/10.1007/978-1-4471-7503-2_33
+
+  parent:
+    type: book
+    title: Springer Handbook of Engineering Statistics
+    publisher: Springer London
+
+flocks:
+  type: article
+  title: "Defining emergence: Learning from flock behavior"
+  author:
+    - Berrondo, Manuel
+    - Sandoval, Mario
+  date: 2016-09-01
+  url: https://doi.org/10.1002/cplx.21711
+  page-range: 69-78
+
+  parent:
+    type: periodical
+    title: Complexity
+    volume: 21
+    issue: S1
+
+differential_evoloution:
+  type: article
+  title: "Differential Evolution: A review of more than two decades of research"
+  author: 
+    - Bilal, 
+    - Pant, Millie
+    - Zaheer, Hira
+    - Garcia-Hernandez, Laura
+    - Abraham, Ajith
+  date: 2020-04-01
+  url: https://doi.org/10.1016/j.engappai.2020.103479
+
+  parent:
+    type: periodical
+    title: Engineering Applications of Artificial Intelligence
+    volume: 90
+
+LLM_ref:
+  type: article
+  title: "Recent Advances in Natural Language Processing via Large Pre-Trained Language Models: A Survey"
+  author:
+    - Min, Bonan 
+    - Ross, Hayley 
+    - Sulem, Elior 
+    - Veyseh, Amir Pouran Ben 
+    - Nguyen, Thien Huu 
+    - Sainz, Oscar 
+    - Agirre, Eneko 
+    - Heintz, Ilana 
+    - Roth, Dan
+  date: 2023-02
+  url: https://doi.org/10.1145/3605943
+  parent:
+    type: periodical
+    titke: ACM Comput. Surv.
+    publisher: Association for Computing Machinery
+    volume: 56
+    number: 2
+
+chatgpt_ref:
+  type: article
+  title: "Chat GPT & Google Bard AI: A Review"
+  page-range: 1-6
+  author:
+    - S. K. Singh
+    - S. Kumar
+    - P. S. Mehra
+  url: https://doi.org/10.1109/ICICAT57735.2023.10263706
+  date: 2023-06-23
+
+  parent:
+    type: proceedings
+    title: 2023 International Conference on IoT, Communication and Automation Technology (ICICAT)
+
+transformer_review:
+  type: article
+  title: A survey of transformers
+  author:
+    - Lin, Tianyang
+    - Wang, Yuxin
+    - Liu, Xiangyang
+    - Qiu, Xipeng
+  page-range: 111-132
+  date: 2022-01-01
+  url: https://doi.org/10.1016/j.aiopen.2022.10.001
+
+  parent:
+    type: periodical
+    title: AI Open
+    volume: 3
+
+diffusion_review:
+  type: article
+  title: "Diffusion Models in Vision: A Survey"
+  page-range: 10850-10869
+  author:
+    - F. -A. Croitoru
+    - V. Hondru
+    - R. T. Ionescu
+    - M. Shah
+  date: 2023-09-01
+  url: https://doi.org/10.1109/TPAMI.2023.3261988
+  parent:
+    type: proceedings
+    title: "IEEE Transactions on Pattern Analysis and Machine Intelligence"
+    volume: 45
+    issue: 9
+
+stable_diffusion:
+  type: web
+  title: Stable Diffusion Public Release
+  url: https://stability.ai/news/stable-diffusion-public-release
+
+midjourney:
+  type: web
+  title: Midjourney
+  url: https://www.midjourney.com/home
+
+dalle_3:
+  type: article
+  title: Improving image generation with better captions
+  author:
+    - Betker, James 
+    - Goh, Gabriel 
+    - Jing, Li 
+    - Brooks, Tim 
+    - Wang, Jianfeng 
+    - Li, Linjie 
+    - Ouyang, Long 
+    - Zhuang, Juntang 
+    - Lee, Joyce 
+    - Guo, Yufei 
+    - others
+  url: https://cdn.openai.com/papers/dall-e-3.pdf
+  date: 2023
+
+attention_review:
+  type: article
+  title: A review on the attention mechanism of deep learning
+  authot:
+    - Niu, Zhaoyang
+    - Zhong, Guoqiang
+    - Yu, Hui
+  page-range: 48-62
+  date: 2021-09-10
+  url: https://doi.org/10.1016/j.neucom.2021.03.091
+  parent:
+    type: periodical
+    title: Neurocomputing
+    volume: 452
+
+rnn_review:
+  type: article
+  title: "A Review of Recurrent Neural Networks: LSTM Cells and Network Architectures"
+  author:
+    - Yu, Yong
+    - Si, Xiaosheng
+    - Hu, Changhua
+    - Zhang, Jianxun
+  date: 2019-07-01
+  url: https://doi.org/10.1162/neco_a_01199
+  page-range: 1235-1270
+
+  parent:
+    type: periodical
+    title: Neural Computation
+    volume: 31
+    issue: 7
+
+generality_of_attention:
+  type: article
+  title: On the relationship between self-attention and convolutional layers
+  author:
+    - Cordonnier, Jean-Baptiste 
+    - Loukas, Andreas 
+    - Jaggi, Martin
+  date: 2019
+  url: https://doi.org/10.48550/arXiv.1911.03584
+  parent:
+    type: web
+    title: arXiv preprint arXiv:1911.03584
+
+ASCII:
+  type: web
+  title: ASCII format for network interchange
+  author: Cerf, Vinton Gray
+  date: 1969
+  url: https://www.rfc-editor.org/rfc/rfc20.html
+
+Unicode:
+  type: article
+  title: The Unicode Standard
+  author: Needleman, Mar
+  date: 2000-08-01
+  url: https://doi.org/10.1080/00987913.2000.10764582
+  page-range: 51-54
+
+  parent: 
+    type: periodical
+    title: Serials Review
+    volume: 26
+    issue: 2
+    publisher: Routledge
+
+tokenization_ref:
+  type: article
+  title: Tokenization as the initial phase in NLP
+  author: 
+    - Webster, Jonathan J 
+    - Kit, Chunyu
+  date: 1992
+  url: https://aclanthology.org/C92-4173.pdf
+
+  parent:
+    type: proceedings
+    title: "COLING 1992 volume 4: The 14th international conference on computational linguistics"
+
+word2vec_processing:
+  type: article
+  author: 
+    - Ma, Long 
+    - Zhang, Yanqing
+  title: Using Word2Vec to process big text data
+  page-range: 2895-2897
+  url: https://doi.org/10.1109/BigData.2015.7364114
+  date: 2015
+
+  parent:
+    type: periodical
+    title: 2015 IEEE International Conference on Big Data (Big Data)
+
+nlp_chapter:
+  type: chapter
+  title: Natural Language Processing
+  date: 2019
+  page-range: 191-218
+  author:
+    - Singh, Pramod
+  url: https://doi.org/10.1007/978-1-4842-4131-8_9
+  
+  parent:
+    type: book
+    title: "Machine Learning with PySpark	: With Natural Language Processing and Recommender Systems"
+
+tokenisation_review:
+  type: article
+  title: A Review of Tools and Techniques for Preprocessing of Textual Data
+  author:
+    - Kathuria, Abhinav
+    - Gupta, Anu
+    - Singla, R. K.
+    - Singh, Vijendra
+    - Asari, Vijayan K.
+    - Kumar, Sanjay
+    - Patel, R. B.
+  date: 2021
+  url:  https://doi.org/10.1007/978-981-15-6876-3_31
+  page-range: 407-422
+
+  parent:
+    type: proceedings
+    title: Computational Methods and Data Engineering
+
+bag_of_words_ref:
+  type: article
+  title: "Understanding bag-of-words model: a statistical framework"
+  author:
+    - Zhang, Yin
+    - Jin, Rong
+    - Zhou, Zhi-Hua
+  date: 2010-12-01
+  page-range: 43-52
+  url: https://doi.org/10.1007/s13042-010-0001-0
+
+  parent:
+    type: periodical
+    title: International Journal of Machine Learning and Cybernetics
+    volume: 1
+    issue: 1
+
+positional_encoding_ref:
+  type: article
+  title: Relative Positional Encoding for Transformers with Linear Complexity
+  author:
+    - Liutkus, Antoine 
+    - Cifka, Ondvrej
+    - Wu, Shih-Lun 
+    - Simsekli, Umut 
+    - Yang, Yi-Hsuan 
+    - Richard, Gael
+  page-range:  7067-7079
+  date: 2021-07-18
+  url: https://proceedings.mlr.press/v139/liutkus21a.html
+
+  parent: 
+    type: proceedings
+    title: Proceedings of the 38th International Conference on Machine Learning
+    volume: 139
+
+linguistic_complexity:
+  type: article
+  title: "Measuring linguistic complexity: The morphological tier"
+  author:
+    - Juola ,Patrick
+  date: 1998-12-01
+  url: https://doi.org/10.1080/09296179808590128
+  page-range: 206-213
+
+  parent:
+    type: periodical
+    title: Journal of Quantitative Linguistics
+    volume: 5
+    issue: 3
+
+lstm_intro:
+  type: article
+  title: Long Short-Term Memory
+  page-range: 1735-1780
+  author:
+    - S. Hochreiter
+    - J. Schmidhuber
+  date: 1997-11-15
+  url: https://doi.org/neco.1997.9.8.1735
+
+  parent: 
+    type: periodical
+    title: Neural Computation
+    issue: 8
+    volume: 9
+
+lstm_chapter:
+  type: chapter
+  title: Long Short-Term Memory
+  author:
+     - Graves, Alex
+  date: 2012
+  page-range: 37-45
+  url: https://doi.org/10.1007/978-3-642-24797-2_4
+
+  parent:
+    type: book
+    title: Supervised Sequence Labelling with Recurrent Neural Networks
+    publisher: Springer Berlin Heidelberg
+
+transformer_memory_usage:
+  type: article
+  title: "EL-Attention: Memory Efficient Lossless Attention for Generation"
+  author:
+     - Yan, Yu 
+     - Chen, Jiusheng 
+     - Qi, Weizhen 
+     - Bhendawade, Nikhil 
+     - Gong, Yeyun 
+     - Duan, Nan 
+     - Zhang, Ruofei
+  page-range: 11648-11658
+  date: 2021-07-12
+  url: https://proceedings.mlr.press/v139/yan21a.html
+
+  parent:
+    type: proceedings
+    title: Proceedings of the 38th International Conference on Machine Learning
+
+cnn_memory_usage:
+  type: article
+  author:
+    - Li, Chao 
+    - Yang, Yi 
+    - Feng, Min 
+    - Chakradhar, Srimat 
+    - Zhou, Huiyang
+  title:  Optimizing Memory Efficiency for Deep Convolutional Neural Networks on GPUs
+  date: 2016
+  page-range: 633-644
+  url: https://doi.org/10.1109/SC.2016.53
+
+  parent:
+    type: proceedings
+    title: "SC '16: Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis"
+
+vision_transformers:
+  type: article
+  title: A Survey on Vision Transformer
+  author:
+    - K. Han
+    - Y. Wang
+    - H. Chen
+    - X. Chen
+    - J. Guo
+    - Z. Liu
+    - Y. Tang
+    - A. Xiao
+    - C. Xu
+    - Y. Xu
+    - Z. Yang
+    - Y. Zhang
+    - D. Tao
+  page-range: 87-110
+  url: https://doi.org/10.1109/TPAMI.2022.3152247
+  date: 2023-01-01
+
+  parent: 
+    type: periodical
+    title: IEEE Transactions on Pattern Analysis and Machine Intelligence
+    volume: 45
+    issue: 1
+
+audio_transformer:
+  type: article
+  title: "{Audio Transformers:Transformer Architectures For Large Scale Audio Understanding. Adieu Convolutions"
+  author: 
+    - Prateek Verma 
+    - Jonathan Berger
+  date: 2021
+  url: https://doi.org/10.48550/arXiv.2105.00335
+
+  parent:
+    type: web
+    title: ArXiv
+
+ligo_far_threshold:
+  type: web
+  name: EMFollow User Guide
+  url: https://emfollow.docs.ligo.org/userguide/analysis/index.html
