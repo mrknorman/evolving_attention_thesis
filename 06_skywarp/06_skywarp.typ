@@ -280,7 +280,7 @@ The other three models perform much more consistently. There is no clear advanta
     columns: (auto, auto, auto, auto, auto),
     inset: 10pt,
     align: horizon,
-    [*Model*], [*FAR*],  [*Accuracy 6*], [*Accuracy 8*], [*Accuracy 10*],
+    [*Model*], [*FAR (Hz)*],  [*Accuracy 6*], [*Accuracy 8*], [*Accuracy 10*],
     [Gabbard _et al._], [$10^(-1)$], [57.4], [91.5], [#text(red)[*99.4*]],
     [Skywarp Pure Attention], [$10^(-1)$], [41.5], [72.9], [91.2],
     [Skywarp Conv Attention Single], [$10^(-1)$], [#text(red)[*59.2*]], [#text(red)[*91.7*]], [99.3],

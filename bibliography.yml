@@ -4084,8 +4084,6 @@ bias_study_two:
     issue: 8
     publisher: American Physical Society
 
-
-
 # PE
 
 bbh_pe_1:
@@ -5564,3 +5562,220 @@ ligo_far_threshold:
   type: web
   name: EMFollow User Guide
   url: https://emfollow.docs.ligo.org/userguide/analysis/index.html
+
+parameter_estimation_review:
+  type: article
+  title: Parameter estimation with gravitational waves
+  author:
+    - Christensen, Nelson 
+    - Meyer, Renate
+  date: 2022-04
+  url: https://doi.org/10.1103/RevModPhys.94.025001
+
+  parent:
+    type: periodical
+    title: Reveiws Modern Physics
+    volume: 94 
+    issue: 2
+    publisher: American Physical Society
+
+burst_pe:
+  type: article
+  title: Parameter Estimation for Gravitational-wave Bursts with the BayesWave Pipeline
+  url: https://doi.org/10.3847/1538-4357/aa63ef
+  author:
+    - Bécsy, Bence
+    - Raffai, Peter
+    - Cornish, Neil J.
+    - Essick, Reed
+    - Kanner, Jonah
+    - Katsavounidis, Erik
+    - Littenberg, Tyson B.
+    - Millhouse, Margaret
+    - Vitale, Salvatore
+  date: 2017-04-07
+  page: 15
+
+  parent:
+    type: periodical
+    title: The Astrophysical Journal
+    issue: 1
+    volume: 839
+    publisher: The American Astronomical Society
+
+intrinstic_params:
+  type: article
+  title: ASTROPHYSICAL PRIOR INFORMATION AND GRAVITATIONAL-WAVE PARAMETER ESTIMATION
+  url: https://doi.org/10.3847/1538-4357/834/2/154
+  author:
+    - Pankow, Chris
+    - Sampson, Laura
+    - Perri, Leah
+    - Chase, Eve
+    - Coughlin, Scott
+    - Zevin, Michael
+    - Kalogera, Vassiliki
+  date: 2017-01-11
+  page-range: 154-154
+
+  parent:
+    type: periodical
+    title: The Astrophysical Journal
+    issue: 2
+    volume: 834
+    publisher: The American Astronomical Society
+
+gravitational_wave_science_overview:
+  type: article
+  title: Gravitational-wave physics and astronomy in the 2020s and 2030s
+  author:
+    - Bailes, M.
+    - Berger, B. K.
+    - Brady, P. R.
+    - Branchesi, M.
+    - Danzmann, K.
+    - Evans, M.
+    - Holley-Bockelmann, K.
+    - Iyer, B. R.
+    - Kajita, T.
+    - Katsanevas, S.
+    - Kramer, M.
+    - Lazzarini, A.
+    - Lehner, L.
+    - Losurdo, G.
+    - Lück, H.
+    - McClelland, D. E.
+    - McLaughlin, M. A.
+    - Punturo, M.
+    - Ransom, S.
+    - Raychaudhury, S.
+    - Reitze, D. H.
+    - Ricci, F.
+    - Rowan, S.
+    - Saito, Y.
+    - Sanders, G. H.
+    - Sathyaprakash, B. S.
+    - Schutz, B. F.
+    - Sesana, A.
+    - Shinkai, H.
+    - Siemens, X.
+    - Shoemaker, D. H.
+    - Thorpe, J.
+    - van den Brand, J. F. J.
+    - Vitale, S.
+  date: 2021-05-01
+  page-range: 344-366
+  url: https://doi.org/10.1038/s42254-021-00303-8
+
+  parent:
+    type: periodical
+    title: Nature Reviews Physics
+    volume: 3
+    issue: 5
+
+multimessenger_ref:
+  type: periodical
+  title: "Multi-messenger astronomy: gravitational waves, neutrinos, photons, and cosmic rays"
+  url: https://doi.org/10.1088/1742-6596/718/2/022004
+  date: 2016-05-01
+  author:
+    - Branchesi, Marica
+  parent:
+    title: "Journal of Physics: Conference Series"
+    issue: 2
+    volume: 718
+    publisher: IOP Publishing
+
+LALSimulation:
+  type: article
+  title: "SWIGLAL: Python and Octave interfaces to the LALSuite gravitational-wave data analysis libraries"
+  author:
+    - Karl Wette
+  date: 2020
+  url: https://doi.org/10.1016/j.softx.2020.100634
+  
+  parent:
+    type: periodical
+    title: SoftwareX
+    volume: 12
+
+aLIGO_design_specificaton:
+  type: article
+  title: The A+ design curve
+  author:
+    - Barsotti, Lisa 
+    - McCuller, Lee 
+    - Evans, Matthew 
+    - Fritschel, Peter
+  url: https://dcc-lho.ligo.org/public/0149/T1800042/005/T1800042-v5.pdf
+
+inbalanced_datasets:
+  type: article
+  title: "Data imbalance in classification: Experimental evaluation"
+  author:
+    - Thabtah, Fadi
+    - Hammoud, Suhel
+    - Kamalov, Firuz
+    - Gonsalves, Amanda
+  page-range: 429 - 441
+  date: 2020-03-01
+  url: https://doi.org/10.1016/j.ins.2019.11.004
+
+  parent:
+    type: periodical
+    title: Information Sciences
+    volume: 513
+
+autoencoder_glitch_rejection:
+  type: article
+  title: An autoencoder neural network integrated into gravitational-wave burst searches to improve the rejection of noise transients
+  url: https://doi.org/10.1088/1361-6382/acd981
+  author:
+    - Bini, Sophie
+    - Vedovato, Gabriele
+    - Drago, Marco
+    - Salemi, Francesco
+    - Prodi, Giovanni A
+  date: 2023-06-07
+  page: 135008
+
+  parent:
+    type: periodical
+    title: Classical and Quantum Gravity
+    issue: 13
+    volume: 40
+    publisher: IOP Publishing
+
+denoising_autoencoder:
+  type: article
+  title: Autoencoders Based Deep Learner for Image Denoising
+  author:
+    - Bajaj, Komal
+    - Singh, Dushyant Kumar
+    - Ansari, Mohd. Aquib
+  page-range: 1535-1541
+  date: 2020-01-01
+  url: https://doi.org/10.1016/j.procs.2020.04.164
+  
+  parent:
+    type: proceedings
+    title:  Third International Conference on Computing and Network Communications (CoCoNet'19)
+    volume: 171
+
+variational_autoencoder:
+  type: article
+  title: The Autoencoding Variational Autoencoder
+  author:
+    - Cemgil, Taylan 
+    - Ghaisas, Sumedh 
+    - Dvijotham, Krishnamurthy 
+    - Gowal, Sven 
+    - Kohli, Pushmeet
+  page-range: 15077-1508
+  url: https://proceedings.neurips.cc/paper_files/paper/2020/file/ac10ff1941c540cd87c107330996f4f6-Paper.pdf
+  date: 2020
+
+  parent:
+    type: proceedings
+    title: Advances in Neural Information Processing Systems
+    volume: 33
