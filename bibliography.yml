@@ -1,3 +1,115 @@
+moon_rocks:
+  type:  article
+  title: Analyzing Moon Rocks
+  author:
+    - Anand, Mahesh
+  date: 2014-04-25
+  url: https://doi.org/10.1126/science.1253266
+  page-range: 365-366
+
+  parent:
+    type: periodical
+    title: Science
+    volume: 344
+    issue: 6182
+    publisher: American Association for the Advancement of Science
+
+voyager:
+  type: article
+  author:
+    - Gurnett, D. A.
+    - Kurth, W. S.
+  date: 2019-11-01
+  title: Plasma densities near and beyond the heliopause from the Voyager 1 and 2 plasma wave instruments
+  page-range: 1024-1028
+  url: https://doi.org/10.1038/s41550-019-0918-5
+
+  parent:
+    type: periodical
+    title: Nature Astronomy
+    volume: 3
+    issue: 11
+
+neutrino:
+  type: article
+  title: "Detection of the Free Neutrino: a Confirmation"
+  author:
+    - Cowan, C. L.
+    - Reines, F.
+    - Harrison, F. B.
+    - Kruse, H. W.
+    - McGuire, A. D.
+  date: 1956-07-20
+  url: https://doi.org/10.1126/science.124.3212.103
+  page-range: 103-104
+
+  parent:
+    type: periodical
+    title: Science
+    volume: 124
+    issue: 3212
+    publisher: American Association for the Advancement of Science
+
+cosmic_rays:
+  type: article
+  title: The Oh-My-God particle
+  author:
+    - O'Callaghan, Jonathan
+  page-range: 46-49
+  date: 2023-06-03
+  url: https://doi.org/10.1016/S0262-4079(23)01010-2
+
+  parent:
+    type: periodical
+    title: New Scientist
+    volume: 258
+    issue: 3441
+
+four_forces:
+  type: book
+  title: "Particles and Fundamental Interactions: An Introduction to Particle Physics"
+  author:
+    - Braibant, S. 
+    - Giacomelli, G. 
+    - Spurio, M.
+  isbn: 9789400724631
+  lccn: 2011940974
+  url: https://books.google.co.uk/books?id=0Pp-f0G9_9sC
+  date: 2011
+  publisher: Springer Netherlands
+
+standard_model:
+  type: article
+  title: The standard model of particle physics
+  author:
+    - Gaillard, Mary K. 
+    - Grannis, Paul D. 
+    - Sciulli, Frank J
+  date: 1999-03
+  url: https://doi.org/10.1103/RevModPhys.71.S96
+  
+  parent:
+    type: periodical
+    title: Reveiws of Modern Physics
+    volume: 71
+    issue: 2
+    publisher: American Physical Society
+
+testing_gr:
+  type: article
+  title: Testing general relativity in cosmology
+  author:
+    - Ishak, Mustapha
+  date: 2018-12-18
+  pages: 1
+  url: https://doi.org/10.1007/s41114-018-0017-4
+
+  parent:
+    type: periodical
+    title: Living Reviews in Relativity
+    volume: 22
+    issue: 1
+
 principia_mathematica:
   type: book
   title: "Newton's Principia: the mathematical principles of natural philosophy"
@@ -5,6 +117,69 @@ principia_mathematica:
     - Sir Issac Newton
   date: 1846
   url: https://archive.org/details/newtonspmathema00newtrich/
+
+gravitational_constant:
+  type: web
+  title: "2018 CODATA Value: Newtonian constant of gravitation" 
+  url: https://physics.nist.gov/cgi-bin/cuu/Value?bg
+  
+  parent:
+    type: web
+    title: The NIST Reference on Constants, Units, and Uncertainty.
+
+newton_vs_leibniz:
+  type: book
+  title: Space, time, and theology in the Leibniz-Newton controversy
+  author: Khamara, Edward J
+  volume: 6
+  date: 2013
+  publisher: Walter de Gruyter
+
+mercury_precession:
+  type: article
+  author:
+    - Amel’kin, N. I.
+  date: 2019-12-01
+  title: Precession of the Orbit of Mercury
+  page-range: 470-474
+  url: https://doi.org/10.1134/S1028335819120073
+
+  parent:
+    title: Doklady Physics
+    volume: 64
+    issue: 12
+
+absoloute_light:
+  type: article
+  title: Michelson-morley experiment
+  author: Shankland, Robert S
+  page-range: 16-35
+  date: 1964
+
+  parent:
+    type: periodical
+    title: American Journal of Physics
+    volume: 32
+    number: 1
+    publisher: American Association of Physics Teachers
+
+maxwells:
+  type: article
+  title: From Classical to Relativistic Mechanics via Maxwell
+  author: Michaud, Andre
+  date: 2013
+  pages: 01-10
+
+  parent:
+    type: periodical
+    title: International Journal of Engineering Research and Development
+
+special_relativity:
+  type: book
+  title: Special relativity
+  author: French, Anthony Philip
+  date: 2017
+  publisher: CRC Press
 
 dartmouth_proposal:
     type: report
