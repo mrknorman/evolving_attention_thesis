@@ -630,6 +630,33 @@ text_generation:
     title: The 28th international conference on machine learning (ICML-11)
     date: 2011
 
+twin_paradox:
+ type: book
+ title: Gravity from the Ground Up
+ author: Bernard Schutz
+ date: 2003-12-04
+ publisher: Cambridge University Press
+
+black_hole_binary_formation:
+  type: article
+  title: Black hole binaries dynamically formed in globular clusters
+  author:
+    - Park, Dawoo
+    - Kim, Chunglee
+    - Lee, Hyung Mok
+    - Bae, Yeong-Bok
+    - Belczynski, Krzysztof
+  date: 2017-08-21
+  url: https://doi.org/10.1093/mnras/stx1015
+  page-range: 4665-4674
+
+  parent:
+    type: periodical
+    title: Monthly Notices of the Royal Astronomical Society
+    volume: 469
+    issue: 4
+
+
 alpha_go:
   type: article
   title: Mastering the game of Go with deep neural networks and tree search
@@ -5559,6 +5586,38 @@ LLM_ref:
     publisher: Association for Computing Machinery
     volume: 56
     number: 2
+
+gravity_history:
+  type: article
+  author:
+    - Cappi, Alberto
+  date: 2012-10-01
+  page-range: 207-218
+  title: The concept of gravity before Newton
+  url: https://doi.org/10.46472/CC.01216.0233
+
+  parent:
+    title: Culture and Cosmos
+    volume: 16
+
+newton_dominance:
+  type: web
+  title: "This Month in Physics History"
+  url: https://www.aps.org/publications/apsnews/202008/history.cfm
+
+time_dilation_ref:
+  type: article
+  title: A time dilatation experiment based on the Mössbauer effect
+  author:
+    - D C Champeney
+    - G R Isaak
+    - A M Khan
+  url: https://doi.org/10.1088/0370-1328/85/3/317
+  pages: 583
+  parent:
+    title: Proceedings of the Physical Society
+    issue: 4
+    volume: 85
 
 chatgpt_ref:
   type: article

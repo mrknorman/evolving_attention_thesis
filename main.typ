@@ -3,8 +3,8 @@
 // Take a look at the file `template.typ` in the file panel
 // to customize this template and discover how it works.
 #show: project.with(
-  title: "Data Ad Infinitum",
-  subtitle: "Bootstrapping Gravitational-Wave Data Science with Machine Learning",
+  title: "Evolving Attention",
+  subtitle: "Exploring the Use of Genetic Algorithms and Attention for Gravitational Wave Data Science",
   authors: (
     "Michael R K Norman",
   ),

@@ -1,4 +1,4 @@
-= Application
+= Application <application-sec>
 
 #set math.equation(numbering: "(1)")
 We have demonstrated that simple artificial neural networks can be used to classify input data drawn from a restricted distribution into a number of classes, $N$, with a high ($>99.9%$) degree of accuracy. Because we didn't design the network with any particular consideration for the dataset (besides the dimensionality of its elements), we can infer that this method should be general enough to classify data drawn from other distributions that contain discrete differentiable classes. It is not clear, however, which other distributions can be classified and what magnitude of network is required to achieve a similar degree of accuracy. It is easy to imagine distributions that are considerably simpler than the MNSIT dataset @mnist and, conversely, ones that are much more complex. There may be a mathematical approach to determine the link between the distribution and required model complexity. One possible metric that touches upon this relation is the Rademacher complexity, $accent(cal(R), hat)_M$, given by 
