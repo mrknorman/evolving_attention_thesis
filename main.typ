@@ -8,11 +8,14 @@
   authors: (
     "Michael R K Norman",
   ),
+  logo: "cardiff_logo.png"
 )
 
 // We generated the example code below so you can see how
 // your document will look. Go ahead and replace it with
 // your own content!
+
+#set page(numbering: "1", number-align: center)
 
 #include "01_intro/01_introduction.typ"
 #pagebreak()
@@ -29,7 +32,3 @@
 #include "07_crosswave/07_crosswave.typ"
 #pagebreak()
 #include "08_infrastructure/08_infrastructure.typ"
-
-=== Contributions
-
-= Related Work

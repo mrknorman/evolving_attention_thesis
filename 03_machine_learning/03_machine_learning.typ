@@ -1,3 +1,5 @@
+#set page(numbering: "1", number-align: center)
+
 = Machine Learning <machine-learning-sec>
 Machine learning techniques can be applied to almost any area of gravitational-wave data science; therefore, an exhaustive list would be difficult to compile and quickly outdated. However, here are some current areas of investigation: transient detection @george_huerta_cnn @gabbard_messenger_cnn @gebhard_conv_only_cnn and parameterisation @george_huerta_cnn @bbh_pe_1 @vitamin, including compact binary coalesces @george_huerta_cnn @gabbard_messenger_cnn @gebhard_conv_only_cnn, bursts @supernovae_cnn_1 @supernovae_cnn_2 @MLy @semi-supervised, and detector glitches @glitch_detection_1 @gravity_spy; continuous waveform detection @continious_1 @continious_2 @continious_3 and parameterisaction @continious_clustering; stochastic background detection and parameterisation @stocastic_1; detector noise characterisation @noise_characterisation and cleaning @deepclean; detector control and calibration @detector_control_1 @detector_control_2; and approximant generation @aproximant_generation_1. This thesis will focus on the application of machine learning to transients, including compact binary coalesces and other burst events. To contextualise this research, this chapter will serve as a brief introduction to machine learning. 
 
@@ -547,7 +549,6 @@ The choice of loss function is largely down to the problem being attempted and, 
   ),
   caption: [Problems often solvable by artificial neural networks and their associated activation and loss functions. This table demonstrates the most commonly used activation and loss functions for several common problem types that machine learning attempts to solve. The activation functions listed are described in @activation_functions_sec, whereas the loss functions were described in this section @loss_functions_sec. MSE is an abbreviation of Mean Squared Error, and MAE is an abbreviation of Mean Absolute Error.]
 ) <loss_function_table>
-
 
 == The Gradients Must Flow <gradient-descent-sec>
 

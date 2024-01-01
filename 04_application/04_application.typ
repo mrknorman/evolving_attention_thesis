@@ -1,3 +1,5 @@
+#set page(numbering: "1", number-align: center)
+
 = Application <application-sec>
 
 #set math.equation(numbering: "(1)")

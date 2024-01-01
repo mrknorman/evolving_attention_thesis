@@ -1,3 +1,5 @@
+#set page(numbering: "1", number-align: center)
+
 = Gravitational Waves <gravitational-waves-sec>
 
 Since time immemorial, humanity has gazed at the stars. With wonder rooted deep in their minds, they imagined strange and divine mechanisms in order to try and make sense of what they saw. Over the millennium, the vast skies have revealed much about their workings, and with ever-improving tools, we have come much closer to understanding their mysteries, but there is still much to be uncovered. It is unclear how deep the truth lies. Perhaps we have but only scratched at the surface. The depths are so vast we simply do not know.
@@ -170,7 +172,7 @@ Gravitational waves have two polarization states, typically named plus, $+$, and
   caption: [The effect of two polarisation states of gravitational waves as they oscillate whilst passing through a region of spacetime. Each of the black dots represents freely falling particles unrestricted by any other forces. The plus and cross polarisations shown are arbitrary names, and the polarisation can be at any angle, but plus and cross are a convention to distinguish the two orthogonal states.]
 ) <wobble>
 
-== Detection
+== Gravitational Wave Detection
 
 Detecting gravity is quite easy, just let go of whatever you're holding. Detecting gravitational waves, however, requires the use of some of the most precise measurement instruments humanity has ever constructed. This subsection will cover the basics of how we detect gravitational waves and the challenges that our detection methods embedded into the data.
 
@@ -195,9 +197,9 @@ What follows is a very rudimentary description of the optics of a gravitational 
 
 A detector of this kind can only detect elements of incoming gravitational wave signals that align with its polarisation @antenna_pattern. An incoming signal that was completely antialigned to the detector arms would be entirely undetectable. Fortunately, this is a rare occurrence as most signals are at least partially aligned with a given detector. Interferometers are also sensitive to the angle between their tangent and the source direction, known as the orientation. Interferometers are most sensitive to signals that lie directly above or below the plane of the detector arms, and least sensitive to signals whose propagation direction is parallel to the plane of the arms. These two factors combine to generate the antenna pattern of the detector, which dictates which regions of the sky the detector is most sensitive to.
 
-=== The global detector network
+=== The Global Detector Network
 
-There are currently five operational gravitational wave detectors worldwide: LIGO Livingston (L1), LIGO Hanford (H1), Virgo (V1), Kagra (K1), and GEO600 (G1) @open_data. See @global_network. Several further future detectors are planned, including LIGO India @LIGO_India, and three future 3#super("rd") generation ground-based detectors: the Einstein Telescope @einstein_telescope, Cosmic Explorer @cosmic_explorer, and LISA @LISA, a space-based detector constellation. 
+There are currently five operational gravitational wave detectors worldwide: LIGO Livingston (L1), LIGO Hanford (H1), Virgo (V1), Kagra (K1), and GEO600 (G1) @open_data. See @global_network. Several further future detectors are planned, including LIGO India @LIGO_India, and three future next-generation detectors: the Einstein Telescope @einstein_telescope, Cosmic Explorer @cosmic_explorer, and LISA @LISA, a space-based detector constellation. 
 
 Having multiple geographically separated detectors has multiple advantages. 
 

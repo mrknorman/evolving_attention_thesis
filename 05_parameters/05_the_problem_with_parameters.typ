@@ -1,3 +1,5 @@
+#set page(numbering: "1", number-align: center)
+
 = Dragonn: Exploring Deep Gravitational-Wave Classifier Hyperparameter Space with Genetic Algorithms <dragonn-sec>
 
 #set math.equation(numbering: "(1)")
@@ -142,7 +144,7 @@ Genetic Algorithms are optimisation methods that can be used to find a set of in
         ["Activation Function (enum)"], [], [],
     ),
     caption: []
-)
+) <table-of-hyperparameters>
 
 Optimised parameters are called genes ($ g $), and each set of genes is called a genome *genomes* ($G$). $G = [g_1, g_i ... g_{x}]$, where $x$ is the number of input parameters. Each genome should map to a single fitness score ($F$) via the fitness function.
 

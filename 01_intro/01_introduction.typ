@@ -1,6 +1,13 @@
-= Introduction
+#set page(numbering: "1", number-align: center)
+#set heading(numbering: "1.1.1")
+
+#counter(page).update(1)
+#counter(heading).update(0)
+
 #set math.equation(numbering: "(1)")
-\
+
+= Introduction
+
 We live in an exciting time. Now dawns an age of remarkable confluence and innovation; machine learning and artificial intelligence stand poised to remake almost every aspect of science, technology, and everyday life. At the same time, our understanding of the world is increasing with ever more fervour. The era of gravitational-wave astronomy has well and truly begun, and bountiful volumes of new data will soon be at our fingertips. The machine learning community is unlocking novel new tools every month, and it would be an odious missed opportunity not to turn some of these powerful techniques onto the data hidden beneath interferometer noise.
 
 This thesis is an exploration of the use of artificial neural networks to solve problems within gravitational-wave data analysis. Certainly, it is not the first work to attempt such a task, and indeed the intersection between the two fields has attracted much interest in recent years, perhaps that is unsurprising since both fields are new and exciting, so it is only natural to try and merge the two. Despite this busy environment, we find that there is some wiggle room for innovation. Crucially, we try and work upward from first principles, and present our results in a manner that is easily comparable with other studies. The entirety of the codebase used in the creation of this thesis and all associated work is available online through this URL: #link("https://github.com/mrknorman/data_ad_infinitum"), although, unfortunately, some of the data acquisition methods are gated behind LIGO collaboration membership.
