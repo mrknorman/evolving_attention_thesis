@@ -181,6 +181,99 @@ special_relativity:
   date: 2017
   publisher: CRC Press
 
+gravitational_lensing:
+  type: book 
+  author: 
+    - Dodelson, Scott. 
+  title: Gravitational lensing. 
+  publisher: Cambridge University Press
+  date: 2017
+
+light_clock:
+  type: book
+  title: Space and Time in Special Relativity, 
+  author: N. David Mermin
+  page-range: 33-41
+  publisher: McGraw-Hill
+  date: 1968
+
+einstein_grav_waves:
+  type: article
+  title: On gravitational waves
+  author:
+    - Einstein, A.
+    - Rosen, N.
+  page-range: 43-54
+  date: 1937-01-01
+  url: https://doi.org/10.1016/S0016-0032(37)90583-0
+  
+  parent:
+    type: periodical
+    title: Journal of the Franklin Institute
+    volume: 223
+    issue: 1
+
+speed_of_gravity:
+  type: article
+  title: On the measurement of the speed of gravitational waves
+  author:
+    - Du, Shuang
+  date: 2021-04-01
+  page: 349
+  url: https://doi.org/10.1140/epjp/s13360-021-01362-7
+
+  parent:
+    type: periodical
+    title: The European Physical Journal Plus
+    volume: 136
+    issue: 4
+
+ligo_o3_noise: 
+  type: article
+  title: Sensitivity and performance of the Advanced LIGO detectors in the third observing run
+  author: 
+    - Buikema, A. 
+    - Cahillane, C. 
+    - Mansell, G. L. 
+    - Blair, C. D. 
+    - Abbott, R. 
+    - Adams, C. 
+    - Adhikari, R. X. 
+    - Ananyeva, A. 
+    - Appert, S. 
+    - Arai, K. 
+    - Areeda, J. S. 
+    - Asali, Y. 
+    - Aston, S. M. 
+  url: https://doi.org/10.1103/PhysRevD.102.062003
+
+  pages: 062003
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 102
+    issue: 6
+    date: 2020-09
+    publisher: American Physical Society
+
+gravitational_wave_detectors:
+  type: article
+  title: Gravitational Wave Detection by Interferometry (Ground and Space)
+  author:
+    - Pitkin, Matthew
+    - Reid, Stuart
+    - Rowan, Sheila
+    - Hough, Jim
+  date: 2011-07-11
+  page: 5
+  url: https://doi.org/10.12942/lrr-2011-5
+
+  parent:
+    type: periodical
+    title: Living Reviews in Relativity
+    volume: 15
+    issue: 1
+
 dartmouth_proposal:
     type: report
     title: A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence
@@ -2034,6 +2127,101 @@ PTA:
     type: periodical
     title: Astronomy & Astrophysics
     volume: 678
+
+LIGO_interferometers:
+  type: article
+  title: "GW150914: The Advanced LIGO Detectors in the Era of First Discoveries"
+  author:
+    - Abbott, B. P. 
+    - Abbott, R. 
+    - Abbott, T. D. 
+    - Abernathy, M. R. 
+    - Acernese, F. 
+    - Ackley, K. 
+    - Adams, C. 
+    - Adams, T. 
+    - Addesso, P. 
+    - Adhikari, R. X. 
+    - Adya, V. B. 
+    - Affeldt, C. 
+    - Agathos, M. 
+    - Agatsuma, K.
+  year: 2016-03
+  url: https://doi.org/10.1103/PhysRevLett.116.131103
+
+  parent:
+    type: article
+    title: Physical Review Letters
+    volume: 116
+    issue: 13
+    pages: 131103
+    publisher: American Physical Society
+
+interferometers:
+  type: article
+  title: Interferometer techniques for gravitational-wave detection
+  author:
+    - Bond, Charlotte
+    - Brown, Daniel
+    - Freise, Andreas
+    - Strain, Kenneth A.
+  date: 2017-02-17
+  pages: 3
+  url: https://doi.org/10.1007/s41114-016-0002-8
+
+  parent:
+    type: periodical
+    title: Living Reviews in Relativity
+    volume: 19
+    issue: 1
+
+antenna_pattern:
+  type: article
+  title: Antenna patterns of interferometric detectors of gravitational waves – I. Linearly polarized waves
+  author:
+    - Schutz, Bernard F.
+    - Tinto, Massimo
+  date: 1987-01-01
+  urk: https://doi.org/10.1093/mnras/224.1.131
+  page-range: 131-154
+  
+  parent: 
+    type: article
+    title: Monthly Notices of the Royal Astronomical Society
+    volume: 224
+    issue: 1
+
+LIGO_India:
+  type: article
+  title: The science case for LIGO-India
+  url: https://doi.org/10.1088/1361-6382/ac3b99
+  author:
+    - Saleem, M
+    - Rana, Javed
+    - Gayathri, V
+    - Vijaykumar, Aditya
+    - Goyal, Srashti
+    - Sachdev, Surabhi
+    - Suresh, Jishnu
+    - Sudhagar, S
+    - Mukherjee, Arunava
+    - Gaur, Gurudatt
+    - Sathyaprakash, Bangalore
+    - Pai, Archana
+    - Adhikari, Rana X
+    - Ajith, P
+    - Bose, Sukanta
+  date: 2021-12-15
+  pages: 025004
+
+  parent:
+    type: article
+    title: Classical and Quantum Gravity
+    publisher:  IOP Publishing
+    issue: 2
+    volume: 39
+
+
 
 first_bns:
   type: article
