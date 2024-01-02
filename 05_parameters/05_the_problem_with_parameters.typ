@@ -56,7 +56,7 @@ Random search is a very similar method to a grid search; however, instead of sel
 A Bayesian optimisation approach makes use of our initial beliefs, priors, about the structure of the objective function @hyperparameter_optimisation_review. For example, you might expect the objective function to be continuous and that closer points in the parameter space might have similar performance. 
 The objective function is estimated probabilistically across the parameter space. It is updated as more information is gathered by new samples, which can be gathered either in batches or one at a time. The information obtained by these new samples is incorporated into the estimated objective function in an effort to move it closer to the ground truth objective function. 
 
-The placement of samples is determined by a combination of the updated belief and a defined acquisition function, which determines the trade-off between exploration and exploitation. The acquisition function assigns each point in the parameter space a score based on its expected contribution to the optimisation goal, effectively directing the search process. A standard method for modelling the objective function in Bayesian optimisation is Gaussian Processes, but other techniques are available, such as Random Forests and Bayesian Neural Networks, among others. This optimisation technique is often employed when evaluating the objective function is expensive or time-consuming, as it aims to find the optimal solution with as few evaluations as possible. See @bayesian_descent_hp_optimisation.
+The placement of samples is determined by a combination of the updated belief and a defined acquisition function, which determines the trade-off between exploration and exploitation. The acquisition function assigns each point in the parameter space a score based on its expected contribution to the optimisation goal, effectively directing the search process. A standard method for modeling the objective function in Bayesian optimisation is Gaussian Processes, but other techniques are available, such as Random Forests and Bayesian Neural Networks, among others. This optimisation technique is often employed when evaluating the objective function is expensive or time-consuming, as it aims to find the optimal solution with as few evaluations as possible. See @bayesian_descent_hp_optimisation.
 
 #figure(
     image("bayesian_descent.png",  width: 90%), 
@@ -97,110 +97,173 @@ Differential Evolution can work well for continuous parameter spaces, and shares
 
 == Dragon Method <dragonn-method>
 
-=== Why genetic algorithms?
+In the following subsection, we will justify our selection of genetic algorithms as the hyperparameter optimisation method of choice, explain in detail the operation of genetic algorithms, and discuss the choice of optimiser parameters selected for tests of Dragonn's optimization ability. 
 
-Genetic Algorithms are optimisation methods that can be used to find a set of input parameters which maximise a given fitness function. Often, this fitness function measures the performance of a certain process. In our case the process being measured is the training and testing of a given set of ANN hyperparameters - the hyperparameters then, are the input parameters which are being optimised.
+=== Why Genetic Algorithms?
+
+Genetic Algorithms are an unusual choice for artificial neural network hyperparameter optimization and have fallen somewhat out of fashion in recent years, with Bayesian methods taking the limelight. Genetic Algorithms typically require many trials before they converge on an acceptable solution, and although they are extremely flexible and adaptable methods, which are easy to implement and fairly straightforward to understand, the computational expense of individual trials of neural network architectures can often be prohibitively expensive for the application of genetic algorithms. Many of the hyperparameters of artificial neural networks are immutable without completely restarting training. While it is possible to adjust the training dataset and training hyperparameters such as the learning rate during model training, there are many hyperparameters related to the network architecture for which training would have to be completely restarted should they be altered, typically reinitializing the model's tunable parameters in the process. This means that for each trial during our optimization campaign, we will have to train a model from scratch, which can be a computationally expensive endeavor especially if the models are large. More computationally hungry layers, such as the attention-based layers that are discussed in future chapters, would require even more time and resources per trial, making genetic algorithms even more costly.
+
+Unfortunately, most of this was not known at the initiation of the project. It should be noted, that at that time, hyperparameter optimization methods were less developed. As the project developed, however, there were new ideas for how genetic algorithms could be better adapted for their task. We can imagine some methods to alter model architectural hyperparameters without entirely resetting the tunable weights of the model in the process. For example, we could add an extra convolutional filter to a convolutional layer, randomly initializing only the new parameters, and keeping existing parameters the same, similarly, we could remove a convolutional kernel. It might also be possible to add and deduct entire layers from the model without completely resetting the tunable parameter every time. A method to reuse existing trained parameters was envisioned. Unfortunately, performing such surgery on models compiled using one of the major machine-learning libraries, in our case TensorFlow, is fairly difficult. So although many alternative methods were conceived, none progressed to the point where they were ready for testing.
+
+With all that said, population-based methods are far from dead, and there are still some significant advantages over other methods. For extremely complex spaces, with many parameters to optimize, genetic algorithms can be the best solutions possible. Though as noted they can take many trials to reach this optimum solution. It should also be noted, that although hyperparameter optimization can be very highly dimensional, it is usual, in artificial neural network design, for the number of dimensions that are important to model performance to be quite low, meaning that the search space is considerably lessened. There are big players in the A.I. who use population-based methods similar to genetic algorithms for model optimization, including Google DeepMind @deepmind_population_based, so it is hoped that further development of this method could result in a highly adaptable population-based method for the optimization of neural networks for use in gravitational-wave research. Much of the software has already been developed, and although it would be a complex task, it would be a rewarding one.
+
+We have some things in our favour: our input data is not particularly highly dimensional, and the models we are attempting to train, are simple Convolutional Neural Networks (CNNs) that are not especially memory or resource intensive, meaning that it should be possible for us to run a relatively large number of trials. The method and software developed for this research have also seen use in a gravitational wave detection pipeline, MLy @MLy, so it has already been useful to the scientific community. The developed genetic algorithm software included as part of GWFlow makes it very easy to add new hyperparameters to the optimisation task, those parameters can be continuous, discrete, or boolean without breaking a sweat. The range of hyperparameters set up for optimisation with Dragonn is already extensive, as is demonstrated in @hyperparameter-seclection-sec.
+
+There has been at least one attempt to use genetic algorithms for hyperparameter optimisation within gravitational wave data science in the past @ga_graviational_waves. Deighan _et al._ share an interest in developing a consistent method for generating hyperparameter solutions, and they use a similar approach to the method described here. They demonstrate that genetic algorithms can indeed generate models with high performance. The work of Deighan _et al._ optimizes a reasonable, but limited number of hyperparameters, predefining several structural elements of the network. We have allowed our optimiser considerably more freedom, although we note that this could also lead to an increased convergence time.
+
+=== Selection of Mutable Hyperparameters <hyperparameter-seclection-sec>
+
+Genetic Algorithms are optimisation methods that can be used to find a set of input parameters that maximise a given fitness function. Often, this fitness function measures the performance of a certain process. In our case the process being measured is the training and testing of a given set of hyperparameters --- the hyperparameters then, form the parameters that are optimization method will adjust to find a performant solution. The GWFlow optimisation model allows us to optimize a wide range of hyperparameters, and whilst it was wished to perform a large optimisation run over all possible hyperparameters, we elected to use only a subset in order to improve convergence speeds due to time constraints.
+
+Model hyperparameters can be split into three categories, with the last category divisible into two subcategories: *Dataset Hyperparameters*, *Training Hyperparameters*, and *Structural Hyperparameters.* 
+
+- *Dataset hyperparameters* control the structure and composition of the training dataset, including its size, the number of each class of example within the dataset, and the properties of each example. In our case, the properties of the noise, the signals injected into that noise, and any additional obfuscations we wish to add to the data like the injection of simulated glitches. It's important that our method cannot also adjust the properties of the validation and testing dataset. It would be very easy for the genetic algorithm to find a solution wherein it makes the difference between classes in the validation set as easy as possible to identify, or make the validation dataset incredibly short, or perhaps remove all but one class of example. If we restrict our optimisation to the training dataset, however, this can be a good way to find optimal hyperparameters. The composition of the training dataset can often be a crucial part of optimising model performance. Unfortunately, we did not run the genetic algorithm on any dataset parameters, since we attempted to optimise for time. The set of possible genes for dataset hyperparameters is shown in @datset-hyperparameters.
+
+#figure(
+    table(
+        columns: (auto, auto, auto, auto),
+        [*Hyperparameters Name (gene)*], [*Type*], [*Optimised*], [*Range*],
+        [Sample Rate (Hz)], [Integer], [No], [-],
+        [Onsource Duration (s)], [Integer], [No], [-],
+        [Offsource Duration (s)#super($plus$)], [Integer], [No], [-],
+        [Total Num Examples], [Integer], [No], [-],
+        [Percent Signal], [Float], [No], [-],
+        [Percent Noise], [Float], [No], [-],
+        [Percent Glitch], [Float], [No], [-],
+        [Noise Type], [Discrete], [No], [-],
+        [Whiten Noise ($plus$)], [Boolean], [No], [-],
+        [_For each feature type_], [], [], [],
+        [SNR Min\*], [Float], [No], [-],
+        [SNR Max\*], [Float], [No], [-],
+        [SNR Mean\*], [Float], [No], [-],
+        [SNR Median\*], [Float], [No], [-],
+        [SNR Distribution (\*)], [Discrete], [No], [-],
+    ),
+    caption: [Possible Dataset Hyperparameters. These are parameters that alter the structure and composition of the dataset used to train or model. None of these parameters were selected for inclusion in our hyperparameter optimization test, in order to decrease convergence time. Parameters with a superscript symbol become active or inactive depending on the value of another parameter in which that symbol is contained within brackets. Range entries are left black for Hyperparameters not included in optimisation, as no ranges were selected for these values. ]
+) <datset-hyperparameters>
+
+- *Training hyperparameters* are parameters used by the gradient descent algorithm, which dictate the training procedure of the neural network. These include things like the learning rate, batch size, and optimization choice. As with the dataset hyperparameters, these are fairly easy to alter after training has begun without first resetting all of the model's tunable parameters, so could easily be incorporated into a more complex population-based method. None of these parameters were selected for optimization. The set of possible genes for dataset hyperparameters is shown in @training-hyperparaneters.
+
+#figure(
+    table(
+        columns: (auto, auto, auto, auto),
+        [*Hyperparameters Name (gene)*], [*Type*], [*Optimised*], [*Range*],
+        [Batch Size], [Integer], [No], [-],
+        [Learning Rate], [Float], [No], [-],
+        [Choice of Optimiser(\*)], [Discrete], [No], [-],
+        [Various Optimiser Parameters\*], [Discrete], [No], [-],
+        [Num Training Epochs], [Float], [No], [-],
+        [Patience], [Discrete], [No], [-],
+        [Choice of Loss function], [Discrete], [No], []
+    ),
+    caption: [Possible Training hyperparameters. These are parameters that alter the training procedure of the model. None of these parameters were selected for inclusion in our hyperparameter optimization test, in order to decrease convergence time. Parameters with a superscript symbol become active or inactive depending on the value of another parameter in which that symbol is contained within brackets. There are different optimiser parameters that could also be optimized depending on your choice of optimiser, for example, values for momentum and decay. It is not typical to optimise your choice of loss function for most tasks, but some are possible with a range of loss functions, such as regression, which could benefit from optimisation of this parameter. Range entries are left black for Hyperparameters not included in optimisation, as no ranges were selected for these values.] 
+) <training-hyperparaneters>
+
+- *Arcitecture hyperparameter* are parameters that control the number and type of layers in a network. This is by far the most extensive category of hyperparameters, since many of the layers that themselves are controlled by hyperparameters contain hyperparameters. For example, a layer in a network could be any of several types, dense, convolutional, or pooling. If convolutional were selected by the optimizer as the layer type of choice, then the optimizer must also select how many filters to give that layer, the size of those filters, and whether any dilation or stride is used. Each layer also comes with a selection of possible activation functions. This increases the number of hyperparameters considerably. In order to allow the optimizer maximal freedom, no restrictions on the order of layers in the network were imposed, any layer in a generated solution could be any of the possible layer types. Another independent hyperparameter selected how many of those layers would be used in the generation of the network in order to allow for various network depths. The output layer was fixed as a dense layer with fixed output size, to ensure compatibility with label dimensions. The set of possible genes for dataset hyperparameters is shown in @architecture-hyperparameters
+
+#figure(
+    table(
+        columns: (auto, auto, auto, auto),
+        [*Hyperparameters Name (gene)*], [*Type*], [*Optimised*], [*Range*],
+        [Nummber of Hidden Layers], [Integer], [Yes], [0 to 10],
+        [_One each for each active layer_], [], [], [],
+        [Layer Type], [Discrete], [Yes], [Dense(\*, $plus$), Convolutional(\*, $times$), Pooling($diamond$), Dropout($square$)],
+        [Activation Function\*], [Discrete], [Yes], [ReLU, ELU, Sigmoid, TanH, SeLU, GeLU, Swish, SoftMax],
+        [Num Dense Neurons #super($plus$)], [Integerr], [Yes], [1 to 128 (all values)],
+        [Num Filters #super($times$)], [Integer], [Yes], [1 to 128 (all values)],
+        [Kernel Size #super($times$)], [Integer], [Yes], [1 to 128 (all values)],
+        [Kernel Stride #super($times$)], [Integer], [Yes], [1 to 128 (all values)],
+        [Kernel Dilation #super($times$)], [Integer], [Yes], [0 to 64 (all values)],
+        [Pool Size #super($diamond$)], [Integer], [Yes], [1 to 32 (all values)],
+        [Pool Stride #super($diamond$)], [Integer], [Yes], [1 to 32 (all values)],
+        [Dropout Value #super($square$)], [Float], [Yes], [0 to 1 (all values)],
+    ),
+    caption: [Possible architecture hyperparameters. These are parameters that alter the architectural structure of the model, or the internal structure of a given layer. All these parameters were selected for optimisation. Parameters with a superscript symbol become active or inactive depending on the value of another parameter in which that symbol is contained within brackets. For each of $N$ layers, where $N$ is the value of the number of hidden layers genome, a layer type gene detemines the type of that layer, and other hyperparameters determine the internal structure of that layer. ]
+) <architecture-hyperparameters>
+
+These parameters are called genes ($g$), and each set of genes is called a genome *genomes* ($G$). $G = [g_1, g_i ... g_{x}]$, where $x$ is the number of input parameters. Each genome should map to a single fitness score ($F$) via the fitness function. 
+
+=== Genetic Algorithms in Detail
+
+Genetic algorithms operate under the following steps, note that this describes the procedure as performed in this paper, slight variations on the method are common:
+
++ *Generation:* First, an initial population of genomes, $P$ is generated. $P = [G_1, G_i, ... G_N]$, where $N$ is the number of genomes in the population. Each genome is randomised, with each gene limited within a search space defined by $g_(i"min")$ and $g_(i"max")$.
++ *Evaluation:* Next, each genome is evaluated by the fitness function to produce an initial fitness score. In our case, this means that each genome is used to construct a CNN model which is trained and tested. The result of each test is used to generate a fitness score for that genome.
++ *Selection:* These fitness scores are used to select which genomes will continue to the next generation. There are a few methods for doing this, however, since we do not expect to need any special functionality in this area we have used the most common selection function - "the Roulette Wheel" method. In this method, the fitness scores are normalised so that the sum of the scores is unity. Then the fitness scores are stacked into bins with each bin width determined by that genome's fitness score. $N$ random numbers between 0 and 1 are generated, and each genome is selected by the number of random numbers that fall into its bin. Any given genome can be selected multiple or zero times.
++ *Crossover and Mutation:* The genomes that have been selected are then acted upon by two genetic operators, crossover and mutation. Firstly, genomes are randomly paired into groups of two, then two new genomes are created by randomly selecting genes from each parent. A "mutation "is then performed on each of the new genomes with a certain mutation probability $M$. Mutation and Crossover create genomes that share elements of both parents but with enough differences to continue exploring the domain space.
++ *Termination:* If the desired number of generations has been reached the process ends and the highest-performing solution is returned. Else-wise the process loops back to step 2 and the newly created genomes are evaluated.
+
+==== Choice of Fitness Function
+
+There are multiple possible variants on the standard genetic algorithm model but for the most part, we have kept to the generic instantiation. It is a common choice to use the model loss as the fitness metric for optimisation, this makes sense in many ways, as the goal of training a model is to reduce its loss function, a better loss indicates a better model. However, the model loss function often fails to map exactly for our requirements to the model. The form of the loss function affects the model's training dramatically, so we cannot just use any function we wish as the loss function, and some things we are trying to optimise for might be too expensive to compute during every training iteration, or impossible to compute directly in this manner. We have chosen to use the area under a FAR-calibrated efficiency curve. Only values above an SNR of 8 were included in the sum, and the FAR chosen was 0.01 Hz, with the assumption that performance at this FAR would translate to performance at a lower FAR. A lower FAR was not directly used because it would be computationally expensive to compute for every trial. This objective function was chosen as it is a representative of the results we look for to determine whether our model is performant or not. If those are the results we will be examining, we may as well attempt to optimise them directly.
+
+==== Choice of Crossover Method
+
+There are several potential choices for crossover methods, one-point crossover, k-point crossover, or uniform crossover. In one-point crossover we treat our two genomes, one from each parent, as long arrays, like two DNA strands, the crossover mechanism randomly cuts both strands in two and selects half from one strand, and the second half from the other genome, generating a new genome by splicing the old, this the simplest approach which in some cases can lead to faster convergence, but it can reduce the possibly for mixing genomes in interesting ways, reducing the total search space. K-point crossover is similar, but selects multiple places to cut, and splices the gene in a more complex manner, this can increase mixing possibilities but can decrease convergence, as the new genome is more likely to gain combinations of genes that perform poorly. The final possibility is uniform mixing, which effectively equates to cutting before and after every genome. Each genome in the new genome is randomly selected between parent a and parent b, this maximizes mixing but can increase convergence time. We selected to use uniform crossover in order to maximise the possible search space, although we were concerned about increasing convergence times, we wanted to ensure that we explored a wide area of the parameter space effectively.
+
+=== Choice of Mutation Method
+
+As well as crossover, mutation was also performed at the inception of every new genome. Mutation ensures that the population keeps exploring new areas of parameter space even as certain traits dominate the population, by introducing a small chance that a gene can randomly change value. Our method for performing mutation is dependent on whether the value of that gene is an integer, continuous, discrete, or boolean. For all cases, there is a 5% chance for mutation to occur in any given gene after crossover has taken place. For continuous and integer values, the value of the gene is mutated either negatively or positively by an amount drawn from a Gaussian distribution, in the case of integer parameters this is then rounded to the nearest parameter. For discrete and boolean values, a new value is drawn from the possible selection, with all values being equally likely -- this is different from the integer case as choices in the discrete category are not ordered.
+
+=== Datasets
+
+The GWFlow data @gwflow_ref and training pipeline were used to generate the datasets used in each of the trial solutions. We are attempting to detect BBH IMRPhenomH signals generated with cuPhenom @cuphenom_ref and obfuscated by real LIGO interferometer noise drawn from the LIGO Livingston detector, Although GWFlow lends itself well for use in hyperparameter optimization methods due to its rapid generation of datasets and lack of requirement for pre-generated datasets, we elected not to optimize dataset parameters in an attempt to decrease the time till model convergence.  Instead, we used identical dataset parameters to those used for the perceptron experiments, but we decreased the training patience to a single epoch, meaning if any epoch has a validation loss higher than the epoch previous, training halts. This was done in order to reduce the time taken for each trial. The parameters used for the training and dataset can be seen in @perceptron-training-parameters.
+
+== Dragonn Results
+
+== Dragonn Training
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    4,
+        gutter: 1em,
+        [ #image("accuracy_generation_1.png", width: 100%) ],
+        [ #image("accuracy_generation_2.png", width: 100%) ],
+        [ #image("accuracy_generation_2.png", width: 100%) ],
+        [ #image("accuracy_generation_4.png", width: 100%) ],
+    ),
+    caption: [Dragonn training results from each of the four generations. ]
+) <dragon_training_results>
+
+#figure(
+    image("averages.png", width: 100%),
+    caption: [Dragonn training results from each of the four generations. ]
+) <dragon_averages>
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    3,
+        gutter: 1em,
+        [ #image("best_model_efficiency_0_1.PNG", width: 100%) ],
+        [ #image("best_model_efficiency_0_01.PNG", width: 100%) ],
+        [ #image("best_model_efficiency_0_001.PNG", width: 100%) ],
+    ),
+    caption: [Dragonn training results from each of the four generations. ]
+) <top_model_perfomance>
 
 #figure(
     table(
         columns: (auto, auto, auto),
-        ["Hyperparameters (genes)"], [], [],
-        ["Base Genes (1 each per genome)], [], [],
-        ["Name", "Min", "Max"], [], [],
-        ["Structural"], [], [],
-        ["Num Layers (int)"], [], [],
-        ["Input Alignment Type (enum)"], [], [],
-        ["Training"],  [], [],
-        ["Loss Type (enum)"], [], [],
-        ["Optimiser Type (enum)"], [], [],
-        ["Learning Rate (double)"], [], [],
-        ["Batch Size (int)"], [], [],
-        ["Num Epocs (int)"], [], [],
-        ["Num Semesters (int)"], [], [],
-        ["Dataset"], [], [],
-        ["Num Training Examples (int)"], [], [],
-        ["Layer Genes (1 each per layer per genome)"], [], [],
-        ["Name", "Min", "Max"],
-        ["Layer Type (enum)"], [], [],
-        ["Dense"], [], [],
-        ["Number of Dense ANs (int)"], [], [],
-        ["Convolutional"], [], [],
-        ["Number of Kernels (int)"], [], [],
-        ["Kernel Size (int)"], [], [],
-        ["Kernel Stride (int)"], [], [],
-        ["Kernel Dilation (int)"], [], [],
-        ["Pooling"], [], [],
-        ["Pooling Present (bool)"], [], [],
-        ["Pooling Type (enum)"], [], [],
-        ["Pooling Size (int)"], [], [],
-        ["Pooling Stride (int)"], [], [],
-        ["Batch Norm"], [], [],
-        ["Batch Norm Present (bool)"], [], [],
-        ["Dropout"], [], [],
-        ["DropOut Used (bool)"], [], [],
-        ["DropOut Value (double)"], [], [],
-        ["Activation"], [], [],
-        ["Activation Present (bool)"], [], [],
-        ["Activation Function (enum)"], [], [],
+        [*Rank*], [*Generation*],  [*Fitness*],
+        [1], [1],  [0.9423],
+        [2], [1], [0.9337], 
+        [3], [1], [0.9215],
+        [4], [4], [0.888], 
+        [5], [3], [0.887], 
+        [6], [2], [0.870], 
+        [7], [2], [0.868], 
+        [8], [4], [0.860], 
+        [9], [1], [0.841],
+        [10], [4], [0.841],
     ),
-    caption: []
-) <table-of-hyperparameters>
+    caption: [Possible architecture hyperparameters. These are parameters that alter the architectural structure of the model, or the internal structure of a given layer. All these parameters were selected for optimisation. Parameters with a superscript symbol become active or inactive depending on the value of another parameter in which that symbol is contained within brackets. For each of $N$ layers, where $N$ is the value of the number of hidden layers genome, a layer type gene detemines the type of that layer, and other hyperparameters determine the internal structure of that layer. ]
+) <top_model_perfomances>
 
-Optimised parameters are called genes ($ g $), and each set of genes is called a genome *genomes* ($G$). $G = [g_1, g_i ... g_{x}]$, where $x$ is the number of input parameters. Each genome should map to a single fitness score ($F$) via the fitness function.
+== Discussion
 
-Genetic algorithms operate under the following steps, note that this describes the procedure as performed in this paper, slight variations on the method are common:
-
-+ *Generation:* First, an initial population of genomes, $P$ is generated. $P = [G_1, G_i, ... G_N]$, where $N$ is the number of genomes in the population. Each genome is randomised, with each gene limited within a search space defined by $g_{i}{min}$ and $g_{i}{max}$.
-+ *Evaluation:* Next, each genome is evaluated by the fitness function to produce an initial fitness score. In our case this means that each genome is used to construct a CNN model which is trained and tested. The result of each test is used to generate a fitness score for that genome.
-+ *Selection:* These fitness scores are used to select which genomes will continue to the next generation. There are a few methods for doing this, however since we do not expect to need any special functionality in this area we have used the most common selection function - "the Roulette Wheel" method. In this method the fitness scores are normalised so that the sum of the scores is unity. Then the fitness scores are stacked into bins with each bin width determined by that genomes fitness score. $N$ random numbers between 0 and 1 are generated, each genome is selected by the number of random numbers that fall into its bin. Any given genome can be selected multiple or zero times.
-+ *Crossover and Mutation:* The genomes that have been selected are then acted upon by two genetic operators, crossover and mutation. Firstly, genomes are randomly paired into groups of two, then two new genomes are created by randomly selecting genes from each parent. A bit-wise mutation is then performed on each of the new genomes with a certain mutation probability $M$. Mutation and Crossover creates genomes which are similar to both parents but with enough differences to continue exploring the domain space.
-+ *Termination:* If the desired number of generations has been reached the process ends and the highest performing solution is returned. Else-wise the process loops back to step 2 and the newly created genomes are evaluated.
-
-== Example Data
-
-Three sets of data were independently generated using identical parameters but differing random seeds - training, testing, and validation datasets. The training and testing datasets were used during the training of each model during each generation. The same datasets were used for each genome - however each was independently shuffled with a different seed for every case.
-
-The datasets parameters were chosen to match as closely as possible, the following paper by 
-
-SNR - discussion - range vs single value, high snr vs low snr
-
-
-
-
-== Layer Configuration Tests
-Testing which combinations of layers are most effective.
-
-=== Dense Layers
-
-=== Convolutional Layers <cnn_sec>
-
-=== Regularisation
-
-=== Custom Layer Exploration
-
-== Input Configuration Tests <input-configuration-sec>
-Testing which input method is most effective. I.e. number of detectors and widthwise, lengthwise, or depthwise.
-
-One detector vs multiple.
-
-SNR cutoff point.
-
-
-=== Noise Type Tests <noise-type-test-sec>
-Also, noise type.
-
-And feature engineering.
-
-== Output Configuration Tests
-
-Baysian tests
-
-== Label Configuration Tests
-Testing which configuration of the label is the most effective combination of noise, glitch, etc.
-
-== Branched Exploration
-
-== All together
+Our attempt to expand the range of the hyperparameter search was admirable but overambitious.
 
 == Deployment in MLy <deployment-in-mly>
 

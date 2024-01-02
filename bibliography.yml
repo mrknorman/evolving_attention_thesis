@@ -615,6 +615,32 @@ audio_generation:
   date: 2016
   url: https://www.deepmind.com/blog/wavenet-a-generative-model-for-raw-audio
 
+deepmind_population_based:
+  type: article
+  title: Population based training of neural networks
+  author: 
+    - Max Jaderberg
+  date: 2017-11-27
+  url: https://deepmind.google/discover/blog/population-based-training-of-neural-networks/
+
+ga_graviational_waves:
+  type: article
+  title: Genetic-algorithm-optimized neural networks for gravitational wave classification
+  author: 
+    - Deighan, Dwyer S.
+    - Field, Scott E.
+    - Capano, Collin D.
+    - Khanna, Gaurav
+  date: 2021-10-01
+  page-range: 13859-13883
+  url: https://doi.org/10.1007/s00521-021-06024-4
+
+  parent:
+    type: periodical
+    title:  Neural Computing and Applications
+    volume: 33
+    issue: 20
+
 text_generation: 
   type: article
   title: Generating text with recurrent neural networks
