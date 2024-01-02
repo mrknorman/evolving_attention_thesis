@@ -31,4 +31,3 @@
 #pagebreak()
 #include "07_crosswave/07_crosswave.typ"
 #pagebreak()
-#include "08_infrastructure/08_infrastructure.typ"
