@@ -97,7 +97,7 @@ Differential Evolution can work well for continuous parameter spaces, and shares
 
 == Dragon Method <dragonn-method>
 
-In the following subsection, we will justify our selection of genetic algorithms as the hyperparameter optimisation method of choice, explain in detail the operation of genetic algorithms, and discuss the choice of optimiser parameters selected for tests of Dragonn's optimization ability. 
+As our attempt to apply genetic algorithms to the problem of deep learning model optimisation in gravitational waves, we introduce Dragonn (Dynamic Ranking And Genetic Optimisation of Neural Networks). Originally a standalone software library developed in C, Dragonn was rewritten in python utilizing other recent advances made in the GWFlow pipeline. A previous version which was used to optimise the core MLy models was existent, but data from those early experiments was lost, so a decision was made to remake the experiments with the updated Dragonn tools. In the following subsection, we will justify our selection of genetic algorithms as the hyperparameter optimisation method of choice, explain in detail the operation of genetic algorithms, and discuss the choice of optimiser parameters selected for tests of Dragonn's optimization ability. 
 
 === Why Genetic Algorithms?
 
@@ -159,7 +159,7 @@ Model hyperparameters can be split into three categories, with the last category
     caption: [Possible Training hyperparameters. These are parameters that alter the training procedure of the model. None of these parameters were selected for inclusion in our hyperparameter optimization test, in order to decrease convergence time. Parameters with a superscript symbol become active or inactive depending on the value of another parameter in which that symbol is contained within brackets. There are different optimiser parameters that could also be optimized depending on your choice of optimiser, for example, values for momentum and decay. It is not typical to optimise your choice of loss function for most tasks, but some are possible with a range of loss functions, such as regression, which could benefit from optimisation of this parameter. Range entries are left black for Hyperparameters not included in optimisation, as no ranges were selected for these values.] 
 ) <training-hyperparaneters>
 
-- *Arcitecture hyperparameter* are parameters that control the number and type of layers in a network. This is by far the most extensive category of hyperparameters, since many of the layers that themselves are controlled by hyperparameters contain hyperparameters. For example, a layer in a network could be any of several types, dense, convolutional, or pooling. If convolutional were selected by the optimizer as the layer type of choice, then the optimizer must also select how many filters to give that layer, the size of those filters, and whether any dilation or stride is used. Each layer also comes with a selection of possible activation functions. This increases the number of hyperparameters considerably. In order to allow the optimizer maximal freedom, no restrictions on the order of layers in the network were imposed, any layer in a generated solution could be any of the possible layer types. Another independent hyperparameter selected how many of those layers would be used in the generation of the network in order to allow for various network depths. The output layer was fixed as a dense layer with fixed output size, to ensure compatibility with label dimensions. The set of possible genes for dataset hyperparameters is shown in @architecture-hyperparameters
+- *Architecture hyperparameter* are parameters that control the number and type of layers in a network. This is by far the most extensive category of hyperparameters, since many of the layers that themselves are controlled by hyperparameters contain hyperparameters. For example, a layer in a network could be any of several types, dense, convolutional, or pooling. If convolutional were selected by the optimizer as the layer type of choice, then the optimizer must also select how many filters to give that layer, the size of those filters, and whether any dilation or stride is used. Each layer also comes with a selection of possible activation functions. This increases the number of hyperparameters considerably. In order to allow the optimizer maximal freedom, no restrictions on the order of layers in the network were imposed, any layer in a generated solution could be any of the possible layer types. Another independent hyperparameter selected how many of those layers would be used in the generation of the network in order to allow for various network depths. The output layer was fixed as a dense layer with fixed output size, to ensure compatibility with label dimensions. The set of possible genes for dataset hyperparameters is shown in @architecture-hyperparameters
 
 #figure(
     table(
@@ -195,7 +195,7 @@ Genetic algorithms operate under the following steps, note that this describes t
 
 ==== Choice of Fitness Function
 
-There are multiple possible variants on the standard genetic algorithm model but for the most part, we have kept to the generic instantiation. It is a common choice to use the model loss as the fitness metric for optimisation, this makes sense in many ways, as the goal of training a model is to reduce its loss function, a better loss indicates a better model. However, the model loss function often fails to map exactly for our requirements to the model. The form of the loss function affects the model's training dramatically, so we cannot just use any function we wish as the loss function, and some things we are trying to optimise for might be too expensive to compute during every training iteration, or impossible to compute directly in this manner. We have chosen to use the area under a FAR-calibrated efficiency curve. Only values above an SNR of 8 were included in the sum, and the FAR chosen was 0.01 Hz, with the assumption that performance at this FAR would translate to performance at a lower FAR. A lower FAR was not directly used because it would be computationally expensive to compute for every trial. This objective function was chosen as it is a representative of the results we look for to determine whether our model is performant or not. If those are the results we will be examining, we may as well attempt to optimise them directly.
+There are multiple possible variants on the standard genetic algorithm model but for the most part, we have kept to the generic instantiation. It is a common choice to use the model loss as the fitness metric for optimisation, this makes sense in many ways, as the goal of training a model is to reduce its loss function, a better loss indicates a better model. However, the model loss function often fails to map exactly for our requirements to the model. The form of the loss function affects the model's training dramatically, so we cannot just use any function we wish as the loss function, and some things we are trying to optimise for might be too expensive to compute during every training iteration, or impossible to compute directly in this manner. We have chosen to use the area under a FAR-calibrated efficiency curve. Only values above an SNR of 8 were included in the sum, and the FAR chosen was 0.01 Hz, with the assumption that performance at this FAR would translate to performance at a lower FAR. A lower FAR was not directly used because it would be computationally expensive to compute for every trial. This objective function was chosen as it is representative of the results we look for to determine whether our model is performant or not. If those are the results we will be examining, we may as well attempt to optimise them directly.
 
 ==== Choice of Crossover Method
 
@@ -211,8 +211,17 @@ The GWFlow data @gwflow_ref and training pipeline were used to generate the data
 
 == Dragonn Results
 
+The genetic algorithm work presented in this chapter has been in development for a long time, but this particular iteration only reached its full capabilities in recent months. What this has meant is that time pressure did not allow for a large number of generations to be run. Optimization was performed over four generations, which is very low for a genetic algorithm optimization run. Nonetheless, we can explore the results, and we have made some intriguing discoveries, even if they were somewhat accidental.
+
 == Dragonn Training
 
+First, we can examine the training histories of our models, and note the difference in performance between generations. @dragon_training_results displays the training results, demonstrating that most of the networks fail to achieve any classification ability. This is expected. As we have allowed complete genetic freedom for layer order and parameters, many nonsensical arrangements of layers are possible which will inhibit any possibility of classification performance. 
+
+With disappointment, we note that even in the later generations no models reach accuracies above around 95%, this could, in part, be a result of our reduced training patience halting training early before extra performance can be extracted, although we note that even in cases where more epochs were reached, the accuracy seems to flatline. Setting the value of patience to one has other consequences, a great number of the somewhat models across the generations were stopped as they reached epoch two where their model loss dropped below the loss for epoch one. It is unknown exactly why this is the case since all models were trained on exactly the same training dataset generated with the same random see, it could be that the training data in that epoch is particularly unhelpful to the model in some way though a statistical fluke. The validation datasets are consistent across epochs, so there could not be a variation in validation difficulty causing this hurdle.
+
+Even with the chaotic diagrams, it is easy to see that the number of performant models increases with each generation, so we have verified that our optimiser works --- we will examine average metrics later for verification of this. However this is not a particularly interesting result, it is known that genetic algorithms work. We do however have an interesting result that demonstrates the importance of a future wide hyperparameter search.
+
+performances close to gabbard small. 
 #figure(
     grid(
         columns: 1,
@@ -223,25 +232,21 @@ The GWFlow data @gwflow_ref and training pipeline were used to generate the data
         [ #image("accuracy_generation_2.png", width: 100%) ],
         [ #image("accuracy_generation_4.png", width: 100%) ],
     ),
-    caption: [Dragonn training results from each of the four generations. ]
+    caption: [Dragonn model training histories from each of the four generations. All models were trained with identical training datasets and validated with epoch-consistent validation data. After each epoch, a new population was generated by applying the genetic algorithms mechanism to select perfomant genes in previous generations. In all generations many models lack any classification ability, this is anticipated because, because of the scope of the hyperparameter search, many of the models generated will be nonsensical, with extremely small data channels or near complete dropout layers. However, we also see that our population size was enough for a considerable number of performance models. With increasing generations, we see increasing numbers of performant models, demonstrating that our genetic optimiser is operating as intended.]
 ) <dragon_training_results>
+
+Next, we can examine the average metrics from each epoch. In @dragon_averages> we examine four metrics of interest; the average maximum model accuracy, that is, the average of all the highest accuracies models archived across their training run; the average lowest model validation loss, the average number of epochs a training run lasted for, and finally the average model fitness. The model fitness is the percentage of correctly classified validation examples with an optimal SNR greater than 8 when using a detection threshold calibrated to a far of 0.01. The metrics show us what we anticipated, increasing average performance in all metrics across generations. The average number of epochs increases as the number of performant models increases since performant models are more likely to reduce their validation loss over the previous epoch.
+
+As expected an increase in model fitness correlates with an increase in accuracy and a decrease in model loss, suggesting that better-performing models when measured with uncalibrated FAR thresholds and loss functions, in general act as better-performing methods in low FAR regimes, although this is not always the case, as we will explore when we examine the best performing models of the generation.
 
 #figure(
     image("averages.png", width: 100%),
-    caption: [Dragonn training results from each of the four generations. ]
+    caption: [Dragonn average metrics from each of the four generations. The blue line is the average best model accuracy across its training run, The red line is the average model loss, the purple line is the average number of epochs in a model's training history, and the green line is the average model fitness. These results are mostly as all average metrics improve with increasing generation count, the drop in loss is particularly impressive, but this probably corresponds to the shedding of extremely poorly designed models after the first epoch. Accuracy is slowly improving, as the number of performant models increases, and with it the average number of epochs in a model's training history. Within increasing numbers of performant models comes increasing numbers of models that can perform better than their last epoch after further training.]
 ) <dragon_averages>
 
-#figure(
-    grid(
-        columns: 1,
-        rows:    3,
-        gutter: 1em,
-        [ #image("best_model_efficiency_0_1.PNG", width: 100%) ],
-        [ #image("best_model_efficiency_0_01.PNG", width: 100%) ],
-        [ #image("best_model_efficiency_0_001.PNG", width: 100%) ],
-    ),
-    caption: [Dragonn training results from each of the four generations. ]
-) <top_model_perfomance>
+The result of an optimization algorithm is only as good as the highest-performing model. So we shall examine the population and extract the most performant models for inspection. Luckily our choice of objective function --- the percentage of validation examples over an optimal SNR of 8 that are correctly classified when calibrated to a FAR of 0.02 Hz, encapsulates most of what we desire out of our models, so we can use this to guide our search to the best models. 
+
+We have extracted the top ten scoring models in @top_model_perfomances. Interestingly, and perhaps worryingly for the effectiveness of our optimization method, the top three models are all in the first generation. This tells us that although the average fitness was increasing along with other metrics of interest, that does not necessarily equate to generating more highly scoring models, which seems counterintuitive. However, examining the validation results of the top-scoring model more closely can lead us toward a reason for this discrepancy, and perhaps an interesting area of further investigation.
 
 #figure(
     table(
@@ -258,24 +263,48 @@ The GWFlow data @gwflow_ref and training pipeline were used to generate the data
         [9], [1], [0.841],
         [10], [4], [0.841],
     ),
-    caption: [Possible architecture hyperparameters. These are parameters that alter the architectural structure of the model, or the internal structure of a given layer. All these parameters were selected for optimisation. Parameters with a superscript symbol become active or inactive depending on the value of another parameter in which that symbol is contained within brackets. For each of $N$ layers, where $N$ is the value of the number of hidden layers genome, a layer type gene detemines the type of that layer, and other hyperparameters determine the internal structure of that layer. ]
+    caption: [The top ten models in any of the populations throughout the genetic optimisation process, out of a total of 800 trial solutions, 200 at each epoch. Unexpectedly, the three top-scoring models when ranked by fitness, the very metric our optimization method is attempting to optimise. The first generation of a genetic optimisation search will alone act as a random search, so it is perhaps not unsurprising that it has some ability to find good solutions, however, we would expect better solutions to arise out of on average better-performing populations. This could perhaps be a result of our very low epoch count, or a statistical fluke. If it were the latter, however, it would seem very unlikely that the top three spots were taken by a first-generation model. The other option is that there was some asymmetry between the generations.]
 ) <top_model_perfomances>
+
+In @top_model_perfomance we examine the efficiency plot used to generate the fitness scores for the highest-scoring model, a model from the first generation. These efficiency plots show extremely strong performance in the lower FAR regimes at medium SNRs, but this appears to come at the cost of some of the performance at the higher SNRs, which do not perform as well as the CNN models from the literature.
+
+
+#figure(
+    grid(
+        columns: 1,
+        rows:    3,
+        gutter: 1em,
+        [ #image("best_model_efficiency_0_1.PNG", width: 100%) ],
+        [ #image("best_model_efficiency_0_01.PNG", width: 100%) ],
+        [ #image("best_model_efficiency_0_001.PNG", width: 100%) ],
+    ),
+    caption: [Efficiency curves of the top performing model from the population of Dragonn trials. The curves maintain high accuracy at low FARs, though their perfomance a high SNRs above 10 is worse, never reaching a 100% accuracy, their performance at an SNR of 6 is considerably greater. It is hypothesized that this is due to an inoculation effect generated by the erroneous injection of WNB glitches into the dataset during the first generation.  _Top:_ Efficiency curve using a threshold calibrated to a FAR of 0.1 Hz. _Middle:_ Efficiency curve generated using a threshold calibrated to a FAR of 0.01 Hz. _Bottom:_ Efficiency curve generated using a threshold calibrated to a FAR of 0.001 Hz. ]
+) <top_model_perfomance>
+
+We hypothesize that this effect arises from a mistake made during the first generation. Initially, the plan had been to optimize the dataset parameters at the same time as the model parameters, and Dragonn was set up to allow the optimiser to adjust the percentage of training examples that contained CBC signals, this defaulted to 50%. However, it was also envisioned that the network could add its own synthetic glitches to the dataset, in order to act as counterexamples, this was also set to inject simulated WNBs into 50% of injections by default, including ones that also contained a CBC. It was not realised that this had been left in this state until partway through the first generation, where it was rectified, however, due to time pressure, the first trials were not repeated. Considering the three most performant results were all in the first 50 values, this oversight likely seems the cause.
+
+The initial idea behind allowing the optimiser to inject simulated glitches was to allow it to act as an inoculant against particularly structured background noise, it would force the network to use the signal morphology because excess power could also come from glitches which would not correlate to a signal class. Due to the way the software was set up, these WNBs were also erroneously injected into the validation examples. In situations where a very high WNB is injected over the top of a signal it could obfuscate it even if that signal had quite a high SNR, this effect could be causing the reduction in ability at the higher SNRs. 
 
 == Discussion
 
-Our attempt to expand the range of the hyperparameter search was admirable but overambitious.
+Our attempt to expand the range of the hyperparameter search was admirable but overambitious. The time taken to perform such an expansive search was underestimated, and time pressure led to mistakes in the final optimisation run, and an insufficient number of generations to gain any real insight into the optimisation power of genetic algorithms with this degree of optimisation freedom.  
+
+Our mistakes did, however, lead us to an interesting discovery that could certainly warrant further investigation. There do not seem to be any existent investigations within the literature into such a method of using fake glitches to innoculate CBC detection models from structured background noise. The closest to such a method is perhaps the training proceedure used to train the models used in the MLy pipeline @MLy. MLy is a coherence detection pipeline so relies on the machine learning models being able to detect coherence between different detectors rather than specific signal morphologies. In order to train the model to distinguish between glitches and real signals, it is trained with counterexamples consisting both of coincident and incoherent glitches across multiple detectors and single detector glitches.
+
+Without a deeper investigation, it is difficult to know whether these glitches were indeed the source of improved performance. If this does turn out to be the case it is very exciting. We can perhaps remove the degradation at high SNRs by only injecting glitches into noise examples, it is unclear whether this would maintain the impressive performance at low SNRs and FARs, but it seems reasonable to think that it might. If this investigation has unveiled anything, it is that a wide search of the parameter space of both models and datasets could reveal unpredicted and useful results. 
 
 == Deployment in MLy <deployment-in-mly>
+
+Whilst this attempt to demonstrate genetic algorithms for optimizing CBC detection models has fallen short, they were used to generate models for the MLy pipeline, which consists of two models. One that is designed to detect coincidence @mly_coincidence, and a second model that is trained to detect coherence @mly_cohernece. Since these were both relatively unknown problems compared to the CBC search, not much was known about the ideal structure of artificial neural networks for these problems.
+
+Optimizing models by hand can be time-consuming and generates many opportunities to miss interesting areas of the parameter search space. A previous version of the Dragonn optimiser was used to develop the models that are today in use by MLy @MLy.
 
 #figure(
     image("mly_coincidence_diagram.png",  width: 75%), 
     caption: [MLy Coincidence Model developed with Dragonn @MLy. ]
 ) <mly_coincidence>
 
-
 #figure(
     image("mly_coherence_diagram.png",  width: 100%), 
     caption: [MLy Coherence Model developed with Dragonn @MLy. ]
 ) <mly_cohernece>
-
-
