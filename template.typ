@@ -40,8 +40,7 @@
 
   v(4.5fr)
 
-  text(1.2em, weight: 300, "Submitted for the degree of Doctor of Philosophy School of Physics and Astronomy
-Cardiff University")
+  text(1.2em, weight: 300, "Submitted for the degree of Doctor of Philosophy \nSchool of Physics and Astronomy \nCardiff University")
 
   v(0.3fr)
   text(1.0em, weight: 300, "2023-12-30")
