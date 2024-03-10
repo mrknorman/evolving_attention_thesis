@@ -1,8 +1,10 @@
+#set page(numbering: "1", number-align: center)
+
+#set math.equation(numbering: it => {[6.#it]})
+#counter(math.equation).update(0)
+
 = Skywarp: An Attention-Based model for the Detection of Gravitational-Wave Compact Binary Coalescences <skywarp-sec>
 
-#set math.equation(numbering: "(1)")
-
-\
 Convolutional Neural Networks (CNNs), though effective, have not been the stars of the machine-learning world for a few years now @architecture_review. Just as AlexNet @image_classification paved the way for the era of CNNs, and the surge to prominence of artificial neural networks as problem-solving solutions in the image domain, a similar step change occurred when the confluence of several different technologies led to the development of Large Language Models (LLMs) @LLM_ref, most notably of which in recent years has been the Generative Pretrained Transformer (GPT) @LLM_ref @attention_is_all_you_need of ChatGPT fame @chatgpt_ref, though it should be noted that this was far from the first LLM @LLM_ref. 
 
 Although CNNs were extremely successful at solving previously intractable problems in the image and audio domain @cnn_review @deep_learning_review, there were still many challenges remaining within Natural Language Processing (NLP), the area of study relating to the analysis of the text domain @LLM_ref. Text sequences differ from audio time series, in that rather than vectors of continuous numerical values, they consist of sequences of discrete tokens that encode externally defined values. There had been some work to attempt these problems with CNNs @text_classification and Recurrent Neural Networks (RNNs) @lstm_text_generation, but it was only through the application of multiple different insights including positional encoding @attention_is_all_you_need, attention mechanisms @attention_1, and skip connections @skip_connections, that the start of the avalanche of progress we have since seen in this area, began. The groundbreaking paper by Vaswani _et al._, @attention_is_all_you_need first introduced the transformer architecture to the world.
@@ -15,7 +17,7 @@ This section is organized into the following structure. First, we will give a br
 
 == Attend Closely <attention-method>
 
-The transformer is a deep learning model first described in Vaswani _et al._  @attention_is_all_you_need. This paper was an NLP paper, demonstrating a deep learning sequence-to-sequence model that could ingest text data and predict the token that was most likely to appear next in the sequence. By recursing inferences of the model, new sentences could be generated based on previous inputs. In some sense, our time series data is already closer to the required input of a deep learning model, however, it is easiest to explain attention by using NLP as an example. Therefore whilst describing attention we will use the text domain as example data before replacing the relevant vectors with gravitational-wave equivalents.
+The transformer is a deep learning model first described in Vaswani _et al._ @attention_is_all_you_need. This paper was an NLP paper, demonstrating a deep learning sequence-to-sequence model that could ingest text data and predict the token that was most likely to appear next in the sequence. By recursing inferences of the model, new sentences could be generated based on previous inputs. In some sense, our time series data is already closer to the required input of a deep learning model, however, it is easiest to explain attention by using NLP as an example. Therefore whilst describing attention we will use the text domain as example data before replacing the relevant vectors with gravitational-wave equivalents.
 
 === Tokenisation and Embedding
 

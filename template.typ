@@ -59,7 +59,7 @@
   align(center, text(strong("Michael R K Norman")))
 
   pagebreak()
-
+  
   include "preface.typ"
 
   // Display inline code in a small box
@@ -70,7 +70,7 @@
     outset: (y: 3pt),
     radius: 2pt,
   )
-  
+
   // Display block code in a larger block
   // with more padding.
   show raw.where(block: true): block.with(
@@ -89,7 +89,21 @@
     ]
     #v(25pt, weak: true)
   ]
+  
+  set heading(numbering: "1.1")
+  show heading.where(level: 1): it => [
+    #counter(figure).update(0)
+    #counter(figure.where(kind: table)).update(0)
+    #counter(figure.where(kind: image)).update(0)
+    #counter(figure.where(kind: block)).update(0)
+    #it
+  ]
 
+  set figure(numbering: it => {
+    [#counter(heading).display((..nums) => str(nums.pos().first())
+    ).#it]
+  })
+  
   // Main body.
   set par(justify: true)
 
@@ -172,5 +186,6 @@
   counter(page).update(0)
   set page(numbering: "a", number-align: center)
 
-  bibliography("bibliography.yml")
+  bibliography("bibliography.yml", style: "american-physics-society-urls.csl")
 }
+

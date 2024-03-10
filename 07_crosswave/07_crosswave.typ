@@ -1,5 +1,9 @@
+#set page(numbering: "1", number-align: center)
+
+#set math.equation(numbering: it => {[7.#it]})
+#counter(math.equation).update(0)
+
 = CrossWave: Cross-detector Attention for the Detection and Parameterisation of Overlapping Gravitational-Wave Compact Binary Coalescences <crosswave-sec>
-#set math.equation(numbering: "(1)")
 
 Thus far, we have focused our attention on perhaps one of the simpler problems in gravitational-wave data analysis, transient detection; the fact remains, that many, more complex, tasks are yet to be satisfactorily solved. One of the largest and most intriguing of these is Parameter Estimation (PE) @parameter_estimation_review. Whilst detection merely identifies the presence of a signal, and, in a modeled search, tells us the type of signal we have detected, there is invariably other scientifically valuable information that can be extracted from a signal. During PE, we attempt to predict, with error margins, several parameters about a gravitational-wave-producing system. Typically this is a CBC system, although PE could also be performed on burst events if they were to be detected @burst_pe. Fortunately, CBCs can be described quite well in as few as 14 parameters that contain information both about the internal state of a CBC system, known as intrinsic parameters, and its relation to us as observers, known as extrinsic parameters @intrinstic_params. Care should be taken to distinguish between the parameters being extracted by PE, and the parameters of a neural network model, as they are unrelated.
 
@@ -38,7 +42,7 @@ There are four types of methods we can apply to alleviate the issues with PE @ph
 
 + *Global-fit* methods attempt to fit both signals simultaneously. There have been several studies investigating this method by Antonelli _et al._ @global_fit, which attempts to apply it to both Einstein Telescope and LISA data, @hieherachical_overlapping_pe_2 which compares this method to hierarchical subtraction, and several studies focusing solely on LISA data @lisa_global_1 @lisa_global_2 @lisa_global_3. This has the advantage of being somewhat a natural extension of existing methods, with no special implementation other than an increased parameter count, but that can also be its greatest disadvantage. The total number of parameters can quickly become large when an overlap is considered, especially if multiple overlaps are present which will be expected to occur in ET and LISA data.
 
-+ *Local-fit* methods attempt to fit each signal independently and correct for the differences. The original proposal by Antonelli _et al._  @global_fit suggests using local fits to supplement a global-fit approach. This will reduce the number of parameters that you require your method to fit, but its efficacy is highly dependent on the proficiency of your correction method.
++ *Local-fit* methods attempt to fit each signal independently and correct for the differences. The original proposal by Antonelli _et al._ @global_fit suggests using local fits to supplement a global-fit approach. This will reduce the number of parameters that you require your method to fit, but its efficacy is highly dependent on the proficiency of your correction method.
 
 + *Hierarchical Subtraction* methods suggest first fitting to the most evident signal, then subtracting the signal inferred from your original fit and repeating this process for all anticipated signals @hiherachical_subtration_overlapping_pe @hieherachical_overlapping_pe_2. This method would be effective at subtracting multiple sets of parameters for overlapping signals, assuming that the overlap does not cause bias in the initial fit, which the previously mentioned studies have shown is not always a correct assumption @bias_study_one @bias_study_two.
 

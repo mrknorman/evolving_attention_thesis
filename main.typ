@@ -15,8 +15,6 @@
 // your document will look. Go ahead and replace it with
 // your own content!
 
-#set page(numbering: "1", number-align: center)
-
 #include "01_intro/01_introduction.typ"
 #pagebreak()
 #include "02_gravitation/02_gravitational_waves.typ"

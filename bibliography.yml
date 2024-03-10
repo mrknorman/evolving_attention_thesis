@@ -6227,3 +6227,31 @@ variational_autoencoder:
     type: proceedings
     title: Advances in Neural Information Processing Systems
     volume: 33
+
+what_is_spacetime:
+  type: article
+  title:  What Is Spacetime?
+  author: Musser, George
+  date: 2018-06
+  url: https://www.jstor.org/stable/27173507
+  pages: 55-58
+
+  parent: 
+    type: periodical
+    title: Scientific American
+    volume: 318
+    issue: 6
+    publisher: Scientific American, a division of Nature America, Inc.
+
+lorentz_relativity:
+  type: article
+  title: Electromagnetic phenomena in a system moving with any velocity smaller than that of light
+  author: Lorentz, Hendrik Antoon
+  date: 1904
+  page-range: 809–831
+  url: https://en.wikisource.org/wiki/Electromagnetic_phenomena
+
+  parent:
+    type: periodical
+    name: Proceedings of the Royal Netherlands Academy of Arts and Sciences
+    volume: 6
