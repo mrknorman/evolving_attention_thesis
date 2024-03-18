@@ -6255,3 +6255,71 @@ lorentz_relativity:
     type: periodical
     name: Proceedings of the Royal Netherlands Academy of Arts and Sciences
     volume: 6
+
+aproximant_usage:
+  type: article
+  title: "Modelling gravitational waves from precessing black-hole binaries: progress, challenges and prospects"
+  author: Hannam, Mark
+  date: 2014-08-14
+  page: 1767
+  url: https://doi.org/10.1007/s10714-014-1767-2
+
+  parent:
+    type: periodical
+    title: General Relativity and Gravitation
+    volume: 46
+    issue: 9
+
+
+eccentricity:
+  type: article
+  title: Signs of Eccentricity in Two Gravitational-wave Signals May Indicate a Subpopulation of Dynamically Assembled Binary Black Holes
+  author:
+    - Isobel Romero-Shaw 
+    - Paul D. Lasky 
+    - Eric Thrane
+  url: https://doi.org/10.3847/2041-8213/ac3138
+  date: 2021-11
+
+  parent:
+    type: periodical
+    title: The American Astronomical Society
+    volume: 921
+    number: 2
+
+higher_modes:
+  type: article
+  title: Higher order gravitational-wave modes with likelihood reweighting
+  author: 
+    - Payne, Ethan 
+    - Talbot, Colm 
+    - Thrane, Eric
+  pages: 123017
+  url: https://doi.org/10.3847/2041-8213/ac3138
+  
+  parent:
+    type: periodical
+    title: Physical Review D
+    volume: 100
+    issue: 12 
+  
+precession:
+  type: article
+  title: Identifying when precession can be measured in gravitational waveforms
+  author: 
+    - Green, Rhys 
+    - Hoy, Charlie 
+    - Fairhurst, Stephen 
+    - Hannam, Mark 
+    - Pannarale, Francesco 
+    - Thomas, Cory
+  date: 2021-06
+  
+parent:
+  type: periodical
+  title: Physical Reveiw D
+  volume: 103
+  issue: 12
+  url: https://doi.org/10.1103/PhysRevD.103.124023
+  publisher: American Physical Society
+

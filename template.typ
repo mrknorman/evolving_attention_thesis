@@ -181,8 +181,6 @@
 
   body
 
-  //[#recursive_count(body)]
-
   counter(page).update(0)
   set page(numbering: "a", number-align: center)
 
