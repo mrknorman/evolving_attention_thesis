@@ -21,11 +21,17 @@ Gravity is one of the four fundamental forces of nature, the other three being t
 
 In the beginning, men threw rocks at each other and were entirely unsurprised when they hit the floor. Over time, people became more and more confused as to why this was the case. Many philosophers proposed many reasons why one direction should be preferred over all others when it came to the unrestrained motion of an object. For a long time, there was much confusion about the relationship between mass, density, buoyancy, and the nature and position of various celestial objects. Sometime after we had decided that the Earth was not, in fact, at the centre of the universe and that objects fell at the same speed irrespective of their densities, came the time of Sir Issac Newton, and along with him arrived what many would argue was one of the most influential theories in the history of physics.
 
-The idea of gravity as a concept had been around for many thousands of years by this point @gravity_history, but what Newton did was formalise the rules by which objects behaved under the action of gravity. Newton's universal law of gravitation states that all massive objects in the universe attract all others @principia_mathematica, acting upon each other, much to Newton's displeasure, whether surrounded by a medium or not. Gravity appeared to ignore all boundaries and was described in a simple formula that seemed to correctly predict everything from the motion of the planets (mostly) to the fall of an apple
+The idea of gravity as a concept had been around for many thousands of years by this point @gravity_history, but what Newton did was formalise the rules by which objects behaved under the action of gravity. Newton's universal law of gravitation states that all massive objects in the universe attract all others @principia_mathematica, acting upon each other whether surrounded by a medium or not. Gravity appeared to ignore all boundaries and was described in a simple formula that seemed to correctly predict everything from the motion of the planets (mostly) to the fall of an apple
 
-$ F = (G m_1 m_2) / r^2 . $ <newtons-law-of-universal-gravitation>
+$ F = G frac(m_1 m_2, Delta r^2). $ <newtons-law-of-universal-gravitation>
 
-where $F$ is the force along the direction between the two masses, $G$ is the gravitational constant equal to #box($6.67430(15) times 10^(−11)$ + h(1.5pt) + $m^3 "kg"^(-1) s^(-2)$) @gravitational_constant, $m_1$ is the mass of the first object, $m_2$ is the mass of the second object, and $r$ is the distance between the two objects. Newton's law of universal gravitation describes the force every massive object in the universe experiences because of every other --- an equal and opposite attraction proportional to the product of their two masses @principia_mathematica; see @newtons_law. Though we now know this equation to be an imperfect description of reality, it still holds accurate enough for many applications to this day.
+where $F$ is the scalar force along the direction between the two masses, $G$ is the gravitational constant equal to #box($6.67430(15) times 10^(−11)$ + h(1.5pt) + $m^3 "kg"^(-1) s^(-2)$) @gravitational_constant, $m_1$ is the mass of the first object, $m_2$ is the mass of the second object, and $Delta r$ is the scalar distance between the two objects. In vector form, this becomes,
+
+$ accent(F, arrow)_(2 arrow 1) =  - G frac(m_1 m_2 , |accent(Delta r, arrow)_(2 arrow 1)|^2) accent(accent(Delta r, hat), arrow)_(2 arrow 1) = - G frac( m_1 m_2, |accent(Delta r, arrow)_(2 arrow 1)|^3) accent(Delta r, arrow)_(2 arrow 1), $ <newtons-law-of-universal-gravitation-vec>
+
+where $F_(2 arrow 1)$ is the force vector exerted on body 2 by the gravitational effect of body 1 and $accent(Delta r, arrow)_(2 arrow 1)$ is the displacement vector between bodies 1 and 2, and $accent(accent(Delta r, hat), arrow)_(2 arrow 1)$ is the unit direction vector between bodies 1 and 2.
+
+Newton's law of universal gravitation describes the force every massive object in the universe experiences because of every other --- an equal and opposite attraction proportional to the product of their two masses @principia_mathematica; see @newtons_law. Though we now know this equation to be an imperfect description of reality, it still holds accurate enough for many applications to this day.
 
 #figure(
   image("newtons_law.png", width: 30%),
@@ -59,7 +65,7 @@ We can visualize the problem in a thought experiment, as Einstein often liked to
 
 A second observer stands on a nearby platform a looks into the moving train as it passes (it has big windows) @light_clock. As they watch the light beam bounce between the two mirrors, they see that, from their reference frame, the beam must take a diagonal path between the mirrors as the train moves forward. This diagonal path is longer than the vertical path observed in the carriage's reference frame. If we take special relativity to be true, the speed of light must be constant for both observers. However, in one reference frame, the light must travel a greater distance than in the other. It cannot be the case that the time taken for the photon to travel between the mirrors is the same for the observer on the carriage and the observer on the platform --- their measurements of time must differ in order to preserve the supremacy of the speed of light. The observer on the platform would indeed see time passing on the train more slowly than time on the apparently "stationary" platform around them --- this effect is known as *time dilation*, and it has since been experimentally verified @time_dilation_ref. We can quantify this effect using
 
-$ Delta t' = (Delta t) / sqrt(1 - v^2/c^2) = gamma(v) Delta t, $
+$ Delta t' = (Delta t) / sqrt(1 - v^2/c^2) = gamma(v) Delta t, $ <time-dilation-eq>
 
 where $Delta t'$ is the measured duration of an event (the time it takes light to move between the two mirrors) in a secondary inertial reference frame (the train carriage) which has a relative velocity, $v$, compared with the inertial reference frame of the current observer (the platform), $Delta t$ is the measured duration of the same event when measured in the secondary inertial reference frame (the train carriage), $c$ is the speed of light in a vaccum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), and $gamma$ is the Lorentz factor given by
 
@@ -80,7 +86,7 @@ An illustration of this effect can be seen in @light_clock_diagram.
 
 Similarly, if we orient the mirrors horizontally, so that the light travels along the length of the carriage, a different relativistic effect becomes apparent @light_clock. The observer on the platform, observing the light's path as longer due to the train's motion, must reconcile this with the constant speed of light. This reconciliation leads to the conclusion that the train, and the distance between the mirrors, are shorter in the direction of motion from the platform observer's perspective. This phenomenon, where objects in motion are contracted in the direction of their movement, is known as *length contraction* and is described by
 
-$ L' = L sqrt(1 - v^2/c^2) = L / gamma(v), $
+$ L' = L sqrt(1 - v^2/c^2) = L / gamma(v), $ <length-contraction-eq>
 
 where $L'$ is the length of an object when measured from an inertial reference frame that has a velocity, $v$, relative to the inertial frame of the measured object, L is the "proper length" of the object when its length is measured in the object's inertial frame, $c$ is the speed of light in a vacuum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), and $gamma$ is the Lorentz factor given by @lorentz-factor.
 
@@ -88,11 +94,68 @@ Together, length contraction and time dilation shatter Newton's notions of absol
 
 As alluded to, special relativity only deals with inertial reference frames, hence it is a "special" case of a larger, cohesive theory --- that theory, developed by Einstein in the following years, is general relativity @gravitation. 
 
-=== General Relativity and Spacetime <general-relativity-sec>
+=== Minkowski Spacetime <minkowski-sec>
 
 Although the notions of independent and absolute time and space were dislodged, it is still possible to describe the new universe illuminated by special relativity as an all-pervasive 4D geometry inside which the universe sits. Unlike Newton's world, however, space and time are inseparably linked into one joint four-dimensional continuum wherein motion can affect the relative measurements of time and space. We call this geometry *spacetime*. Time intervals between events are not fixed, and observers don't necessarily agree on their order. Distances must be described by a combination of temporal and spatial coordinates, and because all reference frames are equal, all coordinate systems (ways of assigning reference values to points in spacetime) are also equally valid.
 
-Special relativity deals with flat spacetime. This type of spacetime is known as *Minkowski space* @gravitation; see @flat for an illustration. Although it is non-Euclidian, and its geometry can sometimes be counterintuitive to people used to travelling at pedestrian velocities, it is still isotropic and homogeneous.
+Special relativity deals with flat spacetime. This type of spacetime is known as *Minkowski space* @gravitation; see @flat for an illustration. Although it is non-Euclidian, and its geometry can sometimes be counterintuitive to people used to travelling at pedestrian velocities, it is still isotropic and homogeneous. 
+
+We can fully describe a given geometry by constructing a metric that can return the distance between any two points in that geometry. In standard 3D Euclidean geometry, which is the most instinctively familiar from everyday life, a point can be represented by a 3-vector comprised of $x$, $y$, and $z$ components
+
+$ accent(r, arrow) = [x, y, z] $<euclidean_point>. 
+
+The scalar distance between two points, $Delta r$, described by @euclidean_point is given by the Euclidean distance formula --- the expansion of Pythagoras' theorem from two dimensions into three,
+
+$ Delta r^2 = ||accent(Delta r, arrow)||^2 = Delta x^2 + Delta y^2 + Delta z^2 $ <euclidean_formula>
+
+where $Delta r$ is the scalar distance between two points separaated by $Delta x$, $Delta y$, and $Delta z$ in the $x$, $y$, and $z$ dimensions respectively, and $||accent(Delta r, arrow)||$ is the magnitude of the displacement vector, $accent(Delta r, arrow) = [Delta x, Delta y, Delta z]$, between the two points. This relationship assumes a flat geometry and does not consider the role that time plays in special relativity. In the case of Euclidean geometry, the metric we have omitted is the $3 times 3$ Euclidean metric
+
+$ [g] = mat(
+  1, 0, 0;
+  0, 1, 0;
+  0, 0, 1;
+). $ <identity_metric>
+
+We can use @identity_metric in @euclidean_formula to return a more complete equation, which can be adjusted for different geometries,
+
+$ Delta r^2 = ||accent(Delta r, arrow)||^2 = accent(Delta r, arrow)^T [g] accent(Delta r, arrow) = mat(Delta x, Delta y, Delta z;) mat(
+  1, 0, 0;
+  0, 1, 0;
+  0, 0, 1;
+) mat(
+  Delta x;
+  Delta y;
+  Delta z;
+) = Delta x^2 + Delta y^2 + Delta z^2 . $
+
+In this case, the inclusion of this metric does not change the calculation of the scalar distance between two points, however, as we have seen in @special-relativity-sec, in order to represent the spacetime described by special relativity, we must include the time dimension, $t$, which does not behave symmetrically with the others. The Minkowski metric allows us to explore beyond standard 3D Euclidean geometry by including a 4#super("th") dimension, time
+
+$ [eta] = mat(
+  -1, 0, 0, 0;
+  0, 1, 0, 0;
+  0, 0, 1, 0;
+  0, 0, 0, 1;
+). $ <minkowski_metric>
+
+Using @minkowski_metric, which describes a flat spacetime, we can use this metric to compute the distance between two events in flat Minkowski spacetime, which can be represented as four-positions (four-vectors), $accent(R, arrow)$, of the following form:
+
+$ accent(R, arrow) = (c t, accent(r, arrow)) = (c t, x, y, z) $ <four-vector>
+
+where $accent(R, arrow)$, is the four-position of an event in spacetime, $c$ is the speed of light in a vacuum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), $t$ is the time component of the four-positions, and $accent(r, arrow)$ is a position in 3D Euclidean space. We set $R_0 = c t$ rather than just $t$ to ensure that each element of the four-position is in the same units. 
+
+From @minkowski_metric and @four-vector, it follows that the displacement four-vector between two events in Minkowski spacetime, $accent(Delta R, arrow)$, can be computed with 
+
+$ Delta R^2 = accent(Delta R, arrow)^T [g] accent(Delta R, arrow) = - c^2 Delta t^2 + Delta x^2 + Delta y^2 + Delta z^2 . $ <spacetime-interval>
+
+$Delta R$, known as the spacetime interval, is invariant and has a value that all observers agree on, independent of the reference frame. Using @spacetime-interval, we can describe the relationship of events and interactions in a flat Minkowski spacetime. We can show that this agrees with @time-dilation-eq and @length-contraction-eq described in @special-relativity-sec.
+
+If imagine two spacetime events occurring at separate four-positions for an observer in an inertial reference frame: $accent(R, arrow)_1 = [t, 0, 0, 0]$, and $accent(R, arrow)_2 = [t', 0, 0, 0]$. In this scenario @spacetime-interval becomes
+
+$ Delta R_(1 arrow 2)^2 = - c^2 Delta t_(1 arrow 2)^2 $
+
+
+
+=== General Relativity <general-relativity-sec>
 
 Einstein realized that by introducing deformations to the otherwise flat Minkowski spacetime described by special relativity you could induce accelerations in particles within this spacetime without imparting any forces on the particles @gravitation. Rather than being attracted by some gravitational "force", the particles continue to behave as they always had, following their natural paths or *geodesics*. A geodesic is the shortest path between two points in a given geometry; in Euclidian geometry, all geodesics are straight lines, in other geometries however, this is not necessarily the case. Thus, depending on the shape of the spacetime they exist within, these particles can accelerate with respect to each other whilst remaining within inertial frames. This is the reason that it is often stated that gravity is "not a force" --- gravitational attraction is a result of the geometry of the spacetime in which objects exist, rather than because of any fundamental force in the traditional understanding of a force.
 
