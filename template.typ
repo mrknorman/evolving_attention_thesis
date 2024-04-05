@@ -1,6 +1,8 @@
 // The project function defines how your document looks.
 // It takes your content and some metadata and formats it.
 // Go ahead and customize it to your liking!
+
+
 #let project(title: "", subtitle: "", authors: (), logo: none, body) = {
   // Set the document's basic properties.
   set document(author: authors, title: title)
@@ -12,7 +14,12 @@
   // Set body font family.
   //set text(font: body-font, lang: "en")
   //show heading: set text(font: sans-font)
+
   set heading(numbering: "1.1.1")
+  show heading: it => {
+    it
+    v(0.3em)
+  }
 
   // Title page.
   // The page can contain a logo if you pass one with `logo: "logo.png"`.

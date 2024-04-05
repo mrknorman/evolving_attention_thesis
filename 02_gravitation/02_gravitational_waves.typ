@@ -2,6 +2,9 @@
 
 #set math.equation(numbering: it => {[2.#it]})
 #counter(math.equation).update(0)
+// #set math.mat(delim: "[")
+
+#import "../notation.typ": vectorn, uvectorn, dvectorn, udvectorn, matrixn
 
 = Gravitational Waves <gravitational-waves-sec>
 
@@ -27,9 +30,9 @@ $ F = G frac(m_1 m_2, Delta r^2). $ <newtons-law-of-universal-gravitation>
 
 where $F$ is the scalar force along the direction between the two masses, $G$ is the gravitational constant equal to #box($6.67430(15) times 10^(−11)$ + h(1.5pt) + $m^3 "kg"^(-1) s^(-2)$) @gravitational_constant, $m_1$ is the mass of the first object, $m_2$ is the mass of the second object, and $Delta r$ is the scalar distance between the two objects. In vector form, this becomes,
 
-$ accent(F, arrow)_(2 arrow 1) =  - G frac(m_1 m_2 , |accent(Delta r, arrow)_(2 arrow 1)|^2) accent(accent(Delta r, hat), arrow)_(2 arrow 1) = - G frac( m_1 m_2, |accent(Delta r, arrow)_(2 arrow 1)|^3) accent(Delta r, arrow)_(2 arrow 1), $ <newtons-law-of-universal-gravitation-vec>
+$ vectorn(F) = - G frac(m_1 m_2, |dvectorn(r)|^2) udvectorn("r") = - G frac( m_1 m_2, |dvectorn(r)|^3) dvectorn(r), $ <newtons-law-of-universal-gravitation-vec>
 
-where $F_(2 arrow 1)$ is the force vector exerted on body 2 by the gravitational effect of body 1 and $accent(Delta r, arrow)_(2 arrow 1)$ is the displacement vector between bodies 1 and 2, and $accent(accent(Delta r, hat), arrow)_(2 arrow 1)$ is the unit direction vector between bodies 1 and 2.
+where $vectorn(F)$ is the force vector exerted on body 2 by the gravitational effect of body 1, $dvectorn(r)$ is the displacement vector between bodies 1 and 2, and $udvectorn(r)$ is the unit direction vector between bodies 1 and 2.
 
 Newton's law of universal gravitation describes the force every massive object in the universe experiences because of every other --- an equal and opposite attraction proportional to the product of their two masses @principia_mathematica; see @newtons_law. Though we now know this equation to be an imperfect description of reality, it still holds accurate enough for many applications to this day.
 
@@ -92,33 +95,48 @@ where $L'$ is the length of an object when measured from an inertial reference f
 
 Together, length contraction and time dilation shatter Newton's notions of absolute time and space @special_relativity. It should be remembered, however, that neither the carriage observer nor the platform observer can be said to be in the true stationary reference frame. The observer standing in the station is in the same inertial reference frame as the rest of the Earth, but that doesn't make it any more valid than any other. If the observer at the station had a similar setup of mirrors and light beams, and the train occupant looked out at them, the train occupant would observe the same phenomenon. To the passenger, time outside the train appears slowed, and the station shorter than it ought to be. This seems to be a paradox, often known as the twin paradox. What happens if the train later stopped and the two observers were to meet? Who would have experienced more time? It is a common misconception that acceleration must be introduced in order to reconcile the two clocks, however, even staying within the regime of special relativity, we can observe an asymmetry between the two observers @twin_paradox. In order for the two observers to meet in a shared reference frame, one of the observers, in this case, the train passenger, must change between reference frames, even if that change is instantaneous. This asymmetry allows us to solve the paradox, but the explanation is a little complex so will not be discussed here.
 
-As alluded to, special relativity only deals with inertial reference frames, hence it is a "special" case of a larger, cohesive theory --- that theory, developed by Einstein in the following years, is general relativity @gravitation. 
+In order to transfer values between two coordinate frames we may use what is referred to as a Lorentz transform, the simplest of which involves moving from the coordinates of one inertial reference frame to another moving at a velocity, $v$, relative to the first. We can see that from @time-dilation-eq and @length-contraction-eq, this transform is given by
+
+$ t' = gamma(t - frac(v x, c^2) ) , $ <lorentz_t_eq>
+
+$ x' = gamma(x - v t), $ <lorentz_x_eq>
+
+$ y' = y, $
+
+and
+
+$ z' = z . $
+
+Noting that as expected, there are no changes in the $y$ and $z$ direction.
+
+Though the world presented by special relativity may at first seem counter-intuitive and hard to belive, there have been inumerable experiments verifying its predictions, most famously, the Global Positioning System (GPS) network of satalites, would be unable to operate without accouting for the time-dilation induced by their relative velocity @gps_relativity, due to the exteremely precise time mesurements required. 
+
 
 === Minkowski Spacetime <minkowski-sec>
 
-Although the notions of independent and absolute time and space were dislodged, it is still possible to describe the new universe illuminated by special relativity as an all-pervasive 4D geometry inside which the universe sits. Unlike Newton's world, however, space and time are inseparably linked into one joint four-dimensional continuum wherein motion can affect the relative measurements of time and space. We call this geometry *spacetime*. Time intervals between events are not fixed, and observers don't necessarily agree on their order. Distances must be described by a combination of temporal and spatial coordinates, and because all reference frames are equal, all coordinate systems (ways of assigning reference values to points in spacetime) are also equally valid.
+Although the notions of independent and absolute time and space were dislodged, it is still possible to describe the new universe illuminated by special relativity as an all-pervasive 4D geometry inside which the universe sits. Unlike Newton's world, however, space and time are inseparably linked into one joint four-dimensional continuum wherein motion can affect the relative measurements of time and space. We call this geometry *spacetime*. Time intervals between events are not fixed, and observers don't necessarily agree on their order. Distances must be described by a combination of temporal and spatial coordinates, and because all inertial reference frames are equal, all inertial coordinate systems (ways of assigning reference values to points in spacetime) are also equally valid.
 
-Special relativity deals with flat spacetime. This type of spacetime is known as *Minkowski space* @gravitation; see @flat for an illustration. Although it is non-Euclidian, and its geometry can sometimes be counterintuitive to people used to travelling at pedestrian velocities, it is still isotropic and homogeneous. 
+Special relativity deals with flat spacetime. This type of spacetime is known as *Minkowski space* @gravitation; see @flat for an illustration. Although it is non-Euclidian, and its geometry can sometimes be counterintuitive to people used to travelling at pedestrian velocities, it is still isotropic and homogeneous; it looks identical, no matter where in it you are, or what velocity you are traveling at relative to any other point or object.
 
-We can fully describe a given geometry by constructing a metric that can return the distance between any two points in that geometry. In standard 3D Euclidean geometry, which is the most instinctively familiar from everyday life, a point can be represented by a 3-vector comprised of $x$, $y$, and $z$ components
+We can fully describe a given geometry by constructing a metric that can return the distance between any two points in that geometry. In standard 3D Euclidean geometry, which is the most instinctively familiar from everyday life, a point can be represented by a three-vector comprised of $x$, $y$, and $z$ components,
 
-$ accent(r, arrow) = [x, y, z] $<euclidean_point>. 
+$ vectorn(r) = mat(x; y; z;) . $<euclidean_point>
 
-The scalar distance between two points, $Delta r$, described by @euclidean_point is given by the Euclidean distance formula --- the expansion of Pythagoras' theorem from two dimensions into three,
+The scalar distance, $Delta r$, between two points each described by @euclidean_point is given by the Euclidean distance formula --- the expansion of Pythagoras' theorem from two dimensions into three,
 
-$ Delta r^2 = ||accent(Delta r, arrow)||^2 = Delta x^2 + Delta y^2 + Delta z^2 $ <euclidean_formula>
+$ Delta r^2 = ||dvectorn(r)||^2 = Delta x^2 + Delta y^2 + Delta z^2 $ <euclidean_formula>
 
-where $Delta r$ is the scalar distance between two points separaated by $Delta x$, $Delta y$, and $Delta z$ in the $x$, $y$, and $z$ dimensions respectively, and $||accent(Delta r, arrow)||$ is the magnitude of the displacement vector, $accent(Delta r, arrow) = [Delta x, Delta y, Delta z]$, between the two points. This relationship assumes a flat geometry and does not consider the role that time plays in special relativity. In the case of Euclidean geometry, the metric we have omitted is the $3 times 3$ Euclidean metric
+where $Delta r$ is the scalar distance between two points separated by $Delta x$, $Delta y$, and $Delta z$ in the $x$, $y$, and $z$ dimensions respectively, and $dvectorn(r)$ is the displacement vector between the two points. This relationship assumes a flat geometry and does not consider the role that time plays in special relativity. In the case of Euclidean geometry, the metric that we have omitted in @euclidean_formula is the $3 times 3$ Euclidean metric
 
-$ [g] = mat(
+$ matrixn(g) = mat(
   1, 0, 0;
   0, 1, 0;
   0, 0, 1;
 ). $ <identity_metric>
 
-We can use @identity_metric in @euclidean_formula to return a more complete equation, which can be adjusted for different geometries,
+We can use @identity_metric and @euclidean_formula to construct a more complete expression, which can be adjusted for different geometries,
 
-$ Delta r^2 = ||accent(Delta r, arrow)||^2 = accent(Delta r, arrow)^T [g] accent(Delta r, arrow) = mat(Delta x, Delta y, Delta z;) mat(
+$ Delta r^2 = ||dvectorn(r)||^2 = dvectorn(r)^bold(T) matrixn(g) dvectorn(r) = mat(Delta x, Delta y, Delta z;) mat(
   1, 0, 0;
   0, 1, 0;
   0, 0, 1;
@@ -130,36 +148,110 @@ $ Delta r^2 = ||accent(Delta r, arrow)||^2 = accent(Delta r, arrow)^T [g] accent
 
 In this case, the inclusion of this metric does not change the calculation of the scalar distance between two points, however, as we have seen in @special-relativity-sec, in order to represent the spacetime described by special relativity, we must include the time dimension, $t$, which does not behave symmetrically with the others. The Minkowski metric allows us to explore beyond standard 3D Euclidean geometry by including a 4#super("th") dimension, time
 
-$ [eta] = mat(
+$ matrixn(eta) = mat(
   -1, 0, 0, 0;
   0, 1, 0, 0;
   0, 0, 1, 0;
   0, 0, 0, 1;
 ). $ <minkowski_metric>
 
-Using @minkowski_metric, which describes a flat spacetime, we can use this metric to compute the distance between two events in flat Minkowski spacetime, which can be represented as four-positions (four-vectors), $accent(R, arrow)$, of the following form:
+Using @minkowski_metric, which describes a flat spacetime, we can use this metric to compute the interval between two events in flat Minkowski space, whose positions can be described as four-positions (four-vectors), #vectorn("s"), of the following form:
 
-$ accent(R, arrow) = (c t, accent(r, arrow)) = (c t, x, y, z) $ <four-vector>
+$ vectorn(s) = mat(c t; vectorn(r);) = mat(c t; x; y; z;) $ <four-vector>
 
-where $accent(R, arrow)$, is the four-position of an event in spacetime, $c$ is the speed of light in a vacuum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), $t$ is the time component of the four-positions, and $accent(r, arrow)$ is a position in 3D Euclidean space. We set $R_0 = c t$ rather than just $t$ to ensure that each element of the four-position is in the same units. 
+where $vectorn(s)$, is the four-position of an event in spacetime, $c$ is the speed of light in a vacuum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), $t$ is the time component of the four-position, and #vectorn("r") is a position in 3D Euclidean space. We set $s_0 = c t$ rather than just $t$ to ensure that each element of the four-position is in the same units. 
 
-From @minkowski_metric and @four-vector, it follows that the displacement four-vector between two events in Minkowski spacetime, $accent(Delta R, arrow)$, can be computed with 
+From @minkowski_metric and @four-vector, it follows that the displacement four-vector between two events in Minkowski spacetime, $dvectorn(s)$, can be computed with 
 
-$ Delta R^2 = accent(Delta R, arrow)^T [g] accent(Delta R, arrow) = - c^2 Delta t^2 + Delta x^2 + Delta y^2 + Delta z^2 . $ <spacetime-interval>
+$ Delta s^2 = dvectorn(s)^bold(T) matrixn(eta) dvectorn(s)= - c^2 Delta t^2 + Delta x^2 + Delta y^2 + Delta z^2 . $ <spacetime-interval>
 
-$Delta R$, known as the spacetime interval, is invariant and has a value that all observers agree on, independent of the reference frame. Using @spacetime-interval, we can describe the relationship of events and interactions in a flat Minkowski spacetime. We can show that this agrees with @time-dilation-eq and @length-contraction-eq described in @special-relativity-sec.
+Even though two observers may disagree on the individual values of the elements of the vector describing the four-displacement, #dvectorn("s"), between the two events, $Delta s$, known as the spacetime interval, is invariant and has a value that all observers will agree on, independent of their reference frame. Using @spacetime-interval, we can describe the relationship of events and interactions in a flat Minkowski spacetime.
 
-If imagine two spacetime events occurring at separate four-positions for an observer in an inertial reference frame: $accent(R, arrow)_1 = [t, 0, 0, 0]$, and $accent(R, arrow)_2 = [t', 0, 0, 0]$. In this scenario @spacetime-interval becomes
+We can show that the Minkowski metric is consistent with length contraction and time dilation, described by @time-dilation-eq and @length-contraction-eq respectively, by showing that the spacetime interval, $Delta s$, is equal in two different coordinate frames that disagree on the values of $Delta t$ and $Delta x$.
 
-$ Delta R_(1 arrow 2)^2 = - c^2 Delta t_(1 arrow 2)^2 $
+In a second, boosted coordinate frame moving with a velocity $v$ (in the x-axis alone) relative to our initial frame, @spacetime-interval becomes
 
+$ Delta s^2 = - c^2 Delta t'^2 + Delta x'^2 + Delta y'^2 + Delta z'^2 . $ <spacetime-interval-shifted>
 
+We can substitute @lorentz_t_eq and @lorentz_x_eq into @spacetime-interval-shifted, and show that $Delta s^2$ remains the same. Substituting we get 
+
+$ Delta s^2 = - c^2 gamma ^2 ( Delta t - frac(v Delta x, c^2))^2 + gamma^2 (Delta x - v Delta t)^2 Delta y^2 + Delta z^2 . $
+
+We can also substitute our definition for the Lorentz factor, $gamma$, given by @lorentz-factor to get 
+
+$ Delta s^2 = - c^2 (1 / sqrt(1 - v^2/c^2))^2 ( Delta t - frac(v Delta x, c^2))^2 + (1 / sqrt(1 - v^2/c^2))^2 (Delta x - v Delta t)^2 + Delta y^2 + Delta z^2 . $
+
+Expanding the squares gives us
+
+$ Delta s^2 = frac( - c^2 ( Delta t - frac(v Delta x, c^2)) ( Delta t - frac(v Delta x, c^2)) , 1 - v^2/c^2) + frac((Delta x - v Delta t)(Delta x - v Delta t), 1 - v^2/c^2) + Delta y^2 + Delta z^2 . $
+
+We can then multiply out the brackets to get
+
+$ Delta s^2 = frac( - c^2 Delta t^2 + 2 c^2 Delta t frac( v Delta x, c^2) - c^2 frac(v^2 Delta x^2, c^4), 1 - v^2/c^2) + frac(Delta x^2 - 2 v Delta t Delta x + v^2 Delta t^2, 1 - v^2/c^2) + Delta y^2 + Delta z^2 , $
+
+and we can cancel this further to get
+
+$ Delta s^2 = frac( - c^2 Delta t^2 + 2 v Delta t Delta x - frac(v^2 Delta x^2, c^2), 1 - v^2/c^2) + frac(Delta x^2 - 2 v Delta t Delta x + v^2 Delta t^2, 1 - v^2/c^2) + Delta y^2 + Delta z^2 . $
+
+Next, we can merge the first two terms under their common denominator, $1 - v^2/c^2$, to get 
+
+$ Delta s^2 = frac( - c^2 Delta t^2 + 2 v Delta t Delta x - frac(v^2 Delta x^2, c^2) + Delta x^2 - 2 v Delta t Delta x + v^2 Delta t^2, 1 - v^2/c^2) + Delta y^2 + Delta z^2 . $
+
+This reduces to
+
+$ Delta s^2 = frac( - c^2 Delta t^2 - frac(v^2 Delta x^2, c^2) + Delta x^2 + v^2 Delta t^2, 1 - v^2/c^2) + Delta y^2 + Delta z^2 . $
+
+We can then rewrite the numerator in terms of $Delta t^2$ and $Delta x^2$, since we are aiming to reduce it to this form. This gives us
+
+$ Delta s^2 = frac( -(c^2 + v^2) Delta t^2  + (1 - frac(v^2, c^2)) Delta x^2, 1 - v^2/c^2) + Delta y^2 + Delta z^2 . $
+
+We can then split the common demoniator into two fractions, giving us
+
+$ Delta s^2 = frac( -(c^2 + v^2) Delta t^2, 1 - v^2/c^2) + frac((1 - frac(v^2, c^2)) Delta x^2, 1 - v^2/c^2) + Delta y^2 + Delta z^2 . $
+
+The coefficients in the term in $Delta x^2$ cancel to leave us with only $Delta x^2$, and we can divide the coefficients of the $Delta t^2$ term by a factor of $c^2$ to give us
+
+$ Delta s^2 = frac( - c^2 (1+ v^2 / c^2 ) Delta t^2, 1 - v^2/c^2) + Delta x^2 + Delta y^2 + Delta z^2 . $
+
+Which cancels and returns us to our original expression @spacetime-interval,
+
+$ Delta s^2 = - c^2 Delta t^2 + Delta x^2 + Delta y^2 + Delta z^2 . $
+
+This shows, that after performing a Lorentz transform by a constant velocity, $v$, in the $x$-axis, the spacetime interval, $ Delta s$, remains constant, i.e,
+
+$ Delta s^2 = - c^2 Delta t^2 + Delta x^2 + Delta y^2 + Delta z^2 =  - c^2 Delta t'^2 + Delta x'^2 + Delta y'^2 + Delta z'^2 . $
+
+This demonstrates that performing a Lorentz transform between two inertial reference frames is consistent with the formulation of Minkowski spacetime described by @minkowski_metric. 
+
+As alluded to, special relativity, and Minkowski Spacetime, only deal with inertial reference frames, hence it is a "special" case of a larger, cohesive theory --- that theory, developed by Einstein in the following years, is general relativity @gravitation. 
+
+When dealing with the gravitational effects of spacetime, we are often considering point-like particles or spherical masses; for this reason, it is very often convenient to work with spherical coordinates with the basis $t$, $r$, $theta$, and $phi$ rather than the Euclidean coordinate system we have been using so far. In spherical coordinates @spacetime-interval becomes
+
+$ Delta s^2 = -c^2 Delta t^2 + Delta r^2 + r^2 Delta Omega^2 $ <minkowski-interval-spherical>
+
+where
+
+$ Delta Omega^2 = Delta theta^2 + sin^2 theta Delta phi^2 $
+
+is the standard metric used on the surface of a two-sphere --- a 2D spherical surface embedded in a 3D space. @minkowski-interval-spherical will become a valuable reference when we move to examine curved spacetime under the influence of gravity.
 
 === General Relativity <general-relativity-sec>
 
-Einstein realized that by introducing deformations to the otherwise flat Minkowski spacetime described by special relativity you could induce accelerations in particles within this spacetime without imparting any forces on the particles @gravitation. Rather than being attracted by some gravitational "force", the particles continue to behave as they always had, following their natural paths or *geodesics*. A geodesic is the shortest path between two points in a given geometry; in Euclidian geometry, all geodesics are straight lines, in other geometries however, this is not necessarily the case. Thus, depending on the shape of the spacetime they exist within, these particles can accelerate with respect to each other whilst remaining within inertial frames. This is the reason that it is often stated that gravity is "not a force" --- gravitational attraction is a result of the geometry of the spacetime in which objects exist, rather than because of any fundamental force in the traditional understanding of a force.
+Einstein realized that by introducing deformations to the otherwise flat Minkowski spacetime described by special relativity you could induce accelerations in particles within this spacetime without invoking any forces @gravitation. Rather than being attracted by some gravitational "force", the particles continue to behave as they always had, following their natural paths or *geodesics*. A geodesic is the shortest path between two points in a given geometry; in Euclidian geometry, all geodesics are straight lines, in other geometries however, this is not necessarily the case. Thus, depending on the shape of the spacetime they exist within, particles can accelerate with respect to each other whilst remaining within inertial frames. This is the reason that it is often stated that gravity is "not a force" --- gravitational attraction is a result of the geometry of the spacetime in which objects exist, rather than because of any fundamental attraction caused by something with the traditional properties of a force. 
 
-It should be noted that although under general relativity gravity is not described in the same way as the other fundamental forces, it is still often useful and valid to describe it as such. We don't have a unifying theory of all of the forces, so they may end up being more similar than current theories describe.
+It should be noted that although under general relativity gravity is not described in the same way as the other fundamental forces, it is still often useful and valid to describe it as such. We don't yet have a unifying theory of all of the forces, so they may end up being more similar than current theories describe.
+
+After observing that deformations in spacetime would cause apparent accelerations akin to a force of gravity, the natural jump to make is that massive objects that have gravity deform spacetime @gravitation. The more massive the object, the larger the gravitational well and the more negative the gravitational potential energy of an object within that valley. The more dense the object, the steeper the gravitational well, and the stronger the gravitational attraction. See @gravitaional-potentials for an illustration. 
+
+What we experience as the force of gravity when standing on the surface of a massive body like Earth, is an upward acceleration caused by the electromagnetic force of the bonds between atoms within the Earth. These atoms exert upward pressure on the soles of our feet. We know we are accelerating upward because we are not in freefall, which would be the case if gravity was a force that was balanced against the force of the planet below. Our bodies, and all particles, simply wish to continue on their geodesics, and in the absence of any other forces, that path would be straight down toward the centre of the Earth.
+
+In general relativity, spacetime is described as a four-dimensional *manifold* @gravitation. A manifold is a type of space that resembles Euclidean space locally irrespective of its global geometry. This is why on the scales humans are used to dealing with, we experience space as Euclidean and never anything else. Consequentially, the flat spacetime described by Minkowski space is also a manifold. Specifically, the type of manifold that represents spacetime is known as a *Lorenzian manifold*, which has all the properties thus far described, plus some extra conditions. The Lorenzian manifold is a differentiable manifold, meaning that its differential is defined at all points without discontinuities between different regions.
+
+Einstein formulated ten equations that describe how gravity behaves in the presence of mass and energy, known as Einstein's Field Equations (EFEs). The full complexity of EFEs is not required for this brief introduction, however, they take the general form of
+
+$ matrixn(G_(mu v)) + Lambda matrixn(g_(mu v)) = frac(8 pi G, c^4) matrixn(T_(mu v)) $
+
+where $matrixn(G_(mu v))$ is the Einstein tensor, describing the curvature of spacetime given the specific distribution of mass-energy described by $matrixn(T_(mu v))$, $Lambda$ is the cosmological constant, $matrixn(g_(mu v))$ is the metric tensor, describing the generic geometric structure of spacetime, and $matrixn(T_(mu v))$ is the stress-energy tensor, describing the distribution of mass and energy across a given spacetime.
 
 #figure(
   grid(
@@ -172,13 +264,26 @@ It should be noted that although under general relativity gravity is not describ
   caption: [Two depictions of Einsteins's spacetime. For illustrative purposes, since we are not 4D beings and the paper on which this will be printed very much isn't, the four dimensions of our universe have been compacted down into two. It should also be noted that these illustrations were not generated with correct physical mathematics but only to give an impression of the concepts being described. _Left:_ Minkowski space --- in the absence of any mass, spacetime will not experience any curvature @gravitation. This is the special case that Einstien's special relativity describes. If we were to place a particle into this environment, it would not experience any acceleration due to gravity. If the particle were massive, it would distort the spacetime, and the spacetime would no longer be considered Minkowski space even though, alone, the particle would not experience any acceleration. Often, when dealing with particles of low mass, their effects on the distortion of spacetime are ignored, and we can still accurately describe the scenario with special relativity @special_relativity. _Right:_ Spacetime distorted by a massive object, shown in blue. Curved space is described by Einstein's more general theory, general relativity @gravitation. In this scenario, we can see how the presence of mass imprints a distortion into the shape of spacetime. Any particles also present in the same universe as the blue object, assuming it has existed indefinitely, will experience an apparent acceleration in the direction of the blue sphere. A beam of light, for example, comprised of photons and entirely massless, would be deflected when moving past the sphere. Even though light will always travel along its geodesic through the vacuum of space, the space itself is distorted; therefore, a geodesic path will manifest itself as an apparent attraction toward the sphere. Notice that the mass of the photon is zero; therefore, using Newton's universal law of gravitation @newtons-law-of-universal-gravitation, it should not experience any gravitational attraction, and indeed, gravitational lensing of the passage of starlight, as it moved past the Sun, was one of the first confirmations of Einstein's theory of general relativity @gravitational_lensing. Even if we assume the photon has some infinitesimal mass, Newtonian mechanics predicts a deflection angle that is only half as large as General Relativity predicts, and half as large as what is observed. Were this sphere several thousand kilometres in diameter, any lifeforms living on its surface, which would appear essentially flat at small scales, would experience a pervasive and everpresent downward force. Note that the mass of the object is distributed throughout its volume, so in regions near the centre of the sphere, the spacetime can appear quite flat, as equal amounts of mass surround it from all directions.],
 ) <flat>
 
-After observing that deformations in spacetime would cause apparent accelerations akin to a force of gravity, the natural jump to make is that massive objects that have gravity deform spacetime @gravitation. The more massive the object, the larger the gravitational well and the more negative the gravitational potential energy of an object within that valley. The more dense the object, the steeper the gravitational well, and the stronger the gravitational attraction. See @gravitaional-potentials for an illustration. 
+Perhaps not the first question to arise, but certainly one that would come up eventually, would be, what happens if we keep increasing the density of a massive object? Is there a physical limit to the density of an object? Would gravity keep getting steeper and steeper? The mathematical solution to this question was inadvertently answered by Karl Schwarzschild, who found the first non-flat solutions to EFEs @gravitation. The solution described the exterior of a spherical mass @gravitation. The Schwarzschild metric that describes the geometry of this manifold is 
 
-What we experience as the force of gravity when standing on the surface of a massive body like Earth, is an upward acceleration caused by the electromagnetic force of the bonds between atoms within the Earth. These atoms exert upward pressure on the soles of our feet. We know we are accelerating upward because we are not in freefall, which would be the case if gravity was a force that was balanced against the force of the planet below. Our bodies, and all particles, simply wish to continue on their geodesics, and in the absence of any other forces, that path would be straight down toward the centre of the Earth.
+$ matrixn(g_(mu v)) = mat(
+  - (1 - frac(r_s, r)), 0, 0, 0;
+  0, (1 - frac(r_s, r))^(-1), 0, 0;
+  0, 0, r^2, 0;
+  0, 0 , 0, r^2 sin^2 theta;
+) $
 
-Perhaps not the first question to arise, but certainly one that would come up eventually, would be, what happens if we keep increasing the density of a massive object? Is there a physical limit to the density of an object? Would gravity keep getting steeper and steeper? The mathematical solution to this question was inadvertently answered by Karl Schwarzschild, who found the first non-flat solutions to Einstein's equations @gravitation. The solution described the exterior of a spherical mass @gravitation. This metric introduces multiple singularities, some introduced at a particular radius, known as the Schwarzschild radius, which can be shown to be coordinate singularities alone that can be removed via choice of coordinate system. However, the other singularity that is introduced, at the centre of the mass, known simply as the singularity, cannot be removed by such a trick. There was at first much confusion about the nature of this singularity, it was assumed by some that the solution was theoretical alone and such an object could not exist in nature. 
+and the spacetime line element for the Lorenzian manifold described by metric is given by 
 
-It was later discovered that there were indeed physical scenarios in which matter could become so compressed there was nothing to stop it from collapsing into what can mathematically be described as a single point @gravitation. No known repulsive forces exist which are strong enough to prevent this kind of gravitational collapse. Such objects would create a gravitational well so steep that light itself would not be able to escape, and since light travels at the fastest possible velocity, nothing else could either. It was from this complete state of darkness that these objects received their name --- black holes. See @gravitaional-potentials for a depiction of a black hole.
+$ d s = - (1 - frac(r_s, r) ) c^2 d t^2 + (1 - frac(r_s, r))^(-1) d r^2 + r ^2 d Omega^2 $
+
+where $r_s$ is the Schwarzschild radius of the massive body inducing the spacetime curvature. The Schwarzschild radius is given by
+
+$ r_s = frac(2 G M , c^2) . $
+
+As can be seen from inspection, this metric introduces multiple singularities. The singularity introduced at $r = r_s$, can be shown to be a coordinate singularity alone, that can be removed via choice of coordinate system. However, the other singularity that is introduced, at the centre of the mass, often known simply as "the singularity", cannot be removed by such a trick. There was at first much confusion about the nature of the singularity, it was assumed by some that the solution was theoretical alone and such an object could not exist in nature. 
+
+It was later discovered that there were indeed physical scenarios in which matter could become so compressed there was nothing to stop it from collapsing into what can mathematically be described as a single point @gravitation. This state occurs when a given spherical volume with a radius, $r$, contains a mass-energy content larger than $M >= frac(r c^2 , 2 G)$. No known repulsive forces exist which are strong enough to prevent this kind of gravitational collapse. Such objects would create a gravitational well so steep that light itself would not be able to escape, and since light travels at the fastest possible velocity, nothing else could either. It was from this complete state of darkness that these objects received their name --- black holes. See @gravitaional-potentials for a depiction of a black hole.
 
 #figure(
   grid(
@@ -229,7 +334,7 @@ Aside from detections of the stochastic gravitational wave background @PTA, we h
   caption: [A depiction of the region of spacetime surrounding two inspiraling black holes. The spacetime grid visible is a 2D representation of the true 4D nature of our universe as described by general relativity @gravitation. This depiction was not produced by an accurate simulation but was constructed as a visual aid alone. Two massive objects can orbit each other if they have sufficient perpendicular velocity; this is a natural state for objects to find themselves trapped in because the chances of direct collisions between objects are low, and any objects that find themselves gravitationally bound together and do not experience a direct collision will eventuate in an orbit. The same is true for black holes; whether they form from pairs of massive stars that both evolve into black holes after the end of their main sequence lives or whether they form separately and through dynamical interaction, end up adjoined and inseparable, the occurrence of two black holes orbiting is not inconceivable @black_hole_binary_formation. Over time, small amounts of energy will leak from these binaries; ripples are sent out through the cosmos, carrying energy away from the system and gradually reducing the separation between the companions. As they get closer, the curvature of the spacetime they occupy increases, and thus, their acceleration toward each other grows. They speed up, and the amount of energy that is lost through gravitational radiation increases, further increasing the speed of their inspiral in an ever-accelerating dance. If they started just close enough, this process would be enough to merge them within the lifetime of the universe; they will inevitably collide with an incredible release of energy out through spacetime as powerful gravitational waves. It is these waves, these disturbances in the nature of length and time itself, that we can measure here on Earth using gravitational wave observatories.]
 ) <waves>
 
-Gravitational waves have two polarization states, typically named plus, $+$, and cross, $times$. They are named as such due to the effect the different polarisations have on spacetime as they propagate through it. In both cases, the two polarisations cause distortions in the local geometry of spacetime along two axes at once, this is a result of their quadrupole nature. Gravitational waves are transverse waves, meaning they oscillate in a direction that is perpendicular to their direction of propagation. They alternate between stretching spacetime along one of the two axes of oscillation and squeezing along the other, to the inverse, as the wave oscillates. See @wobble for an illustration of the effect of the passage of a gravitational wave through a region of spacetime. It is this stretching and squeezing effect that we have been able to detect in gravitational wave detectors on Earth. It is worth noting that because they are quadrupole waves and oscillate in two directions simultaneously, the polarisation states are $45 deg$ apart rather than the $90 deg$ separation of states seen in electromagnetic waves. This means that any two points on a line that is at a $45 deg$ angle to the polarisation of an incoming wave, will not see any effect due to the passing wave.
+Gravitational waves have two polarization states, typically named plus, $+$, and cross, $times$. They are named as such due to the effect the different polarisations have on spacetime as they propagate through it. In both cases, the two polarisations cause distortions in the local geometry of spacetime along two axes at once, this is a result of their quadrupole nature. Gravitational waves are transverse waves, meaning they oscillate in a direction that is perpendicular to their direction of propagation. They alternate between stretching spacetime along one of the two axes of oscillation and squeezing along the other, to the inverse, as the wave oscillates. See @wobble for an illustration of the effect of the passage of a gravitational wave through a region of spacetime. It is this stretching and squeezing effect that we have been able to detect in gravitational wave detectors on Earth. It is worth noting that because they are quadrupole waves and oscillate in two directions simultaneously, the polarisation states are $45 degree$ apart rather than the $90 degree$ separation of states seen in electromagnetic waves. This means that any two points on a line that is at a $45 degree$ angle to the polarisation of an incoming wave, will not see any effect due to the passing wave.
 
 #figure(
   image("wibble_wobble.png", width: 100%),
@@ -244,7 +349,7 @@ Detecting gravity is quite easy, just let go of whatever you're holding. Detecti
 
 After the notion of detectable gravitational waves became more widespread, a few methods were put forward as possible avenues of investigation, the most notable alternative to current methods was the resonant bar antenna @gravitational_wave_detectors. In the end, interferometers have been proven as viable gravitational wave detectors @first_detction, along with, more recently, pulsar timing arrays @PTA. These two detection methods operate in very different frequency regimes and so can detect very distinct gravitational wave phenomena --- the former able to detect gravitational waves from individual CBC events, and the latter able to detect the pervasive stochastic gravitational wave background, generated by the overlapping and interfering signals of many supermassive black hole mergers.
 
-We will focus our discussion on laser interferometry, as that is the most relevant to work in this thesis. As illustrated by @wobble, gravitational waves have a periodic effect on the distance between pairs of freely falling particles (assuming their displacement doesn't lie at $45 deg$ to the polarisation of the wave). We can use this effect to create a detection method if we can measure a precise distance between two freely floating masses @LIGO_interferometers. In the absence of all other interactions (hence freely falling), the distance between two particles should remain constant. If there is a change in this distance we can deduce that this arises from a passing gravitational wave.
+We will focus our discussion on laser interferometry, as that is the most relevant to work in this thesis. As illustrated by @wobble, gravitational waves have a periodic effect on the distance between pairs of freely falling particles (assuming their displacement doesn't lie at $45degree$ to the polarisation of the wave). We can use this effect to create a detection method if we can measure a precise distance between two freely floating masses @LIGO_interferometers. In the absence of all other interactions (hence freely falling), the distance between two particles should remain constant. If there is a change in this distance we can deduce that this arises from a passing gravitational wave.
 
 Masses suspended by a pendulum are effectively in a state of free fall in the direction perpendicular to the suspension fibers, this allows us to build test masses that are responsive to gravitational wave oscillations in one direction, provided they have significant isolation from other forces --- which is no small task; a considerable amount of engineering goes into ensuring these test masses are as isolated as possible from the outside world @LIGO_interferometers.
 

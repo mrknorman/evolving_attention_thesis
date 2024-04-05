@@ -6323,3 +6323,17 @@ parent:
   url: https://doi.org/10.1103/PhysRevD.103.124023
   publisher: American Physical Society
 
+gps_relativity:
+  type: article
+  title: Relativity in the Global Positioning System
+  date: 2003-01-28
+  author:
+    - Ashby, Neil
+  pages: 1
+  url: https://doi.org/10.12942/lrr-2003-1
+
+  parent:
+    type: periodical
+    title:  Living Reviews in Relativity
+    volume: 6
+    issue: 1
