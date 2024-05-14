@@ -6337,3 +6337,50 @@ gps_relativity:
     title:  Living Reviews in Relativity
     volume: 6
     issue: 1
+
+special_relativity_tests:
+  type: article
+  title: Modern Tests of Special Relativity
+  author:
+    - Mark P. Haugan
+    - Clifford M. Will
+  date: 1987-05-01
+  page-range:  69–76
+  url: https://doi.org/10.1063/1.881074
+  
+  parent:
+    type: periodical
+    title: Physics Today
+    volume: 40  
+
+weak_gravity:
+  type: article
+  title: Weak gravity conjecture
+  author:
+    - Harlow, Daniel 
+    - Heidenreich, Ben 
+    - Reece, Matthew 
+    - Rudelius, Tom
+  date: 2023-09
+  url:  https://doi.org/10.1103/RevModPhys.95.035003
+  
+  parent:
+    type: periodical
+    title: Reviews of Modern Physics
+    volume: 95
+    issue: 3
+    publisher: American Physical Society
+
+coupling_constants:
+  type: article
+  title: "Fundamental Forces of Nature: The Story of Gauge Fields"
+  author: Hans C. von Baeyer
+  url: https://doi.org/10.1063/1.2911184
+  page-range: 70-72
+  date: 2008
+
+  parent:
+    type: periodical
+    title: Physics Today
+    volume: 61
+    issue: 4

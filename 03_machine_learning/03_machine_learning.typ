@@ -204,24 +204,24 @@ where L is the model-architecture-agnostic loss function, $L_M$ is the loss func
 
 The gradient of the model is defined as the vector of partial derivatives of the model's loss function with respect to its parameters @gradient_descent_matrix. If $L_(M vectorn(x) vectorn(y)) (vectorn(theta))$ is the loss function with a fixed model architecture, input vector, and ground-truth label, then the gradient of the model is
 
-$ vectorn(nabla) bold(L) eq.triple vectorn(nabla) bold(L_(M vectorn(x) vectorn(y)) (vectorn(theta))) = [frac(diff L_(M vectorn(x) vectorn(y)), diff theta_1), ..., frac(diff L_(M vectorn(x) vectorn(y)), diff theta_i), ..., frac(diff L_(M vectorn(x) vectorn(y)), diff theta_N)] $ <gradient_equation>
+$ vectorn(gradient) bold(L) eq.triple vectorn(gradient) bold(L_(M vectorn(x) vectorn(y)) (vectorn(theta))) = [frac(partial L_(M vectorn(x) vectorn(y)), partial theta_1), ..., frac(partial L_(M vectorn(x) vectorn(y)), partial theta_i), ..., frac(partial L_(M vectorn(x) vectorn(y)), partial theta_N)] $ <gradient_equation>
 
 where N is the total number of tunable parameters. 
 
- @gradient_equation describes a vector, $vectorn(nabla) bold(L)$. Each element of the vector, $frac(diff L_(M vectorn(x) vectorn(y)), diff theta_i)$, is a gradient that describes the effect of changing the value of the corresponding parameter, $theta_i$, on the model loss. If the gradient is positive, then increasing the value of the parameter will increase the value of the loss, whereas if it's negative, increasing the value of that parameter will decrease the model loss. The magnitude of the gradient is proportional to the magnitude of that parameter's effect on the loss @gradient_descent_matrix.
+@gradient_equation describes a vector, $vectorn(gradient) bold(L)$. Each element of the vector, $frac(partial L_(M vectorn(x) vectorn(y)), partial theta_i)$, is a gradient that describes the effect of changing the value of the corresponding parameter, $theta_i$, on the model loss. If the gradient is positive, then increasing the value of the parameter will increase the value of the loss, whereas if it's negative, increasing the value of that parameter will decrease the model loss. The magnitude of the gradient is proportional to the magnitude of that parameter's effect on the loss @gradient_descent_matrix.
 
 Since we want to reduce the model loss, we want to move down the gradient. Therefore, for each parameter, we subtract an amount proportional to the calculated gradient @gradient_descent_matrix @deep_learning_review.
 
 #figure(
   image("gradient.png", width: 100%),
-  caption: [An illustration of gradient descent, where $vectorn(nabla) bold(L_(M vectorn(x) vectorn(y)) (vectorn(theta)))$ is the loss at a fixed model architecture, $M$, input vector $vectorn(x)$, and data label $vectorn(y)$. This simplified example of the shape of a 1D parameter space shows how the gradient of the loss function with respect to the model parameters can be used to move toward the minimum of the loss function. The shape of the loss function in this example is given by $ L_(M vectorn(x) vectorn(y)) (vectorn(theta)) = theta^2$. In almost all cases, the parameter space will be much more complex than the one depicted in both dimensionality and shape complexity. Usually, the shape of the loss function will be an N-dimensional surface, where N is the number of parameters, $vectorn(theta)$, in the model, but the principle is still the same. For a 2D example of a gradient space; see @gradient_descent_examples. This plot can be recreated with the code found here: https://tinyurl.com/3ufb5my3.]
+  caption: [An illustration of gradient descent, where $vectorn(gradient) bold(L_(M vectorn(x) vectorn(y)) (vectorn(theta)))$ is the loss at a fixed model architecture, $M$, input vector $vectorn(x)$, and data label $vectorn(y)$. This simplified example of the shape of a 1D parameter space shows how the gradient of the loss function with respect to the model parameters can be used to move toward the minimum of the loss function. The shape of the loss function in this example is given by $ L_(M vectorn(x) vectorn(y)) (vectorn(theta)) = theta^2$. In almost all cases, the parameter space will be much more complex than the one depicted in both dimensionality and shape complexity. Usually, the shape of the loss function will be an N-dimensional surface, where N is the number of parameters, $vectorn(theta)$, in the model, but the principle is still the same. For a 2D example of a gradient space; see @gradient_descent_examples. This plot can be recreated with the code found here: https://tinyurl.com/3ufb5my3.]
 ) <gradient_example>
 
 We need to be able to control the magnitude of the parameter adjustment because the gradient is only measured for the current parameter values, $vectorn(theta)$. Therefore we are unsure of the shape of the loss function. It's possible for the tuning process to overshoot the loss function minimum. In order to apply this control, we introduce a constant coefficient to scale the gradient, known as the learning rate, $eta$ @gradient_descent_matrix @deep_learning_review.
 
 Therefore, if we want to find the new adjusted parameters after one optimisation step, we can use
 
-$ vectorn(theta)_(t+1) = vectorn(theta)_t - eta vectorn(nabla) bold(L_( M vectorn(x)_bold(t) vectorn(y)_t ) (vectorn(theta)_t)) $ <gradient_decent_step>
+$ vectorn(theta)_(t+1) = vectorn(theta)_t - eta vectorn(gradient) bold(L_( M vectorn(x)_bold(t) vectorn(y)_t ) (vectorn(theta)_t)) $ <gradient_decent_step>
 
 where t is the step index, we can see this process in a Python @python form in @train_step_definition. In this function, the gradients are captured using the tf.GradientTape scope, which automatically captures the gradients of all "watched" tensors within its scope. This automatic differentiation utilises a process called back-propagation @gradient_descent_matrix @deep_learning_review, which will be discussed in more detail in @backpropagate-sec.
 
@@ -238,7 +238,7 @@ def train_step(x, y, W, b, η):
     b.assign_sub(η * gradients[1]) # update biases
     return current_loss
 ```,
-caption : [_Python @python ._ Function to execute a single training step. This function runs an example, ``` x ``` $ = vectorn(x)_bold(t)$, through the model (usually multiple examples at once as explained in @gradient-descent-sec) and computes the loss, ``` loss ``` $= L_( M vectorn(x)_bold(t) vectorn(y)_bold(t)) (vectorn(theta)_bold(t))$ of the output of that model, ``` y_pred ```$= uvectorn(y)_bold(t)$ compared with the ground truth label of that example, ``` y ```$= vectorn(y)_bold(t)$. The gradients, ``` gradients``` $= vectorn(nabla) L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) ) (vectorn(theta)_bold(t))$, are automatically computed for each parameter by ``` tf.GradientTape()```, which produces a list of gradients for the weights, ``` w``` $= matrixn(W)$, and biases, ``` b``` $= vectorn(b)$, which are then used multiplied by the learning rate ``` η``` $= eta$ and used to update the parameters, $vectorn(theta)$, for the next training step; see @gradient_decent_step.]
+caption : [_Python @python ._ Function to execute a single training step. This function runs an example, ``` x ``` $ = vectorn(x)_bold(t)$, through the model (usually multiple examples at once as explained in @gradient-descent-sec) and computes the loss, ``` loss ``` $= L_( M vectorn(x)_bold(t) vectorn(y)_bold(t)) (vectorn(theta)_bold(t))$ of the output of that model, ``` y_pred ```$= uvectorn(y)_bold(t)$ compared with the ground truth label of that example, ``` y ```$= vectorn(y)_bold(t)$. The gradients, ``` gradients``` $= vectorn(gradient) L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) ) (vectorn(theta)_bold(t))$, are automatically computed for each parameter by ``` tf.GradientTape()```, which produces a list of gradients for the weights, ``` w``` $= matrixn(W)$, and biases, ``` b``` $= vectorn(b)$, which are then used multiplied by the learning rate ``` η``` $= eta$ and used to update the parameters, $vectorn(theta)$, for the next training step; see @gradient_decent_step.]
 ) <train_step_definition>
 
 If we repeat this process over T steps, where T is the number of training examples in our dataset, then the model will hopefully begin to gain aptitude at the classification task. The process of tuning the model parameters once with all examples in the training dataset is called a training epoch @perceptron_and_neural_network_chapter. Oftentimes, if our training dataset is not large enough, we can improve the model performance by running for multiple epochs, hence training the model with the same examples multiple times. Between epochs, the training dataset is usually shuffled in order to explore new areas of parameter space and avoid repeating exactly the same pathway @perceptron_and_neural_network_chapter.
@@ -566,7 +566,6 @@ Imagine we are lost in these Parameter Peaks. Our goal is to find the lowest poi
     caption: [_ Left: _ An idealised gradient descent path. This gradient descent process quickly reaches the true function minimum where, in this case, the loss is close to zero. However, this is a constructed example by first finding a point near the function minimum and performing a gradient ascent operation. _ Right: _ A more realistic gradient descent path. This example shows a simple but real gradient descent function running on the cost function. As can be seen, it takes many more steps and has not yet converged on the true minimum; in fact, the process might be at risk of getting stuck in a local minimum. Both examples were generated using this notebook: https://tinyurl.com/3ufb5my3.] 
 ) <gradient_descent_examples>
 
-
 This works perfectly if all gradients point toward the bottom, what is called a convex parameter space with one global minimum and no local minima. Parameter peaks, however, can often have some nasty tricks in store. Just like real-life mountain ranges, there can be local minima. Divits and valleys look like they might be the bottom of the mountain, but without some global information, it is impossible to tell. The parameter space is non-convex. Thus, we must explore before we settle on our final choice, moving up and down smaller hills, generally moving toward lower regions, but always searching for better outcomes --- that is, until our time runs out, model training ends, and we must make a final decision about where to await the helicopter. Although perhaps if our training lasts multiple epochs, we'll have multiple days to figure it out, taking new paths each time.
 
 There are, perhaps unsurprisingly, a number of different algorithms to achieve this purpose beyond the naive descent suggested by @gradient_decent_step, which could leave you stuck blindly in a divot on the top of a mountain whilst wide chasms stretch unseen before you. The first misconception to correct beyond what has been previously discussed is that usually when performing gradient descent, it is not performed one example at a time but rather in batches of $N_op("batch")$ examples, the gradient of which is calculated simultaneously. This $N_op("batch")$ adds a further user-adjustable hyperparameter, batch size, $N_op("batch")$, to our growing collection of hyperparameters. It also creates a distinction between three distinct gradient descent modes. 
@@ -591,13 +590,13 @@ Adding momentum to a descent algorithm is quite literally what it sounds like; i
 
 In order to describe this process mathematically, we introduce the concept of a parameter space velocity, $v_theta (t)$, which is recorded independently of parameter space position, i.e. the parameter values themselves, $vectorn(theta)$. The two equations that fully describe the descent are
 
-$ bold(vectorn(v)_theta (t)) = alpha bold(vectorn(v)_theta (t - 1)) + eta vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t )) $ <descent_momentum_velocity>
+$ bold(vectorn(v)_theta (t)) = alpha bold(vectorn(v)_theta (t - 1)) + eta vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t )) $ <descent_momentum_velocity>
 
 and
 
 $ vectorn(theta)_bold(t + 1) = vectorn(theta)_bold(t) - bold(vectorn(v)_theta (t)), $ <descent_momentum_position>
 
-where $t$ is the current batch index, $ bold(vectorn(v)_theta (t))$ is the parameter velocity at the current batch, $bold(vectorn(v)_theta (t - 1))$, is the parameter velocity at the previous batch (initialized to $0$ at $t - 1$), $alpha$ is the momentum parameter, $eta$ is the learning rate, $vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t ))$, is the gradient of the model parameters with respect to the loss function, $vectorn(theta)_bold(t+1)$, are the updated model parameters, and $vectorn(theta)_bold(t)$ are the model parameters at the current step. As with the previous training steps, this process can be used for either stochastic or mini-batch descent and will be repeated across all training examples or batches of training examples in the training data set. The momentum parameter is a newly introduced hyperparameter that must be set before the initiation of training. The momentum value indicates what fraction of the previous parameter velocity is added to the current velocity; for any valid descent algorithm, this must be below one, $alpha < 1$, as otherwise, the velocity will grow unbounded with each step. Common choices for momentum values hover around 0.9.
+where $t$ is the current batch index, $ bold(vectorn(v)_theta (t))$ is the parameter velocity at the current batch, $bold(vectorn(v)_theta (t - 1))$, is the parameter velocity at the previous batch (initialized to $0$ at $t - 1$), $alpha$ is the momentum parameter, $eta$ is the learning rate, $vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t ))$, is the gradient of the model parameters with respect to the loss function, $vectorn(theta)_bold(t+1)$, are the updated model parameters, and $vectorn(theta)_bold(t)$ are the model parameters at the current step. As with the previous training steps, this process can be used for either stochastic or mini-batch descent and will be repeated across all training examples or batches of training examples in the training data set. The momentum parameter is a newly introduced hyperparameter that must be set before the initiation of training. The momentum value indicates what fraction of the previous parameter velocity is added to the current velocity; for any valid descent algorithm, this must be below one, $alpha < 1$, as otherwise, the velocity will grow unbounded with each step. Common choices for momentum values hover around 0.9.
 
 Momentum can be combined with stochastic or mini-batch descent and is an important aspect of other gradient techniques, including RMSProp and Adam @gradient_descent_algorithms @gradient_descent_algorithms_2. 
 
@@ -607,13 +606,13 @@ In standard gradient descent, every parameter, $theta_i$, within your parameter 
 
 To combat this problem, AdaGrad, or the adaptive gradient algorithm, was introduced @adagrad @gradient_descent_algorithms @gradient_descent_algorithms_2. This method independently modifies the learning rate for each parameter depending on how often it is updated, allowing space parameters more opportunity to train. It achieves this by keeping a record of the previous sum of gradients squared and then adjusting the learning rate independently by using the value of this record. This is equivalent to normalising the learning rate by the L2 norm of the previous gradients. This approach is defined by
 
-$ vectorn(g)_bold(t) = vectorn(g)_bold(t - 1) + vectorn(nabla) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) ))^(compose 2) $ <adagrad_sum>
+$ vectorn(g)_bold(t) = vectorn(g)_bold(t - 1) + vectorn(gradient) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) ))^(compose 2) $ <adagrad_sum>
 
 and
 
-$ vectorn(theta)_bold(t + 1) = vectorn(theta)_bold(t) - (eta/(vectorn(g)_bold(t) + epsilon)^(compose 1/2) ) dot.circle vectorn(nabla) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t)) ) $ <adagrad_iteration>
+$ vectorn(theta)_bold(t + 1) = vectorn(theta)_bold(t) - (eta/(vectorn(g)_bold(t) + epsilon)^(compose 1/2) ) dot.circle vectorn(gradient) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t)) ) $ <adagrad_iteration>
 
-where $t$ is the current batch index, $vectorn(g)_bold(t)$ is a vector containing the sum of the square of all parameter gradients up to the training iteration, $t$, $vectorn(g)_bold(t-1)$ is the sum of the square of all parameter gradients except the current gradient squares, $vectorn(nabla) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) ))$ is a vector containing the gradients for each parameter at the current iteration, $vectorn(theta)_bold(t + 1) $ are the parameters at the next iteration, $vectorn(theta)_bold(t) $ are the parameters at the current iteration, and $epsilon $ is a very small value to prevent division by zero errors in the calculation. The $dot.circle $ notation is known as the Hadamard product and represents the element-wise multiplication of two vectors, i.e $vectorn(a) dot.circle vectorn(b) = [a_1 b_1, ..., a_i b_i, ..., a_N b_N]$. Similarly $vectorn(a)^(compose 2)$ refers to the element-wise square of the vector $vectorn(a)$, i.e $vectorn(a)^(compose 2) = [a_1^2, ..., a_i^2, ..., a_N^2]$, and $a^(compose 1/2)$ represents the element-wise square-root of $a$, i.e $vectorn(a)^(compose 2) = [sqrt(a_1), ..., sqrt(a_i), ..., sqrt(a_N)]$.
+where $t$ is the current batch index, $vectorn(g)_bold(t)$ is a vector containing the sum of the square of all parameter gradients up to the training iteration, $t$, $vectorn(g)_bold(t-1)$ is the sum of the square of all parameter gradients except the current gradient squares, $vectorn(gradient) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) ))$ is a vector containing the gradients for each parameter at the current iteration, $vectorn(theta)_bold(t + 1) $ are the parameters at the next iteration, $vectorn(theta)_bold(t) $ are the parameters at the current iteration, and $epsilon $ is a very small value to prevent division by zero errors in the calculation. The $dot.circle $ notation is known as the Hadamard product and represents the element-wise multiplication of two vectors, i.e $vectorn(a) dot.circle vectorn(b) = [a_1 b_1, ..., a_i b_i, ..., a_N b_N]$. Similarly $vectorn(a)^(compose 2)$ refers to the element-wise square of the vector $vectorn(a)$, i.e $vectorn(a)^(compose 2) = [a_1^2, ..., a_i^2, ..., a_N^2]$, and $a^(compose 1/2)$ represents the element-wise square-root of $a$, i.e $vectorn(a)^(compose 2) = [sqrt(a_1), ..., sqrt(a_i), ..., sqrt(a_N)]$.
 
 This method has the advantage of self-tuning the learning rate for individual parameters, removing the need for manual per-parameter tuning, and it helps the model update sparse parameters more quickly by increasing the learning rate for parameters which learn more rarely seen features @adagrad @gradient_descent_algorithms @gradient_descent_algorithms_2. These small features are often very important for whatever operation is being optimised for.
 
@@ -623,13 +622,13 @@ AdaGrad still leaves the global learning rate, $eta$, as an open hyperparameter 
 
 RMSProp, or root mean square propagation, is an alternative method to solve the adaptive learning rate issue, which attempts to alleviate the vanishing learning rate problem by less aggressively normalising the learning rate @rmsprop. Instead of using the L2 Norm of all previous gradients to normalise each parameter learning rate, like AdaGrad, it uses a moving average of the squared gradients. This also deals with non-convex scenarios better, as it allows the gradient descent to escape without the learning rate falling to tiny values. This process is described by
 
-$ vectorn(E)_bold(g^2) (t) = beta vectorn(E)_bold(g^2) (t-1) + (1 - beta) (vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t )))^(compose 2) $ <rms_sum>
+$ vectorn(E)_bold(g^2) (t) = beta vectorn(E)_bold(g^2) (t-1) + (1 - beta) (vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t )))^(compose 2) $ <rms_sum>
 
 and 
 
-$ vectorn(theta)_bold(t + 1) = vectorn(theta)_bold(t) - (eta/(vectorn(E)_bold(g^2) (t) + epsilon)^(compose 1/2)) dot.circle vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t )), $ <rms_iteration>
+$ vectorn(theta)_bold(t + 1) = vectorn(theta)_bold(t) - (eta/(vectorn(E)_bold(g^2) (t) + epsilon)^(compose 1/2)) dot.circle vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t )), $ <rms_iteration>
 
-where $t$ is the current batch index, $vectorn(e)_bold(g^2) (t)$ is the moving average of parameter gradients squared with respect to the loss function, $beta$ is the decay rate for the moving average, which controls how quickly the effect of previous gradients on the current learning rate falls off, $vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t ))$ is a vector containing the gradients for each parameter at the current iteration, $vectorn(theta)_bold(t + 1) $ are the parameters at the next iteration, $vectorn(theta)_bold(t) $ are the parameters at the current iteration, and $epsilon $ is a very small value to prevent division by zero errors in the calculation.
+where $t$ is the current batch index, $vectorn(e)_bold(g^2) (t)$ is the moving average of parameter gradients squared with respect to the loss function, $beta$ is the decay rate for the moving average, which controls how quickly the effect of previous gradients on the current learning rate falls off, $vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t ))$ is a vector containing the gradients for each parameter at the current iteration, $vectorn(theta)_bold(t + 1) $ are the parameters at the next iteration, $vectorn(theta)_bold(t) $ are the parameters at the current iteration, and $epsilon $ is a very small value to prevent division by zero errors in the calculation.
 
 This is a similar method to AdaGrad, so it has many of the same strengths and weaknesses but alleviates the vanishing gradient problem @gradient_descent_algorithms @gradient_descent_algorithms_2. It also introduces one new hyperparameter, the decay rate, $beta $, which must be decided, and it does not necessarily completely eradicate the vanishing gradient problem in all situations.
 
@@ -637,11 +636,11 @@ This is a similar method to AdaGrad, so it has many of the same strengths and we
 
 Adam (Adaptive Moment Estimation) combines the advantages of AdaGrad and RMSProp @adam_optimiser. Instead of normalising by the L2 loss alone, like AdaGrad, or the moving squared average alone, like RMSProp, it uses an exponential of the moving average of both the gradient, $E_g (t)$ and the squared gradient, $E_(g^2) (t)$ and uses the parameters, $beta_1$ and $beta_2$ to control the decay rates of these averages respectively. The moving average of the gradient and the moving average of the squared gradient are
 
-$ vectorn(E)_bold(g) bold(t) = beta_1 vectorn(E)_g bold(t-1) + (1-beta_1) vectorn(nabla) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) )) $ <adam_average>
+$ vectorn(E)_bold(g) bold(t) = beta_1 vectorn(E)_g bold(t-1) + (1-beta_1) vectorn(gradient) bold(L_( M vectorn(x)_bold(t) vectorn(y)_bold(t) )) $ <adam_average>
 
 and
 
-$ vectorn(E)_bold(g^2) (t) = beta_2 vectorn(E)_bold(g^2) (t-1) + (1-beta_2) vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t ))^(compose 2). $ <adam_moving_average>
+$ vectorn(E)_bold(g^2) (t) = beta_2 vectorn(E)_bold(g^2) (t-1) + (1-beta_2) vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t ))^(compose 2). $ <adam_moving_average>
 
 As with previous methods, both moving average values are initialised to vectors of zeros at the start of the descent @adam_optimiser. This poses an issue as early steps would be weighted toward zero. In order to solve this, the algorithm introduces two new terms, $uvectorn(E)_bold(g) bold(t) $, and $uvectorn(E)_bold(g^2) bold(t) $, to correct this issue:
 
@@ -655,7 +654,7 @@ These terms are then collected in @adam_iteration.
 
 $ vectorn(theta)_bold(t + 1) = vectorn(theta)_bold(t) - eta uvectorn(E)_bold(g) dot.circle (t) / ((uvectorn(E)_bold(g^2) (t) + epsilon)^(compose 1/2)) $ <adam_iteration>
 
-where $t$ is the current batch index, $E_(g) (t)$ is the moving average of parameter gradients with respect to the loss function, $E_(g^2) (t)$ is the moving average of parameter gradients squared with respect to the loss function, $beta_1$ and $beta_2$ are the decay rate for the moving average and the moving squared averages respectively, which controls how quickly the effect of previous gradients on the current learning rate falls off,  $vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_bold(t) ))$ is a vector containing the gradients for each parameter at the current iteration, $vectorn(theta)_bold(t + 1) $ are the parameters at the next iteration, $vectorn(theta)_bold(t) $ are the parameters at the current iteration, and $epsilon $ is a very small value to prevent division by zero errors in the calculation.
+where $t$ is the current batch index, $E_(g) (t)$ is the moving average of parameter gradients with respect to the loss function, $E_(g^2) (t)$ is the moving average of parameter gradients squared with respect to the loss function, $beta_1$ and $beta_2$ are the decay rate for the moving average and the moving squared averages respectively, which controls how quickly the effect of previous gradients on the current learning rate falls off,  $vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_bold(t) ))$ is a vector containing the gradients for each parameter at the current iteration, $vectorn(theta)_bold(t + 1) $ are the parameters at the next iteration, $vectorn(theta)_bold(t) $ are the parameters at the current iteration, and $epsilon $ is a very small value to prevent division by zero errors in the calculation.
 
 The Adam optimiser can intuitively be thought of as combining the adaptive learning rate methods with a form of momentum @adam_optimiser. $E_g (t)$ carries the first moment, the momentum of the past gradients, which, like momentum, will keep you moving in the general direction that you have been travelling, moderated by the $beta_1$ parameter. $E_(g^2)$ carries information about the second moment, which remembers the magnitude of the gradients. This will make the algorithm move more cautiously if it has been encountering steep gradients, which can normally cause large learning rates and make the optimiser overshoot. This can act as a break to the momentum built up in the first moment. The $beta_2$ parameter moderates this aspect.
 
@@ -663,7 +662,7 @@ The Adam optimiser is perhaps the most widely known and widely used in modern ar
 
 === Backpropagation <backpropagate-sec>
 
-So far, we have been using the parameter gradient vector, $vectorn(nabla) bold(L_( M vectorn(x)_t vectorn(y)_t))$, without considering how we might calculate this value. 
+So far, we have been using the parameter gradient vector, $vectorn(gradient) bold(L_( M vectorn(x)_t vectorn(y)_t))$, without considering how we might calculate this value. 
 
 In the case of a single-layer perceptron, this process is not particularly difficult. As discussed before, first, we must pass an example (or batch of examples) through a randomly initiated network. This network, though untuned, will still produce an output vector, $accent(y, hat)$, albeit a useless one. We can then work backwards from the model output, $accent(y, hat)$,  and, in the case of supervised learning, compare it to our desired output, $y$, by using the loss function, $L$. We can do this by applying the chain rule for the weights @backpropogation_ref.
 
@@ -681,42 +680,42 @@ and the loss function is given by
 
 $ L = -sum_(i=1)^N y_i log(accent(y, hat)_i), $
 
-where L is the loss function, N is the number of elements in the output vector and $accent(y, hat)_i$ is the $i^op("th")$ element of the output vector. We want to find the gradients of the model parameters with respect to the loss function. In this case, $(diff L) / (diff matrixn(W))$ and $(diff L) / (diff b)$. We can start by using the chain rule to compute $(diff L) / (diff z_i)$, the derivative of the loss with respect to the $i^op("th")$ component of z:
+where L is the loss function, N is the number of elements in the output vector and $accent(y, hat)_i$ is the $i^op("th")$ element of the output vector. We want to find the gradients of the model parameters with respect to the loss function. In this case, $(partial L) / (partial matrixn(W))$ and $(partial L) / (partial b)$. We can start by using the chain rule to compute $(partial L) / (partial z_i)$, the derivative of the loss with respect to the $i^op("th")$ component of z:
 
-$ (diff L) / (diff z_i) = sum_(j=1) (diff L) / (diff y_j) (diff y_j) / (diff z_i) $ <chain_rule_1>
+$ (partial L) / (partial z_i) = sum_(j=1) (partial L) / (partial y_j) (partial y_j) / (partial z_i) $ <chain_rule_1>
 
-Here, $(diff L) / (diff y_j)$ is the derivative of the loss with respect to the $j^op("th")$ output, and $(diff y_j)/ (diff z_i)$ is the derivative of the $j^op("th")$ output with respect to the $i^op("th")$ input before activation. In our case, because we are using categorical cross-entropy loss:
+Here, $(partial L) / (partial y_j)$ is the derivative of the loss with respect to the $j^op("th")$ output, and $(partial y_j)/ (partial z_i)$ is the derivative of the $j^op("th")$ output with respect to the $i^op("th")$ input before activation. In our case, because we are using categorical cross-entropy loss:
 
-$ (diff L) / (diff y_j) = accent(y, hat)_j / y_j $ <chain_rule_2>
+$ (partial L) / (partial y_j) = accent(y, hat)_j / y_j $ <chain_rule_2>
 
 And, due to the softmax activation function, in which the value of all output neurons affects the gradient of all others, 
 
-$ (diff accent(y, hat)_j) / (diff z_i) = cases(
+$ (partial accent(y, hat)_j) / (partial z_i) = cases(
   accent(y, hat)_j (1 - accent(y, hat)_j) "if" i = j,
   - accent(y, hat)_j accent(y, hat)_i "if" i ≠ j ) $ <chain_rule_3>
 
 Substitution of @chain_rule_2 and @chain_rule_3 into @chain_rule_1 gives
 
-$ (diff L) / (diff z_i) = - y_i / accent(y, hat)_i  accent(y, hat)_i (1 - accent(y, hat)_i) + ∑_(j ≠ i) y_j / accent(y, hat)_j (-accent(y, hat)_j accent(y, hat)_i). $
+$ (partial L) / (partial z_i) = - y_i / accent(y, hat)_i  accent(y, hat)_i (1 - accent(y, hat)_i) + ∑_(j ≠ i) y_j / accent(y, hat)_j (-accent(y, hat)_j accent(y, hat)_i). $
 
 Simplifying gives:
 
-$ (diff L)/ (diff z_i) = - y_i (1 - accent(y, hat)_i) + ∑_(j ≠ i) -y_j accent(y, hat)_i. $
+$ (partial L)/ (partial z_i) = - y_i (1 - accent(y, hat)_i) + ∑_(j ≠ i) -y_j accent(y, hat)_i. $
 
 We can simplify this further because $sum_(j) y_j = 1$, as the input label is a one-hot vector and will always sum to one:
 
 // TODO: FIX THIS BASTARD (or at least understand it; the answer is right)
-$ (diff L)/ (diff z_i) = y_i - accent(y, hat)_i. $
+$ (partial L)/ (partial z_i) = y_i - accent(y, hat)_i. $
 
-This shows that the derivative of the softmax function with respect to the sum of the weighted inputs and bias values, $(diff L)/ (diff z_i)$, is equal to the difference between the ground truth label value and the model output value. This provides us with another insight into the design of the softmax function and its use of exponentials.
+This shows that the derivative of the softmax function with respect to the sum of the weighted inputs and bias values, $(partial L)/ (partial z_i)$, is equal to the difference between the ground truth label value and the model output value. This provides us with another insight into the design of the softmax function and its use of exponentials.
 
 We can then again use the chain rule to find the gradient of the weights and biases
 
-$ (diff L) / (diff matrixn(W)) = (diff L) / (diff vectorn(z)) (diff vectorn(z)) / (diff matrixn(W)) = (vectorn(y) - uvectorn(y)) dot.circle vectorn(x) $ <weights_chain>
+$ (partial L) / (partial matrixn(W)) = (partial L) / (partial vectorn(z)) (partial vectorn(z)) / (partial matrixn(W)) = (vectorn(y) - uvectorn(y)) dot.circle vectorn(x) $ <weights_chain>
 
 and 
 
-$ (diff L)/ (diff vectorn(b)) = (diff L)/(diff vectorn(z)) (diff vectorn(z))/ (diff vectorn(b)) = y - uvectorn(y). $ <bias_chain>
+$ (partial L)/ (partial vectorn(b)) = (partial L)/(partial vectorn(z)) (partial vectorn(z))/ (partial vectorn(b)) = y - uvectorn(y). $ <bias_chain>
 
 Both of the gradients, @weights_chain, and @bias_chain, are quite intuitively what you might expect from a single-layer network. There is no non-linear behaviour, and as we previously speculated, the network is just training to find pixels that are most often activated by certain classes.
 
@@ -724,10 +723,10 @@ We can use a similar method for artificial neural networks of all complexities a
 
 First, we compute the forward propagation by running an input vector, $vectorn(x)$, or batch of input vectors, through the network to produce an output vector $uvectorn(y)$. Then follow the following procedure.
 
-+ Compute the derivative of the loss function with respect to the final output values: $ (diff L)/( diff a_N) = (diff L)/( diff accent(y, hat))$.
-+ Compute $(diff L)/ (diff z_N) = (diff L) / (diff a_N) (diff a_N)/ (diff z_N) $, where $(diff a_N)/(diff z_N)$ is the derivative of the activation function in the final layer. This gives the gradient of the loss function with respect to the final raw outputs, $vectorn(z)_bold(N)$.
-+ Compute $(diff L)/ (diff matrixn(W)_bold(N)) = (diff L) / (diff z_N) (diff z_N) / (diff matrixn(W)_bold(N)) $ and $(diff L) / (diff b_N) = (diff L) / (diff z_N) (diff z_N)/ (diff b_L) $. This gives the gradients with respect to the final layer's weights and biases.
-+ To propagate the error back to the previous layer, compute $(diff L)/ (diff a_(N-1)) = (diff z_N)/ (diff a_(N-1)) (diff L) / (diff z_N) = W_(N)^T (diff L) / (diff z_N)$.
++ Compute the derivative of the loss function with respect to the final output values: $ (partial L)/( partial a_N) = (partial L)/( partial accent(y, hat))$.
++ Compute $(partial L)/ (partial z_N) = (partial L) / (partial a_N) (partial a_N)/ (partial z_N) $, where $(partial a_N)/(partial z_N)$ is the derivative of the activation function in the final layer. This gives the gradient of the loss function with respect to the final raw outputs, $vectorn(z)_bold(N)$.
++ Compute $(partial L)/ (partial matrixn(W)_bold(N)) = (partial L) / (partial z_N) (partial z_N) / (partial matrixn(W)_bold(N)) $ and $(partial L) / (partial b_N) = (partial L) / (partial z_N) (partial z_N)/ (partial b_L) $. This gives the gradients with respect to the final layer's weights and biases.
++ To propagate the error back to the previous layer, compute $(partial L)/ (partial a_(N-1)) = (partial z_N)/ (partial a_(N-1)) (partial L) / (partial z_N) = W_(N)^T (partial L) / (partial z_N)$.
 + Recursively repeat steps 1 to 4 until you reach the input layer and you have gradients for all parameters.
 
 This method is known as backpropagation because you work backward from the output of the model toward the input vector @backpropogation_ref.

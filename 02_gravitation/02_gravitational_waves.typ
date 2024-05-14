@@ -18,7 +18,23 @@ This chapter will introduce a small part of the science of gravitational waves; 
 
 == Gravity
 
-Gravity is one of the four fundamental forces of nature, the other three being the electromagnetic force and the strong and weak nuclear forces @four_forces. It is, in some ways, the black sheep of the interactions, as it is the only one not explained by the standard model of particle physics, which is, by some measures, the most accurate theory of physics ever described @standard_model. Luckily, gravity has its own extremely accurate descriptive theory @testing_gr. It has a storied history, which, if you are unfamiliar, is worth skimming for context. 
+Gravity is one of the four fundamental forces of nature, the other three being the electromagnetic force and the strong and weak nuclear forces @four_forces. It is, in some ways, the black sheep of the interactions, as it is the only one not explained by the standard model of particle physics, which is, by some measures, the most accurate theory of physics ever described @standard_model. Gravity is also orders of magnitude weaker than the other four fundamental forces @weak_gravity, see @force-coupling-constants. This weakness adds to its mystery by ensuring that only extremely sensitive detectors can detect the tiny fluctuations caused by some of the most violent collisions of mass in the universe. Luckily, gravity has its own extremely accurate descriptive theory @testing_gr. It has a storied history, which, if you are unfamiliar, is worth skimming for context. 
+
+#pagebreak()
+
+#figure(
+  table(
+    columns: (auto, auto),
+    inset: 10pt,
+    align: horizon,
+    [*Force*],  [*Coupling Constant*],
+    [Strong], [1],
+    [Electromagnetic], [$frac(1, 137)$],
+    [Weak], [ $10^(-6)$ ],
+    [Gravitational], [ $10^(-29)$  ],
+  ),
+  caption: [Dimensionless coupling constants for the four fundamental forces of nature. These coupling constants are dimensionless values normalised to the strongest of the forces, the strong nuclear force.  The coupling constants illustrate the weakness of the gravitational force compared to the other three fundamental forces of nature @coupling_constants, as they determine the strength of their respective forces. The specifics of why this is the case are not discussed here, as that is outside the scope of this work, but even without a deep understanding, it is clear that gravity is by far the weakest of the forces.]
+) <force-coupling-constants>
 
 === Ye Old Times
 
@@ -107,14 +123,13 @@ and
 
 $ z' = z . $
 
-Noting that as expected, there are no changes in the $y$ and $z$ direction.
+Noting that as expected, there are no changes in the $y$ and $z$ directions.
 
-Though the world presented by special relativity may at first seem counter-intuitive and hard to belive, there have been inumerable experiments verifying its predictions, most famously, the Global Positioning System (GPS) network of satalites, would be unable to operate without accouting for the time-dilation induced by their relative velocity @gps_relativity, due to the exteremely precise time mesurements required. 
-
+Although the world presented by special relativity may at first seem counter-intuitive and hard to believe, there have been numerous experiments verifying its predictions @special_relativity_tests. Most famously, the Global Positioning System (GPS) network of satellites would be unable to operate without accounting for the time dilation induced by the satellites' relative velocities @gps_relativity, due to the extremely precise time measurements required.
 
 === Minkowski Spacetime <minkowski-sec>
 
-Although the notions of independent and absolute time and space were dislodged, it is still possible to describe the new universe illuminated by special relativity as an all-pervasive 4D geometry inside which the universe sits. Unlike Newton's world, however, space and time are inseparably linked into one joint four-dimensional continuum wherein motion can affect the relative measurements of time and space. We call this geometry *spacetime*. Time intervals between events are not fixed, and observers don't necessarily agree on their order. Distances must be described by a combination of temporal and spatial coordinates, and because all inertial reference frames are equal, all inertial coordinate systems (ways of assigning reference values to points in spacetime) are also equally valid.
+Although the notions of independent and absolute time and space were dislodged, it is still possible to describe the new universe illuminated by special relativity as an all-pervasive 4D geometry inside which the universe sits. Unlike Newton's world, however, space and time are inseparably linked into one joint four-dimensional continuum wherein motion can affect the relative measurements of time and space. We call this geometry *spacetime*. As we have seen in @special-relativity-sec, time intervals between events within spacetime are not fixed, and observers don't necessarily agree on their order. Events must be described by a combination of temporal and spatial coordinates, and because all inertial reference frames are equal, all inertial coordinate systems (ways of assigning reference values to points in spacetime) are also equally valid.
 
 Special relativity deals with flat spacetime. This type of spacetime is known as *Minkowski space* @gravitation; see @flat for an illustration. Although it is non-Euclidian, and its geometry can sometimes be counterintuitive to people used to travelling at pedestrian velocities, it is still isotropic and homogeneous; it looks identical, no matter where in it you are, or what velocity you are traveling at relative to any other point or object.
 
@@ -146,7 +161,7 @@ $ Delta r^2 = ||dvectorn(r)||^2 = dvectorn(r)^bold(T) matrixn(g) dvectorn(r) = m
   Delta z;
 ) = Delta x^2 + Delta y^2 + Delta z^2 . $
 
-In this case, the inclusion of this metric does not change the calculation of the scalar distance between two points, however, as we have seen in @special-relativity-sec, in order to represent the spacetime described by special relativity, we must include the time dimension, $t$, which does not behave symmetrically with the others. The Minkowski metric allows us to explore beyond standard 3D Euclidean geometry by including a 4#super("th") dimension, time
+In this case, the inclusion of this metric does not change the calculation of the scalar distance between two points, however, as we have seen in @special-relativity-sec, in order to represent the spacetime described by special relativity, we must include the time dimension, $t$, which does not behave identically to the other three dimensions. The *Minkowski metric* allows us to explore beyond standard 3D Euclidean geometry by including a 4#super("th") dimension, time
 
 $ matrixn(eta) = mat(
   -1, 0, 0, 0;
@@ -155,11 +170,11 @@ $ matrixn(eta) = mat(
   0, 0, 0, 1;
 ). $ <minkowski_metric>
 
-Using @minkowski_metric, which describes a flat spacetime, we can use this metric to compute the interval between two events in flat Minkowski space, whose positions can be described as four-positions (four-vectors), #vectorn("s"), of the following form:
+Using @minkowski_metric, which describes a flat spacetime, we can use this metric to compute the interval between two events in flat Minkowski space, whose locations can be described with four-positions (four-vectors), #vectorn("s"), of the following form:
 
 $ vectorn(s) = mat(c t; vectorn(r);) = mat(c t; x; y; z;) $ <four-vector>
 
-where $vectorn(s)$, is the four-position of an event in spacetime, $c$ is the speed of light in a vacuum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), $t$ is the time component of the four-position, and #vectorn("r") is a position in 3D Euclidean space. We set $s_0 = c t$ rather than just $t$ to ensure that each element of the four-position is in the same units. 
+where $vectorn(s)$, is the four-position of an event in spacetime, $c$ is the speed of light in a vacuum, #box($299,792,458$ + h(1.5pt) + $ m s^(-1)$), $t$ is the time component of the four-position, and #vectorn("r") is a position in 3D Euclidean space. We set $s_0$ equal to $c t$ rather than just $t$ to ensure that each element of the four-position is in the same units. 
 
 From @minkowski_metric and @four-vector, it follows that the displacement four-vector between two events in Minkowski spacetime, $dvectorn(s)$, can be computed with 
 
@@ -223,8 +238,6 @@ $ Delta s^2 = - c^2 Delta t^2 + Delta x^2 + Delta y^2 + Delta z^2 =  - c^2 Delta
 
 This demonstrates that performing a Lorentz transform between two inertial reference frames is consistent with the formulation of Minkowski spacetime described by @minkowski_metric. 
 
-As alluded to, special relativity, and Minkowski Spacetime, only deal with inertial reference frames, hence it is a "special" case of a larger, cohesive theory --- that theory, developed by Einstein in the following years, is general relativity @gravitation. 
-
 When dealing with the gravitational effects of spacetime, we are often considering point-like particles or spherical masses; for this reason, it is very often convenient to work with spherical coordinates with the basis $t$, $r$, $theta$, and $phi$ rather than the Euclidean coordinate system we have been using so far. In spherical coordinates @spacetime-interval becomes
 
 $ Delta s^2 = -c^2 Delta t^2 + Delta r^2 + r^2 Delta Omega^2 $ <minkowski-interval-spherical>
@@ -235,7 +248,11 @@ $ Delta Omega^2 = Delta theta^2 + sin^2 theta Delta phi^2 $
 
 is the standard metric used on the surface of a two-sphere --- a 2D spherical surface embedded in a 3D space. @minkowski-interval-spherical will become a valuable reference when we move to examine curved spacetime under the influence of gravity.
 
+As alluded to, special relativity, and Minkowski Spacetime, only deal with inertial reference frames, hence it is a "special" case of a larger, cohesive theory --- that theory, developed by Einstein in the following years, is general relativity @gravitation. 
+
 === General Relativity <general-relativity-sec>
+
+Although special relativity and Minkowski space successfully reconcile the nature of space and time with the observed constancy of the speed of light, and allow Maxwell's equations to operate as predicted in all inertial reference frames, they still only provide an incomplete picture of the universe. Specifically, they do not explain how to reconcile non-inertial reference frames and coordinate systems, which constitute a significant portion of what we observe in the universe. A more general theory was needed to explain all facets of reality, *general relativity*.
 
 Einstein realized that by introducing deformations to the otherwise flat Minkowski spacetime described by special relativity you could induce accelerations in particles within this spacetime without invoking any forces @gravitation. Rather than being attracted by some gravitational "force", the particles continue to behave as they always had, following their natural paths or *geodesics*. A geodesic is the shortest path between two points in a given geometry; in Euclidian geometry, all geodesics are straight lines, in other geometries however, this is not necessarily the case. Thus, depending on the shape of the spacetime they exist within, particles can accelerate with respect to each other whilst remaining within inertial frames. This is the reason that it is often stated that gravity is "not a force" --- gravitational attraction is a result of the geometry of the spacetime in which objects exist, rather than because of any fundamental attraction caused by something with the traditional properties of a force. 
 
@@ -249,9 +266,17 @@ In general relativity, spacetime is described as a four-dimensional *manifold* @
 
 Einstein formulated ten equations that describe how gravity behaves in the presence of mass and energy, known as Einstein's Field Equations (EFEs). The full complexity of EFEs is not required for this brief introduction, however, they take the general form of
 
-$ matrixn(G_(mu v)) + Lambda matrixn(g_(mu v)) = frac(8 pi G, c^4) matrixn(T_(mu v)) $
+$ matrixn(G) + Lambda matrixn(g) = frac(8 pi G, c^4) matrixn(T) $ <einstein_equation>
 
-where $matrixn(G_(mu v))$ is the Einstein tensor, describing the curvature of spacetime given the specific distribution of mass-energy described by $matrixn(T_(mu v))$, $Lambda$ is the cosmological constant, $matrixn(g_(mu v))$ is the metric tensor, describing the generic geometric structure of spacetime, and $matrixn(T_(mu v))$ is the stress-energy tensor, describing the distribution of mass and energy across a given spacetime.
+$ matrixn(G) = - 8 pi G matrixn(T) $
+
+where $matrixn(G)$ is the Einstein tensor, describing the curvature of spacetime given the specific distribution of mass-energy described by $matrixn(T)$, $Lambda$ is the cosmological constant, $matrixn(g)$ is the metric tensor, describing the generic geometric structure of spacetime, and $matrixn(T)$ is the stress-energy tensor, describing the distribution of mass and energy across a given spacetime, $G$ is Netwtonian constant of gravitation, and $c$ is the speed of light in a vaccum. The Einstein tensor is given by
+
+$ matrixn(G) = matrixn(R) - frac(1,2) matrixn(g) R , $ <einstein_tensor_eq>
+
+where $matrixn(R)$ is the Ricci tensor, a tensor which detemines how much the metric differs from the Euclidean metric, or in our case the Minkowski metric, $R$ is the Ricci tensor's trace, the scalar sum of the tensor's diagonal elements, which tells us the scalar curvature, and $matrixn(g)$ is the metric tensor.
+
+This description of spacetime as deformable geometry altered by the location of the mass and energy it contains gives us a more complete picture of how space, time, and gravity work in non-intertial reference frames. It also expands the validity of coordinate systems to include all coordinate systems, not just non-inertial ones.
 
 #figure(
   grid(
@@ -319,6 +344,14 @@ It is also quite easy to arrive at the notion of an orbit starting from everyday
 
 In Newtonian mechanics, assuming no other gravitational interactions, and no energy losses through tidal heating or other means (so not in reality), orbits are eternal and will never decay. This is not the case under general relativity, however, where orbiting bodies will release energy through gravitational radiation otherwise known as gravitational waves @gravitation. Two objects in orbit will continuously emit gravitational waves which will carry energy away from the system and gradually decay the orbit until eventually, the two objects merge. For most objects in the universe, the energy released through gravitational radiation will be almost negligible, and orbital decay from other factors will usually be vastly more significant. However, when we look again at the densest objects in the universe, black holes, and their slightly less dense cousins, neutron stars, their gravitational wells are so extreme that the energy lost through the emission of gravitational waves becomes significant enough for them to merge within timeframes less than the lifespan of the universe, outputting a colossal amount of energy in a frenzy of ripples in the moments before their collision. These huge amounts of energy propagate out through the universe at the speed of light, causing imperceptible distortions in the geometry of spacetime as they go. They pass through planets, stars, and galaxies with almost no interaction at all.
 
+/*
+We can aproximate a given metric tensor with, 
+
+$ matrixn(g) = matrixn(eta) + matrixn(h) $
+
+where $matrixn(h)$ is tensor pertabation from the Minkowski metric. If we use natural units, and set both the speed of light in a vaccum, $c$, to unity, @einstein_equation becomes:
+*/
+
 Like many things, the existence of gravitational waves was predicted by Einstein @einstein_grav_waves (although there had been earlier proposals based on different physical theories), as a consequence of the mathematics of general relativity. General relativity predicts that any non-axisymmetric acceleration of mass, linear or circular, will generate gravitational waves. This is because these motions induce changes in the system's quadrupole moment. A perfect rotating sphere will not produce any gravitational waves, no matter how fast it is spinning, because there is no change in the quadrupole moment. A sphere with an asymmetric lump however, like a mountain, will produce gravitational radiation @neutron_star_gw_review, as will two spheres connected by a bar spinning around their centre, or a massive alien starship accelerating forward using immense thrusters. However, as Einstein quite rightly calculated, for most densities and velocities, the energy released in such a manner is minuscule.
 
 Under general relativity, gravitational waves travel at the speed of light @gravitation. They are not predicted by Newtonian mechanics, as in Newtonian mechanics the propagation of gravitational effects is instant. Special and general relativity, do not allow any information to travel faster than the speed of light, gravitational information is no different @special_relativity @gravitation. All current observations suggest gravitational waves appear to travel at, or very close to, the speed of light, however, this is still some limited debate on the matter @speed_of_gravity. As a perfectly spherical body rotates, the gravitational field remains constant in all directions. Due to the lack of a quadrupole moment, its rotation has no effect on the surrounding spacetime, thus no waves are created that can propagate, and no energy is lost from the spinning sphere.
@@ -347,7 +380,7 @@ Detecting gravity is quite easy, just let go of whatever you're holding. Detecti
 
 === Interferometry
 
-After the notion of detectable gravitational waves became more widespread, a few methods were put forward as possible avenues of investigation, the most notable alternative to current methods was the resonant bar antenna @gravitational_wave_detectors. In the end, interferometers have been proven as viable gravitational wave detectors @first_detction, along with, more recently, pulsar timing arrays @PTA. These two detection methods operate in very different frequency regimes and so can detect very distinct gravitational wave phenomena --- the former able to detect gravitational waves from individual CBC events, and the latter able to detect the pervasive stochastic gravitational wave background, generated by the overlapping and interfering signals of many supermassive black hole mergers.
+After the notion of detectable gravitational waves became more widespread, a few methods were put forward as possible avenues of investigation, the most notable alternative to current methods was the resonant bar antenna @gravitational_wave_detectors. In the end, interferometers have been proven as viable gravitational wave detectors @first_detction, along with, more recently, pulsar timing arrays @PTA. These two detection methods operate in very different frequency regimes and so can detect very distinct gravitational wave phenomena --- the former able to detect gravitational waves generated from stellar-mass CBC events, and the latter able to detect the pervasive stochastic gravitational wave background, generated by the overlapping and interfering signals of many supermassive black hole mergers. With increased sensitivity, future ground-based detectors may be able to extract the stochastic background generated from stellar-mass mergers, and with further data collection and analysis, PTA might be able to detect individual supermassive black hole mergers.
 
 We will focus our discussion on laser interferometry, as that is the most relevant to work in this thesis. As illustrated by @wobble, gravitational waves have a periodic effect on the distance between pairs of freely falling particles (assuming their displacement doesn't lie at $45degree$ to the polarisation of the wave). We can use this effect to create a detection method if we can measure a precise distance between two freely floating masses @LIGO_interferometers. In the absence of all other interactions (hence freely falling), the distance between two particles should remain constant. If there is a change in this distance we can deduce that this arises from a passing gravitational wave.
 
@@ -364,7 +397,7 @@ What follows is a very rudimentary description of the optics of a gravitational 
   caption: [A very simplified interferometer diagram. Real gravitational wave detection apparatus have considerably more optics than what is shown. The power recycling and signal recycling mirrors help maintain a high laser power within the cavities. Higher laser powers are preferable as they help reduce quantum shot noise, the limiting source of noise at high frequencies.]
 ) <interferometer_diagram>
 
-A detector of this kind can only detect elements of incoming gravitational wave signals that align with its polarisation @antenna_pattern. An incoming signal that was completely antialigned to the detector arms would be entirely undetectable. Fortunately, this is a rare occurrence as most signals are at least partially aligned with a given detector. Interferometers are also sensitive to the angle between their tangent and the source direction, known as the orientation. Interferometers are most sensitive to signals that lie directly above or below the plane of the detector arms, and least sensitive to signals whose propagation direction is parallel to the plane of the arms. These two factors combine to generate the antenna pattern of the detector, which dictates which regions of the sky the detector is most sensitive to.
+A detector of this kind can only detect elements of incoming gravitational wave signals that align with its polarisation @antenna_pattern. An incoming signal that was completely antialigned to the detector arms would be almost undetectable, though there will always be higher modes present that will produce some SNR in the detector. However, this small SNR would likely be undetectable for current sensitivities unless the unaligned event was very close to Earth. Fortunately, the occurrence of completely unaligned waves is a rare since most signals are at least partially aligned with a given detector. Interferometers are also sensitive to the angle between their tangent and the source direction, known as the orientation. Interferometers are most sensitive to signals that lie directly above or below the plane of the detector arms, and least sensitive to signals whose propagation direction is parallel to the plane of the arms. These two factors combine to generate the antenna pattern of the detector, which dictates which regions of the sky the detector is most sensitive to.
 
 === The Global Detector Network
 

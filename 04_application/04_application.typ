@@ -6,6 +6,8 @@
 
 = The Application of Machine Learning to Gravitational-Wave Data Analysis <application-sec>
 
+The following chapter will explore the intersection between gravitational waves and machine learning. We will review the possible areas for detection applications, and describe how we have constructed the example datasets used for training and validation throughout the thesis. We will then explore the results of repeating the dense network experiments from previous chapters on gravitational-wave data. We will introduce Convolutional Neural Networks (CNNs), and review previous work from the literature that has been performed using CNNs. We will conclude the chapter by recreating some key results from the literature. This chapter is not indended to be presented as original work but as an exploration of existing methods, and a demonstration of the novel data pipeline that will used through the rest of the thesis. By the end of this chapter, we will have accumulated a large number of possible network, training, and data configurations. These form the set of hyperparameters that we must, though some approach, narrow down; we will explore how we can do this in @dragonn-sec.
+
 We have demonstrated that simple artificial neural networks can be used to classify input data drawn from a restricted distribution into a number of classes, $N$, with a high ($>99.9%$) degree of accuracy. We didn't design the network with any particular consideration for the dataset (besides the dimensionality of its elements), therefore, we can infer that artificial neural networks should be general enough to classify data drawn from other distributions that contain discrete differentiable classes. It is not clear, however, which other distributions can be classified and what network complexity is required to achieve a similar degree of accuracy. It is easy to imagine distributions that are considerably simpler than the MNSIT dataset @mnist and, conversely, ones that are much more complex. There may be a mathematical approach to determine the link between the distribution and required model complexity. 
 
 One possible metric that touches upon this relation is the Rademacher complexity, $accent(cal(R), hat)_M$, given by 
@@ -16,7 +18,7 @@ where $M$ is the number of data points in a dataset, $X = [vectorn(x)_bold(1), .
 
 The Rademacher complexity is a measure of how well functions in $H$ can fit random noise in the data. A higher Rademacher complexity indicates that the function class can fit the noise better, which implies a higher capacity to overfit to the data. So, one approach to optimising the model would be to attempt to minimise Rademacher complexity value whilst maximising model performance. More details about this metric and its use in defining the relationship between data samples and model complexity can be found at @model_complexity. Despite the existence of this metric, however, it would appear that there has not been substantial research into the link between dataset complexity and required model size @model_complexity_2, though it is possible that such a paper has been missed.
 
-One method that we can use to explore this question is to find out the answer empirically. As we move from the MNIST dataset @mnist to distributions within gravitational-wave data science, the natural starting point is to repeat the previous experiments with gravitational-wave data, both as a comparison and as a baseline as we move forward. The following subsection will explore the possible areas for detection applications, describe the example datasets and their construction, and explore the results of repeating the previous experiments on gravitational-wave data, comparing our results to similar attempts from the literature. By the end of this chapter, we will have accumulated a large number of possible network, training, and data configurations. These form the set of hyperparameters that we must, though some approach, narrow down; we will explore how we can do this in @dragonn-sec.
+One method that we can use to explore this question is to find out the answer empirically. As we move from the MNIST dataset @mnist to distributions within gravitational-wave data science, the natural starting point is to repeat the previous experiments with gravitational-wave data, both as a comparison and as a baseline as we move forward. 
 
 == Gravitational-Wave Classifiers
 
@@ -335,15 +337,15 @@ where $h(t)$ is the resultant waveform present in the detector output at time $t
 
 We can also calculate the relative times that the signals will arrive at a given detector,
 
-$ Delta t = frac( (vectorn(x)_bold(0) - vectorn(x)_bold(d)) ,  c) dot.op uvectorn(m) $ <time-delay_eq>
+$ Delta t = frac( (vectorn(x)_bold(0) - vectorn(x)_bold(d)) dot.op uvectorn(m),  c)  $ <time-delay_eq>
 
 where $Delta t$ is the time difference between the wave's arrival at location $vectorn(x)_bold(d)$ and $vectorn(x)_bold(0)$, $c$ is the speed of light, $vectorn(x)_bold(0)$ is some reference location, often taken as the Earth’s centre, $vectorn(x)_d$ is the location for which you are calculating the time delay, in our case, one of our interferometers, and $uvectorn(m)$ is the direction of the gravitational-wave source. If we work in Earth-centred coordinates and take the Earth's centre as the reference position so that $vectorn(x)_bold(0) = [0.0, 0.0, 0.0]$ we can simplify @time-delay_eq to
 
-$ Delta t = - frac(vectorn(x) ,  c) dot.op uvectorn(m). $ <time-delay_eq_sim>
+$ Delta t = - frac(vectorn(x) dot.op uvectorn(m),  c) . $ <time-delay_eq_sim>
 
 Finally, combining @projection_equ and @time-delay_eq_sim, we arrive at
 
-$ h(t) = F_plus h_plus (t - frac(vectorn(x) ,  c) dot.c uvectorn(m)) + F_times h_times (t - frac(vectorn(x) ,  c) dot.c uvectorn(m)) . $ <final_response_equation>
+$ h(t) = F_plus h_plus (t - frac(vectorn(x) dot.c uvectorn(m),  c) ) + F_times h_times (t - frac(vectorn(x) dot.c uvectorn(m) ,  c)) . $ <final_response_equation>
 
 In practice, for our case of discretely sampled data, we first calculate the effect of the antenna response in each detector and then perform a heterodyne shift to each projection to account for the arrival time differences. When multiple detector outputs are required for training, testing, or validation examples, GravyFlow performs these calculations using a GPU-converted version of the PyCBC @pycbc project_wave function; see @projection_examples for example projections.
 
@@ -368,11 +370,11 @@ We can use matched filtering statistics to prove this point, as we know that giv
 
 $ P_F (cal(F)_0) = integral_(cal(F)_0)^infinity p_0(cal(F))d cal(F) = exp(-cal(F_0)) sum_(k=0)^(n/2-1) frac(cal(F)_0^k, k!) $ <false_alarm_rate_eq>
 
-where n is the number of degrees of freedom of $chi^2$ distributions. We can see from @false_alarm_rate_eq that the False Alarm Rate (FAR) in this simple matched filtering search is only dependent on the arbitrary choice of $cal(F)_0$. However, in practice, the choice of $cal(F)_0$ will be determined by the minimum amplitude waveform you wish to detect because the probability of detection, $P_d$ given the presence of a waveform, is dependent on the optimal SNR, $rho_"opt"$ of that waveform, $rho$, which has a loose relationship to the amplitude of the waveform. The probability of detection is given by
+where n is the number of degrees of freedom of $chi^2$ distributions, and $p_0$ is the probability density function of $cal(F)$ when a known signal is not present. We can see from @false_alarm_rate_eq that the False Alarm Rate (FAR) in this simple matched filtering search is only dependent on the arbitrary choice of $cal(F)_0$. However, in practice, the choice of $cal(F)_0$ will be determined by the minimum amplitude waveform you wish to detect because the probability of detection, $P_d$ given the presence of a waveform, is dependent on the optimal SNR, $rho_"opt"$ of that waveform, $rho$, which has a loose relationship to the amplitude of the waveform. The probability of detection is given by
 
-$ P_D (rho, cal(F)_0) = integral_(cal(F)_0)^infinity frac((2 cal(F))^((n/2 - 1)/2), rho^(n/2 - 1)) I_(n/2-1) (rho sqrt(2 cal(F))) exp(-cal(F) - 1/2 rho^2) d cal(F) $
+$ P_D (rho, cal(F)_0) = integral_(cal(F)_0)^infinity p_1(rho, cal(F))d cal(F) = integral_(cal(F)_0)^infinity frac((2 cal(F))^((n/2 - 1)/2), rho^(n/2 - 1)) I_(n/2-1) (rho sqrt(2 cal(F))) exp(-cal(F) - 1/2 rho^2) d cal(F) $
 
-where $I_(n/2-1)$ is the modified Bessel function of the first kind and order $n/2 -1$. For more information on this, please refer to @gw_gaussian_case.
+where $I_(n/2-1)$ is the modified Bessel function of the first kind and order $n/2 -1$, and and $p_1$ is the probability density function of $cal(F)$ when a known signal is present. For more information on this, please refer to @gw_gaussian_case.
 
 More complex types of noise, however, like real LIGO interferometer noise, could potentially produce waveform simulacra more often than artificially generated white noise @det_char. 
 
@@ -568,7 +570,7 @@ In the second case, treating each model as an independent boolean statistic and 
 
 $ op("FAR")_(op("comb")) = (w - o)  product_(i=1)^N op("FAR")_i $ <comb_far_eq>
 
-where $op("FAR")_(op("comb"))$ is the combined FAR, $N$ is the number of included detectors, $w$ is the duration of the input vector, and $o$ is the overlap between windows @false_alarm_rate_ref. This equation works in the case when a detection method tells you a feature has been detected within a certain time window, $w$, but not the specific time during that window, meaning that $t_"central" > w_"start" and t_"central" < w_"end"$, where $t_"central"$ is the signal central time, $w_"start"$ is the input vector start time and $w_"end"$ is the input vector end time. 
+where $op("FAR")_(op("comb"))$ is the combined FAR, $N$ is the number of included detectors, $w$ is the duration of the input vector in unit time, and $o$ is the overlap between windows @false_alarm_rate_ref also in unit time. This equation works in the case when a detection method tells you a feature has been detected within a certain time window, $w$, but not the specific time during that window, meaning that $t_"central" > w_"start" and t_"central" < w_"end"$, where $t_"central"$ is the signal central time, $w_"start"$ is the input vector start time and $w_"end"$ is the input vector end time. 
 
 If a detection method can be used to ascertain a more constrained time for a feature ($w_"duration" < "light_travel_time"$), then you can use the light travel time between the two detectors to calculate a FAR @false_alarm_rate_ref. For two detectors, combing the FAR in this way can be achieved by
 
